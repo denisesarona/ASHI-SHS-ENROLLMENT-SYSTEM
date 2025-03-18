@@ -12,11 +12,13 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <style>
             #ASHI-logo {
-                margin-left: 40px; /* Adjust as needed */
+                margin-left: 40px;
             }
-
             #contactus {
-                margin-right: 40px; /* Adjust as needed */
+                margin-right: 40px;
+            }
+            .navbar-toggler{
+                margin-right: 40px;
             }
         </style>
     </head>
@@ -24,7 +26,7 @@
         <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img id="ASHI-logo" src="{{ asset('images/ASHILOGO.png') }}" alt="MDB Logo" draggable="false" height=50>
+                    <img id="ASHI-logo" src="{{ asset('images/ASHILOGO.png') }}" alt="ASHI Logo" draggable="false" height=50>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,11 +52,11 @@
         </nav>
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-12">
-                    {{ $slot }}
-                </div>
+                {{ $slot }}
             </div>
         </div>
+
+
 
         <!-- Bootstrap JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
