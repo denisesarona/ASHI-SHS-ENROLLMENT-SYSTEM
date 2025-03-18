@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
 html, body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
+    font-family: 'Poppins', sans-serif;
 }
 
 body, .container, .row, .col-md-12 {
@@ -84,9 +87,27 @@ p {
 }
 
 .Contact{
-    background-color: black ;
+    background-color: black;
 }
 
 .c-bold{
     color: white;
+    font-weight: bold;
+    text-align: left;
+}
+
+.c-text{
+    color: rgb(174, 174, 174);
+    text-align: left;
+}
+
+.clogo-text{
+    color: rgb(174, 174, 174);
+}
+
+#fb-icon {
+    display: block;  
+    text-align: left;
+    font-size: 50px;
+    color: #1877F2;
 }
