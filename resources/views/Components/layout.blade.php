@@ -14,6 +14,10 @@
             #ASHI-logo {
                 margin-left: 40px; /* Adjust as needed */
             }
+
+            #contactus {
+                margin-right: 40px; /* Adjust as needed */
+            }
         </style>
     </head>
     <body>
@@ -29,16 +33,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link mx-2" href="#">HOME</a>
+                            <a class="nav-link mx-2" href="#HomePage">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-2" href="#">ABOUT</a>
+                            <a class="nav-link mx-2" href="#AboutUs">ABOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-2" href="#">TRACK ENROLLMENT</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="#">CONTACT US</a>
+                        <li class="nav-item" id="contactus">
+                            <a class="nav-link mx-2" href="#Contact">CONTACT US</a>
                         </li>   
                     </ul>
                 </div>
