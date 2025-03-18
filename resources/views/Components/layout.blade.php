@@ -1,64 +1,34 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Web Page</title>
-        
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- FontAwesome Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Boxicons CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-        <style>
-            #ASHI-logo {
-                margin-left: 40px;
-            }
-            #contactus {
-                margin-right: 40px;
-            }
-            .navbar-toggler{
-                margin-right: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
-            <div class="container">
-                <a class="navbar-brand" href="{{ route('homepage') }}#HomePage">
-                    <img id="ASHI-logo" src="{{ asset('images/ASHILOGO.png') }}" alt="ASHI Logo" draggable="false" height=50>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto align-items-center">
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="{{ route('homepage') }}#HomePage">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="{{ route('homepage') }}#AboutUs">ABOUT</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="#">TRACK ENROLLMENT</a>
-                        </li>
-                        <li class="nav-item" id="contactus">
-                            <a class="nav-link mx-2" href="{{ route('homepage') }}#Contact">CONTACT US</a>
-                        </li>   
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="container mt-5">
-            <div class="row">
-                {{ $slot }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-100">
+    <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+        <div class="container mx-auto flex items-center justify-between py-3 px-6">
+            <a href="{{ route('homepage') }}#HomePage">
+                <img id="ASHI-logo" src="{{ asset('images/ASHILOGO.png') }}" alt="ASHI Logo" draggable="false" class="h-12">
+            </a>
+            <button class="lg:hidden text-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <div class="hidden lg:flex space-x-6">
+                <a href="{{ route('homepage') }}#HomePage" class="text-gray-700 hover:text-blue-600">HOME</a>
+                <a href="{{ route('homepage') }}#AboutUs" class="text-gray-700 hover:text-blue-600">ABOUT</a>
+                <a href="#" class="text-gray-700 hover:text-blue-600">TRACK ENROLLMENT</a>
+                <a href="{{ route('homepage') }}#Contact" class="text-gray-700 hover:text-blue-600">CONTACT US</a>
             </div>
         </div>
+    </nav>
 
-        <!-- Bootstrap JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
+    <div class="w-screen mt-16 px-0 mx-0">
+        <div class="row">
+            {{ $slot }}
+        </div>
+    </div>
+    
+</body>
+</html>
