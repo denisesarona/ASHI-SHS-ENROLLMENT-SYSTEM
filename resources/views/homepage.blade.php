@@ -4,13 +4,13 @@
             <div class="hero-section shadow-lg">
                 <div class="hero-text">
                     <h2>Start your journey with ASHI today!</h2>
-                    <a href="{{ route('enrollment') }}#EnrollmentForm" class="btn btn-primary">Enroll Now!</a>
+                    <a href="{{ route('enrollment') }}#EnrollmentForm" class="btn btn-primary py-3 BlueBtn">Enroll Now!</a>
                 </div>
             </div>    
         </div>
     </div>
     
-    <section id="AboutUs" class="AboutUs py-5">
+    <section id="AboutUs" class="AboutUs py-5 shadow-lg">
         <div class="container text-center">
             <h2 class="fw-bold">ACADEMIC PROGRAMS</h2>
     

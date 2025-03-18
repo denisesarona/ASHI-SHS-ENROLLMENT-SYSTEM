@@ -6,14 +6,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/homepage', function () {
-    return view('homepage');
-});
-
-Route::get('/enrollmentform', function () {
-    return view('enrollmentform');
-});
-
 Route::get('/enrollment', function () {
     return view('enrollmentform');
 })->name('enrollment');
+
+Route::get('/homepage', function () {
+    return view('homePage');
+})->name('homepage');

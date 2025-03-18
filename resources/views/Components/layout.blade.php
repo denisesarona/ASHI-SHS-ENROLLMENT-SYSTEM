@@ -27,7 +27,7 @@
     <body>
         <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{ route('homepage') }}#HomePage">
                     <img id="ASHI-logo" src="{{ asset('images/ASHILOGO.png') }}" alt="ASHI Logo" draggable="false" height=50>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -37,16 +37,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link mx-2" href="#HomePage">HOME</a>
+                            <a class="nav-link mx-2" href="{{ route('homepage') }}#HomePage">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-2" href="#AboutUs">ABOUT</a>
+                            <a class="nav-link mx-2" href="{{ route('homepage') }}#AboutUs">ABOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-2" href="#">TRACK ENROLLMENT</a>
                         </li>
                         <li class="nav-item" id="contactus">
-                            <a class="nav-link mx-2" href="#Contact">CONTACT US</a>
+                            <a class="nav-link mx-2" href="{{ route('homepage') }}#Contact">CONTACT US</a>
                         </li>   
                     </ul>
                 </div>
