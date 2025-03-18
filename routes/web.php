@@ -13,3 +13,7 @@ Route::get('/homepage', function () {
 Route::get('/enrollmentform', function () {
     return view('enrollmentform');
 });
+
+Route::get('/enrollment', function () {
+    return view('enrollmentform');
+})->name('enrollment');

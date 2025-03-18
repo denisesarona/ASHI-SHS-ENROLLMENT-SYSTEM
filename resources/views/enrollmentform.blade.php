@@ -1,7 +1,5 @@
 <x-layout>
-    <h1 class="p-5">Enrollment Form</h1>
-    <div class="hero-section d-flex flex-column justify-content-center align-items-center text-white text-center">
-        <h2>Start your journey with ASHI today!</h2>
-        <a href="#" class="btn btn-primary">Enroll Now!</a>
-    </div>    
+    <div id="EnrollmentForm">
+        <h1>Hotdog</h1>
+    </div>
 </x-layout>
