@@ -57,7 +57,26 @@
                             </label>
                         </div>
                     </div>
+                </div>
+                
+                <!-- 4Ps Beneficiary Section -->
+                <div class="w-full mt-6">
+                    <label class="block font-semibold mb-2 text-lg">
+                        Are you a beneficiary of 4Ps? (Ikaw ba ay benepisyaryo ng 4Ps?)
+                    </label>
+                    <div class="flex space-x-10">
+                        <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
+                            <input type="checkbox" class="w-6 h-6">
+                            <span>Yes</span> 
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
+                            <input type="checkbox" class="w-6 h-6">
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
 
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div>
                         <label class="block font-semibold mb-2 text-lg">House No./ Street</label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter Address">
@@ -85,24 +104,6 @@
                         <input type="tel" class="w-full p-3 border rounded" placeholder="Enter Contact">
                     </div>
                 </div>
-
-                <!-- 4Ps Beneficiary Section -->
-                <div class="w-full mt-6">
-                    <label class="block font-semibold mb-2 text-lg">
-                        Are you a beneficiary of 4Ps? (Ikaw ba ay benepisyaryo ng 4Ps?)
-                    </label>
-                    <div class="flex space-x-10">
-                        <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                            <input type="checkbox" class="w-6 h-6">
-                            <span>Yes</span> 
-                        </label>
-                        <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                            <input type="checkbox" class="w-6 h-6">
-                            <span>No</span>
-                        </label>
-                    </div>
-                </div>
-
                 <!-- Relationship with Guardian -->
                 <div class="w-full mt-6">
                     <label class="block font-semibold mb-2 text-lg">Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)</label>
