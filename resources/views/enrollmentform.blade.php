@@ -1,83 +1,97 @@
 <x-layout>
-    <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4 w-full" style="overflow: hidden;">
-        <div class="bg-gray-200 p-12 sm:p-10 rounded-lg -mt-20 shadow-md w-full">
+    <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+        <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl">
             <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6">Enrollment Form</h1>
             <form action="#">
-
-                <div class="flex justify-center space-x-10">
-                    <div class="w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
                         <label class="block font-semibold mb-2 text-lg">School Year</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter School Year">
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter School Year">
                     </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Grade Level to Enrollment (Antas ng Baitang upang magpatala)    </label>
-                        <Select class="w-full p-3 border rounded mb-6">
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Grade Level</label>
+                        <select class="w-full p-3 border rounded">
                             <option value="g11">Grade 11</option>
-                        </Select>
+                        </select>
                     </div>
-                </div>
 
-                <div class="flex justify-center space-x-10">
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Last Name (Apelyido)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Last Name">
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Last Name</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last Name">
                     </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">First Name (Pangalan)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter First Name">
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">First Name</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter First Name">
                     </div>
-                </div>
 
-                <div class="flex justify-center space-x-10">
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Middle Name (Gitnang Pangalan)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Middle Name">
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Middle Name</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Middle Name">
                     </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Extension Name (e.g. Jr., III if applicable)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Extension Name">
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Extension Name</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Extension Name">
                     </div>
-                </div>
 
-                <div class="flex justify-center space-x-10">
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">LRN (Learner Reference Number)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter LRN">
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">LRN</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter LRN">
                     </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Birthdate (Araw ng kapanganakan)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Birthdate">
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Birthdate</label>
+                        <input type="date" class="w-full p-3 border rounded">
                     </div>
-                </div>
 
-                <div class="flex justify-center space-x-10">
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Age (Edad)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Age">
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Age</label>
+                        <input type="number" class="w-full p-3 border rounded" placeholder="Enter Age">
                     </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Gender (Kasarian)</label>
-                        <div class="flex justify-center space-x-10">
-                            <div class="w-full p-3">
-                                <label class="flex items-center space-x-2 w-full p-1 border rounded mb-6 cursor-pointer">
-                                    <input type="checkbox" class="w-6 h-6">
-                                    <span>Male</span>
-                                </label>
-                            </div>                            
-                            <div class="w-full p-3">
-                                <label class="flex items-center space-x-2 w-full p-1 border rounded mb-6 cursor-pointer">
-                                    <input type="checkbox" class="w-6 h-6">
-                                    <span>Female</span>
-                                </label>
-                            </div>                            
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Gender</label>
+                        <div class="flex items-center space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="gender" value="Male" class="mr-2"> Male
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="gender" value="Female" class="mr-2"> Female
+                            </label>
                         </div>
                     </div>
+
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">House No./ Street</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Address">
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Barangay</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Barangay">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Municipality/ City</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter City">
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Province</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Province">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Guardian's Name</label>
+                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Guardian's Name">
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-2 text-lg">Guardian's Contact</label>
+                        <input type="tel" class="w-full p-3 border rounded" placeholder="Enter Contact">
+                    </div>
                 </div>
-                <div class="w-full">
+
+                <!-- 4Ps Beneficiary Section -->
+                <div class="w-full mt-6">
                     <label class="block font-semibold mb-2 text-lg">
-                        "Are you a beneficiary of 4Ps? (Ikaw ba ay benepisyaryo ng 4Ps?)"
+                        Are you a beneficiary of 4Ps? (Ikaw ba ay benepisyaryo ng 4Ps?)
                     </label>
-                    <div class="flex justify-left space-x-10">
+                    <div class="flex space-x-10">
                         <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
                             <input type="checkbox" class="w-6 h-6">
                             <span>Yes</span> 
@@ -87,114 +101,61 @@
                             <span>No</span>
                         </label>
                     </div>
-                </div>                
-                <div class="flex justify-center space-x-10 mt-4">
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">House No./ Street (e.g. 416, Bocalan St.)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6"  placeholder="Enter House No./ Street">
-                    </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Barangay</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Barangay">
-                    </div>
                 </div>
 
-                <div class="flex justify-center space-x-10">
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Municipality/ City</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Municipality/ City">
-                    </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Province</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Province">
-                    </div>
-                </div>
-
-                <div class="w-full">
-                    <label class="block font-semibold mb-2 text-lg">Guardian's Name (Pangalan ng Tagapag-alaga)</label>
-                    <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Guardian's Name">
-                </div>
-
-                <div class="flex justify-center space-x-10">
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Municipality/ City</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Municipality/ City">
-                    </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Province</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Province">
-                    </div>
-                </div>
-
-                <div class="w-full">
+                <!-- Relationship with Guardian -->
+                <div class="w-full mt-6">
                     <label class="block font-semibold mb-2 text-lg">Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)</label>
-                    
-                    <div class="flex items-center gap-4 mb-4">
-                        <!-- Mother -->
-                        <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                            <input type="checkbox" class="w-6 h-6">
-                            <span>Mother (Nanay)</span> 
-                        </label>
-                        
-                        <!-- Father -->
-                        <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                            <input type="checkbox" class="w-6 h-6">
-                            <span>Father (Tatay)</span>
-                        </label>
-                
-                        <!-- Others -->
-                        <div class="flex items-center space-x-2">
-                            <label class="text-md">Others:</label>
-                            <input type="text" class="p-2 border rounded w-48" placeholder="Enter Relationship">
+                    <div class="flex justify-between items-center">
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
+                                <input type="checkbox" class="w-6 h-6">
+                                <span>Mother (Nanay)</span> 
+                            </label>
+                            <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
+                                <input type="checkbox" class="w-6 h-6">
+                                <span>Father (Tatay)</span>
+                            </label>
                         </div>
-                    </div>
-                
-                    <!-- Guardian's Contact Number -->
-                    <div>
-                        <label class="block font-semibold mb-2 text-lg">Guardian's Contact Number</label>
-                        <input type="number" class="w-full p-3 border rounded" placeholder="Enter Guardian's Contact Number">
-                    </div>
-                </div>                       
-                <div class="w-full">
-                    <label class="block font-semibold mb-2 text-lg">Guardian's Contact Number</label>
-                    <input type="number" class="w-full p-3 border rounded mb-6" placeholder="Enter Guardian's Contact Number">
-                </div>
-                <div class="flex justify-center space-x-10">
-                    <div class="w-full">
-                        <label class="block font-semibold text-lg">Last School attended (Huling Paaralan na Pinasukan)</label>
-                        <p class="italic text-sm">Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</p>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Last School attended">
-                    </div>
-                    <div class="w-full">
-                        <label class="block font-semibold mb-2 text-lg">Last School Year attended (Huling Taong Pinasukan)</label>
-                        <input type="text" class="w-full p-3 border rounded mb-6" placeholder="Enter Last School Year attended">
+                        <div class="w-full">
+                            <label class="text-md block mb-1">Others:</label>
+                            <input type="text" class="p-2 border rounded w-full" placeholder="Enter Relationship">
+                        </div>
                     </div>
                 </div>
 
-     
-                    <div>
-                        <label class="block font-semibold mb-4 text-lg">Choose only ONE Strand</label>
-                        
-                        <div class="bg-white p-4 rounded-md shadow-inner mb-4">
-                            <p class="italic text-sm"><strong>REGULAR</strong> - Mga estudyante na nagtapos ng <strong>G10 noong SY 2023-2024.</strong></p>
-                            <p class="italic text-sm"><strong>BALIK-ARAL</strong> - Mga estudyante na nagtapos ng <strong>G10 noong SY 2022-2023 PABABA at hindi pa nakapag-enroll bilang G11.</strong></p>
-                            <p class="italic text-sm"><strong>REPEATER</strong> - Mga estudyante na <strong>nakapag-enroll na ng G11 dati</strong> ngunit hindi natapos.</p>
-                            <p class="italic text-sm"><strong>ALS GRADUATE</strong> - Mga estudyante na nakatapos ng ALS Junior High School.</p>
-                        </div>
-                
-                        <select class="w-full p-3 border rounded-md mb-4">
-                            <option value="regular">Regular</option>
-                            <option value="balik-aral">Balik-Aral</option> 
-                            <option value="repeater">Repeater</option> 
-                            <option value="als-graduate">ALS Graduate</option>   
-                        </select>
-                
-                     
-                    </div>
-          
-                
+                <!-- Last School Information -->
+                <div class="w-full mt-6">
+                    <label class="block font-semibold mb-2 text-lg">Last School Year Attended</label>
+                    <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last School Year">
+                </div>
+                <div class="w-full mt-6">
+                    <label class="block font-semibold mb-2 text-lg">Last School Attended</label>
+                    <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last School Attended">
+                </div>
 
-                <button class="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-700 text-lg">Submit</button>
+                <!-- Strand Selection -->
+                <div class="w-full mt-6">
+                    <label class="block font-semibold mb-4 text-lg">Choose only ONE Strand</label>
+                    <div class="bg-white p-4 rounded-md shadow-inner mb-4">
+                        <p class="italic text-sm"><strong>REGULAR</strong> - G10 graduates of SY 2023-2024.</p>
+                        <p class="italic text-sm"><strong>BALIK-ARAL</strong> - G10 graduates of SY 2022-2023 or earlier who haven't enrolled in G11.</p>
+                        <p class="italic text-sm"><strong>REPEATER</strong> - Previously enrolled in G11 but didn't finish.</p>
+                        <p class="italic text-sm"><strong>ALS GRADUATE</strong> - ALS Junior High School graduates.</p>
+                    </div>
+                    <select class="w-full p-3 border rounded-md mb-4">
+                        <option value="regular">Regular</option>
+                        <option value="balik-aral">Balik-Aral</option> 
+                        <option value="repeater">Repeater</option> 
+                        <option value="als-graduate">ALS Graduate</option>   
+                    </select>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600">
+                        Submit Enrollment
+                    </button>
+                </div>
             </form>
         </div>
     </section>
