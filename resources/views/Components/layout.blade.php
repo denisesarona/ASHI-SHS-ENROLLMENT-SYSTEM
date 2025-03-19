@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
-<body class="font-sans bg-gray-100">
+<body class="font-sans bg-gray-100 {{ $bodyClass ?? '' }}">
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
         <div class="container mx-auto flex items-center justify-between py-3 px-6">
             <!-- Logo -->

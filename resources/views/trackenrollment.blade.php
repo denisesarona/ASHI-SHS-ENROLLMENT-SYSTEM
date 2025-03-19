@@ -1,5 +1,5 @@
 <x-layout>
-    <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4 w-full">
+    <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4 w-full" style="overflow: hidden;">
         <div class="bg-gray-200 p-12 sm:p-10 rounded-lg -mt-20 shadow-md w-full max-w-sm sm:max-w-lg">
             <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6">Track Enrollment Status</h1>
             <form action="#">

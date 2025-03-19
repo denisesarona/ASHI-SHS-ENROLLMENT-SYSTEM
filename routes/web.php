@@ -21,3 +21,7 @@ Route::get('/verification', function () {
 Route::get('/trackenrollment', function () {
     return view('trackenrollment');
 })->name('trackenrollment');
+
+Route::get('/controlnum', function () {
+    return view('controlnumber');
+})->name('controlnum');
