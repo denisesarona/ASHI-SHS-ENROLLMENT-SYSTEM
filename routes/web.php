@@ -17,3 +17,7 @@ Route::get('/homepage', function () {
 Route::get('/verification', function () {
     return view('studentverify');
 })->name('studentverification');
+
+Route::get('/trackenrollment', function () {
+    return view('trackenrollment');
+})->name('trackenrollment');

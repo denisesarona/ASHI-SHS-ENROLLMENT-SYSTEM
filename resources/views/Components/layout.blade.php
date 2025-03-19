@@ -24,12 +24,12 @@
             </button>    
                 
             <!-- Navigation Links -->
-            <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white p-4 
+            <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white p-4 
                 flex flex-col items-center space-y-2 
-                lg:flex lg:flex-row lg:items-center lg:justify-end lg:w-auto lg:space-x-6 lg:p-0 lg:relative lg:block">
+                lg:flex-row lg:items-center lg:justify-end lg:w-auto lg:space-x-6 lg:p-0 lg:relative lg:block">
                 <a href="{{ route('homepage') }}#HomePage" class="text-gray-700 hover:text-blue-600 px-4 py-2 mt-2">HOME</a>
                 <a href="{{ route('homepage') }}#AboutUs" class="text-gray-700 hover:text-blue-600 px-4 py-2">ABOUT</a>
-                <a href="#" class="text-gray-700 hover:text-blue-600 px-4 py-2">TRACK ENROLLMENT</a>
+                <a href="{{ route('trackenrollment') }}" class="text-gray-700 hover:text-blue-600 px-4 py-2">TRACK ENROLLMENT</a>
                 <a href="{{ route('homepage') }}#Contact" class="text-gray-700 hover:text-blue-600 px-4 py-2">CONTACT US</a>
             </div>
 
