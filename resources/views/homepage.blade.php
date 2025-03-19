@@ -8,7 +8,7 @@
                     shadow-black">
                     Start your journey with ASHI today!
                 </h2>                                   
-                    <a href="{{ route('enrollment') }}#EnrollmentForm" class="mt-4 inline-block bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded">Enroll Now!</a>
+                    <a href="{{ route('studentverification') }}" class="mt-4 inline-block bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded">Enroll Now!</a>
                 </div>
             </div>
         </div>

@@ -13,3 +13,7 @@ Route::get('/enrollment', function () {
 Route::get('/homepage', function () {
     return view('homePage');
 })->name('homepage');
+
+Route::get('/verification', function () {
+    return view('studentverify');
+})->name('studentverification');
