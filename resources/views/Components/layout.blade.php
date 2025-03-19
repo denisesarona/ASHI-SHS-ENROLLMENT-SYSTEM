@@ -8,7 +8,7 @@
     <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body class="font-sans bg-gray-100">
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
