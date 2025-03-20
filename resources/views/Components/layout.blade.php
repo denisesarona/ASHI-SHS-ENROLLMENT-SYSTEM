@@ -27,10 +27,15 @@
             <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white p-4 
             flex flex-col items-center space-y-2 
             lg:flex-row lg:items-center lg:justify-end lg:w-auto lg:space-x-6 lg:p-0 lg:relative lg:block">
-                <a href="{{ route('homepage') }}#HomePage" class="nav-link text-gray-700 hover:bg-blue-600 hover:text-white rounded-md px-4 py-2 mt-2" data-section="HomePage">HOME</a>
-                <a href="{{ route('homepage') }}#AboutUs" class="nav-link text-gray-700 hover:bg-blue-600 hover:text-white rounded-md px-4 py-2" data-section="AboutUs">ABOUT</a>
-                <a href="{{ route('trackenrollment') }}" class="{{ request()->is('trackenrollment') ? 'text-white bg-blue-600' : 'text-gray-700 hover:bg-blue-600 hover:text-white' }} rounded-md px-4 py-2">TRACK ENROLLMENT</a>
-                <a href="{{ route('homepage') }}#Contact" class="nav-link text-gray-700 hover:bg-blue-600 hover:text-white rounded-md px-4 py-2" data-section="Contact">CONTACT US</a>
+    
+                <x-nav-link href="/" class="nav-link" data-section="HomePage">HOME</x-nav-link>
+                <x-nav-link href="{{ route('homepage') }}#AboutUs" class="nav-link" data-section="AboutUs">
+                    ABOUT
+                </x-nav-link>
+                <x-nav-link href="/trackenrollment" :active="request()->is('trackenrollment')">TRACK ENROLLMENT</x-nav-link>
+                <x-nav-link href="{{ route('homepage') }}#Contact" class="nav-link" data-section="Contact">
+                    CONTACT US
+                </x-nav-link>
             </div>
         </div>
     </nav>
@@ -55,29 +60,20 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             function updateActiveLink() {
-                let hash = window.location.hash.substring(1);
-                let activeLinkFound = false;
-        
+                let hash = window.location.hash.substring(1) || "home"; // Default to "home" if no hash
                 document.querySelectorAll(".nav-link").forEach(link => {
                     if (link.dataset.section === hash) {
                         link.classList.add("text-white", "bg-blue-600");
                         link.classList.remove("text-gray-700");
-                        activeLinkFound = true;
                     } else {
                         link.classList.remove("text-white", "bg-blue-600");
                         link.classList.add("text-gray-700");
                     }
                 });
-        
-                // If no section is selected, highlight the HOME button
-                if (!activeLinkFound) {
-                    document.querySelector("[data-section='HomePage']").classList.add("text-white", "bg-blue-600");
-                    document.querySelector("[data-section='HomePage']").classList.remove("text-gray-700");
-                }
             }
-        
+    
             window.addEventListener("hashchange", updateActiveLink);
-            updateActiveLink();
+            updateActiveLink(); // Run once on page load
         });
     </script>
 </body>
