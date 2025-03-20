@@ -29,3 +29,7 @@ Route::get('/controlnum', function () {
 Route::get('/login', function () {
     return view('login');
 })->name('login');
+
+Route::get('/forgotpassword', function () {
+    return view('forgotpass');
+})->name('forgotpass');
