@@ -33,3 +33,7 @@ Route::get('/login', function () {
 Route::get('/forgotpassword', function () {
     return view('forgotpass');
 })->name('forgotpass');
+
+Route::get('/verification', function () {
+    return view('verifycode');
+})->name('verifycode');
