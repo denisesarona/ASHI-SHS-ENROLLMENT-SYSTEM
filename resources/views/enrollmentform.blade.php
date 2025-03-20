@@ -5,22 +5,22 @@
             <form action="#">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">School Year</label>
+                        <label class="block font-semibold mb-2 text-lg">School Year<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter School Year">
                     </div>
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Grade Level</label>
+                        <label class="block font-semibold mb-2 text-lg">Grade Level<span class="text-red-500 font-bold"> *</span></label>
                         <select class="w-full p-3 border rounded">
                             <option value="g11">Grade 11</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Last Name</label>
+                        <label class="block font-semibold mb-2 text-lg">Last Name<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last Name">
                     </div>
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">First Name</label>
+                        <label class="block font-semibold mb-2 text-lg">First Name<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter First Name">
                     </div>
 
@@ -34,20 +34,20 @@
                     </div>
 
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">LRN</label>
+                        <label class="block font-semibold mb-2 text-lg">LRN<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter LRN">
                     </div>
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Birthdate</label>
+                        <label class="block font-semibold mb-2 text-lg">Birthdate<span class="text-red-500 font-bold"> *</span></label>
                         <input type="date" class="w-full p-3 border rounded">
                     </div>
 
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Age</label>
+                        <label class="block font-semibold mb-2 text-lg">Age<span class="text-red-500 font-bold"> *</span></label>
                         <input type="number" class="w-full p-3 border rounded" placeholder="Enter Age">
                     </div>
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Gender</label>
+                        <label class="block font-semibold mb-2 text-lg">Gender<span class="text-red-500 font-bold"> *</span></label>
                         <div class="flex items-center space-x-4">
                             <label class="flex items-center">
                                 <input type="radio" name="gender" value="Male" class="mr-2"> Male
@@ -62,7 +62,7 @@
                 <!-- 4Ps Beneficiary Section -->
                 <div class="w-full mt-6">
                     <label class="block font-semibold mb-2 text-lg">
-                        Are you a beneficiary of 4Ps? (Ikaw ba ay benepisyaryo ng 4Ps?)
+                        Are you a beneficiary of 4Ps? (Ikaw ba ay benepisyaryo ng 4Ps?)<span class="text-red-500 font-bold"> *</span>
                     </label>
                     <div class="flex space-x-10">
                         <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
@@ -78,35 +78,35 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">House No./ Street</label>
+                        <label class="block font-semibold mb-2 text-lg">House No./ Street<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter Address">
                     </div>
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Barangay</label>
+                        <label class="block font-semibold mb-2 text-lg">Barangay<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter Barangay">
                     </div>
 
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Municipality/ City</label>
+                        <label class="block font-semibold mb-2 text-lg">Municipality/ City<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter City">
                     </div>
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Province</label>
+                        <label class="block font-semibold mb-2 text-lg">Province<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter Province">
                     </div>
 
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Guardian's Name</label>
+                        <label class="block font-semibold mb-2 text-lg">Guardian's Name<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" placeholder="Enter Guardian's Name">
                     </div>
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">Guardian's Contact</label>
+                        <label class="block font-semibold mb-2 text-lg">Guardian's Contact<span class="text-red-500 font-bold"> *</span></label>
                         <input type="tel" class="w-full p-3 border rounded" placeholder="Enter Contact">
                     </div>
                 </div>
                 <!-- Relationship with Guardian -->
                 <div class="w-full mt-6">
-                    <label class="block font-semibold mb-2 text-lg">Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)</label>
+                    <label class="block font-semibold mb-2 text-lg">Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)<span class="text-red-500 font-bold"> *</span></label>
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-4">
                             <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
@@ -127,18 +127,18 @@
 
                 <!-- Last School Information -->
                 <div class="w-full mt-6">
-                    <label class="block font-semibold text-lg">Last School Year Attended</label>
+                    <label class="block font-semibold text-lg">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal mb-2"><i> Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</i></label>
                     <input type="text" class="w-full p-3 border rounded mt-2" placeholder="Enter Last School Year">
                 </div>
                 <div class="w-full mt-6">
-                    <label class="block font-semibold mb-2 text-lg">Last School Attended</label>
+                    <label class="block font-semibold mb-2 text-lg">Last School Attended<span class="text-red-500 font-bold"> *</span></label>
                     <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last School Attended">
                 </div>
 
                 <!-- Strand Selection -->
                 <div class="w-full mt-6">
-                    <label class="block font-semibold mb-4 text-lg">Choose only ONE Strand</label>
+                    <label class="block font-semibold mb-4 text-lg">Choose only ONE Strand<span class="text-red-500 font-bold"> *</span></label>
                     <div class="bg-white p-4 rounded-md shadow-inner mb-4">
                         <p class="italic text-sm"><strong>REGULAR</strong> - G10 graduates of SY 2023-2024.</p>
                         <p class="italic text-sm"><strong>BALIK-ARAL</strong> - G10 graduates of SY 2022-2023 or earlier who haven't enrolled in G11.</p>
@@ -154,12 +154,12 @@
                 </div>
 
                 <div class="w-full mt-6">
-                    <label class="block font-semibold mb-2 text-lg">Grade 10 Section</label>
+                    <label class="block font-semibold mb-2 text-lg">Grade 10 Section<span class="text-red-500 font-bold"> *</span></label>
                     <input type="text" class="w-full p-3 border rounded" placeholder="Enter Grade 10 section">
                 </div>
 
                 <div class="w-full mt-6">
-                    <label class="block font-semibold text-lg">Picture of Grade 10 Card</label>
+                    <label class="block font-semibold text-lg">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal"><i> FRONT and BACK of the Card</i></label>
                     <input type="file" class="w-full p-3 border rounded mt-3">
                 </div>
