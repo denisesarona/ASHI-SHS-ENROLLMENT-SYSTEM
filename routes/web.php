@@ -25,3 +25,7 @@ Route::get('/trackenrollment', function () {
 Route::get('/controlnum', function () {
     return view('controlnumber');
 })->name('controlnum');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
