@@ -3,20 +3,16 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('homepage');
+})->name('homepage');
 
 Route::get('/enrollment', function () {
     return view('enrollmentform');
 })->name('enrollment');
 
-Route::get('/homepage', function () {
-    return view('homePage');
-})->name('homepage');
-
-Route::get('/verification', function () {
+Route::get('/studentverify', function () {
     return view('studentverify');
-})->name('studentverification');
+})->name('studentverify');
 
 Route::get('/trackenrollment', function () {
     return view('trackenrollment');
