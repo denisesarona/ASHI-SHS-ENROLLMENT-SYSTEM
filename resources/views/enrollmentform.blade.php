@@ -127,8 +127,9 @@
 
                 <!-- Last School Information -->
                 <div class="w-full mt-6">
-                    <label class="block font-semibold mb-2 text-lg">Last School Year Attended</label>
-                    <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last School Year">
+                    <label class="block font-semibold text-lg">Last School Year Attended</label>
+                    <label class="text-sm font-normal mb-2"><i> Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</i></label>
+                    <input type="text" class="w-full p-3 border rounded mt-2" placeholder="Enter Last School Year">
                 </div>
                 <div class="w-full mt-6">
                     <label class="block font-semibold mb-2 text-lg">Last School Attended</label>
@@ -149,6 +150,45 @@
                         <option value="balik-aral">Balik-Aral</option> 
                         <option value="repeater">Repeater</option> 
                         <option value="als-graduate">ALS Graduate</option>   
+                    </select>
+                </div>
+
+                <div class="w-full mt-6">
+                    <label class="block font-semibold mb-2 text-lg">Grade 10 Section</label>
+                    <input type="text" class="w-full p-3 border rounded" placeholder="Enter Grade 10 section">
+                </div>
+
+                <div class="w-full mt-6">
+                    <label class="block font-semibold text-lg">Picture of Grade 10 Card</label>
+                    <label class="text-sm font-normal"><i> FRONT and BACK of the Card</i></label>
+                    <input type="file" class="w-full p-3 border rounded mt-3">
+                </div>
+
+                <div class="w-full mt-6 ">
+                    <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
+                    <div class="bg-white p-4 rounded-md shadow-inner mb-2">
+                        <p class="text-md"><strong>HUMSS</strong> - Humanities and Social Sciences</p>
+                        <p class="text-md"><strong>Industrial Arts</strong> - Automotive Servicing (NC II)</p>
+                        <p class="text-md"><strong>Industrial Arts</strong> - Electrical Installation and Maintenance (NC II)</p>
+                        <p class="text-md"><strong>Industrial Arts</strong> - Electronic Products Assembly and Servicing (NC II)</p>
+                        <p class="text-md"><strong>Industrial Arts</strong> - Shielded Metal Arc Welding (NC I & NC II)</p>
+                        <p class="text-md"><strong>Home Economics</strong> - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</p>
+                        <p class="text-md"><strong>Home Economics</strong> - Dressmaking (NC II) and Tailoring (NC II)</p>
+                        <p class="text-md"><strong>Home Economics</strong> - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</p>
+                        <p class="text-md"><strong>Information and Communication Technology</strong> - Computer Systems Servicing (NC II)</p>
+                        <p class="text-md"><strong>Information and Communication Technology</strong> - Technical Drafting (NC II) and Illustration (NC II)</p>
+                    </div>
+                    <select class="w-full p-3 border rounded-md mb-4">
+                        <option value="hums">HUMSS - Humanities and Social Sciences</option>
+                        <option value="ia-as">Industrial Arts - Automotive Servicing (NC II)</option> 
+                        <option value="ia-eim">Industrial Arts - Electrical Installation and Maintenance (NC II)</option> 
+                        <option value="ia-epas">Industrial Arts - Electronic Products Assembly and Servicing (NC II)</option>   
+                        <option value="ia-smaw">Industrial Arts - Shielded Metal Arc Welding (NC I & NC II)</option>
+                        <option value="he-brpfbs">Home Economics - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</option> 
+                        <option value="he-dt">Home Economics - Dressmaking (NC II) and Tailoring (NC II)</option> 
+                        <option value="he-hbc">Home Economics - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</option>   
+                        <option value="ict-css">Information and Communication Technology - Computer Systems Servicing (NC II)</option>
+                        <option value="ict-td">Information and Communication Technology - Technical Drafting (NC II) and Illustration (NC II)</option>  
                     </select>
                 </div>
 
