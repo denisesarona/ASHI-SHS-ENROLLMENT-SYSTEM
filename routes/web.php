@@ -37,3 +37,7 @@ Route::get('/forgotpassword', function () {
 Route::get('/verification', function () {
     return view('verifycode');
 })->name('verifycode');
+
+Route::get('/changepassword', function () {
+    return view('changepassword');
+})->name('changepassword');
