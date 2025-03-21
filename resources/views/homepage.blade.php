@@ -50,7 +50,7 @@
                     <a href="https://www.facebook.com/profile.php?id=61550700366483" target="_blank" class="text-blue-500 text-4xl inline-block mt-4">
                         <i class="bx bxl-facebook-square"></i>
                     </a>
-                </div>                
+                </div>
             </div>
         </div>
     </section>

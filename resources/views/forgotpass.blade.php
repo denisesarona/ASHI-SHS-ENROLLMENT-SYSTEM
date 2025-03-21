@@ -16,7 +16,7 @@
         <div class="flex justify-start">
           <a href="{{ route('login') }}"><i class='bx bx-arrow-back text-gray-500 text-2xl font-bold'></i></a>
         </div>
-        <h2 class="text-2xl font-bold text-black">Forgot your password?</h2> 
+        <h2 class="text-2xl font-bold text-black">Forgot your password?</h2>
         <div class="mt-6">
             <form action="">
                 @csrf
