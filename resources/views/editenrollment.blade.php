@@ -2,7 +2,7 @@
     <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
         <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl">
             <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6">Edit Enrollment Form</h1>
-            <form action="{{route('update', $learner->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -14,7 +14,7 @@
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Grade Level<span class="text-red-500 font-bold"> *</span></label>
-                        <select class="w-full p-3 border rounded" name="grade_level">
+                        <select class="w-full p-3 border rounded" name="grade_level">/
                             <option value="g11">Grade 11</option>
                         </select>
                     </div>
