@@ -138,7 +138,7 @@
 
                 <!-- Strand Selection -->
                 <div class="w-full mt-6">
-                    <label class="block font-semibold mb-4 text-lg">Choose only ONE Strand<span class="text-red-500 font-bold"> *</span></label>
+                    <label class="block font-semibold mb-4 text-lg">Choose a Learner's Category<span class="text-red-500 font-bold"> *</span></label>
                     <div class="bg-white p-4 rounded-md shadow-inner mb-4">
                         <p class="italic text-sm"><strong>REGULAR</strong> - G10 graduates of SY 2023-2024.</p>
                         <p class="italic text-sm"><strong>BALIK-ARAL</strong> - G10 graduates of SY 2022-2023 or earlier who haven't enrolled in G11.</p>
