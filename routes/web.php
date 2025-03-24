@@ -1,32 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LearnerController;
 
-Route::get('/', [LearnerController::class, 'showHomePage'])->name('login');
+Route::get('/', [LearnerController::class, 'showHomePage'])->name('homepage');
+Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
+Route::get('/studentverify', [LearnerController::class, 'showStudentVerify'])->name('studentverify');
+Route::get('/trackenrollment', [LearnerController::class, 'showTrackEnrollment'])->name('trackenrollment');
+Route::get('/controlnum', [LearnerController::class, 'showControlNum'])->name('controlnum');
+Route::get('/login', [LearnerController::class, 'showLoginForm'])->name('login');
 
-Route::get('/', function () {
-    return view('homepage');
-})->name('homepage');
-
-Route::get('/enrollment', function () {
-    return view('enrollmentform');
-})->name('enrollment');
-
-Route::get('/studentverify', function () {
-    return view('studentverify');
-})->name('studentverify');
-
-Route::get('/trackenrollment', function () {
-    return view('trackenrollment');
-})->name('trackenrollment');
-
-Route::get('/controlnum', function () {
-    return view('controlnumber');
-})->name('controlnum');
-
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
 
 Route::get('/forgotpassword', function () {
     return view('forgotpass');
