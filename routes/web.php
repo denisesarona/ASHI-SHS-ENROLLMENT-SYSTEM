@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', [LearnerController::class, 'showHomePage'])->name('login');
+
 Route::get('/', function () {
     return view('homepage');
 })->name('homepage');
