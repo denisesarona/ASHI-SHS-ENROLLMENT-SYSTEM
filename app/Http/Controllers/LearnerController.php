@@ -39,4 +39,19 @@ class LearnerController extends Controller
     {
         return view('auth.login');
     }
+
+    public function showForgotPassword()
+    {
+        return view('auth.forgotpassword');
+    }
+
+    public function showVerification()
+    {
+        return view('auth.verifycode');
+    }
+
+    public function showChangePassword()
+    {
+        return view('auth.changepassword');
+    }
 }

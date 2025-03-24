@@ -9,16 +9,6 @@ Route::get('/studentverify', [LearnerController::class, 'showStudentVerify'])->n
 Route::get('/trackenrollment', [LearnerController::class, 'showTrackEnrollment'])->name('trackenrollment');
 Route::get('/controlnum', [LearnerController::class, 'showControlNum'])->name('controlnum');
 Route::get('/login', [LearnerController::class, 'showLoginForm'])->name('login');
-
-
-Route::get('/forgotpassword', function () {
-    return view('forgotpass');
-})->name('forgotpass');
-
-Route::get('/verification', function () {
-    return view('verifycode');
-})->name('verifycode');
-
-Route::get('/changepassword', function () {
-    return view('changepassword');
-})->name('changepassword');
+Route::get('/forgotpassword', [LearnerController::class, 'showForgotPassword'])->name('forgotpassword');
+Route::get('/verification', [LearnerController::class, 'showVerification'])->name('verifycode');    
+Route::get('/changepassword', [LearnerController::class, 'showChangePassword'])->name('changepassword');
