@@ -1,15 +1,5 @@
 <x-layout>
     <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif    
-
         <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl">
             <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6">Enrollment Form</h1>
             <form action="{{ route('registerLearner') }}" method="POST" enctype="multipart/form-data">
@@ -202,6 +192,8 @@
                     </select>
                 </div>
 
+                <input type="hidden" value="Pending" name="status">
+
                 <div class="mt-6 text-center">
                     <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600">
                         Submit Enrollment
@@ -210,47 +202,4 @@
             </form>
         </div>
     </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show success notification if present
-            if (document.getElementById('success-notification')) {
-                setTimeout(function() {
-                    let successNotif = document.getElementById('success-notification');
-                    successNotif.classList.remove('show');
-                    successNotif.classList.add('fade');
-                }, 5000); // Hide after 5 seconds
-            }
-
-            // Show error notification if present
-            if (document.getElementById('error-notification')) {
-                setTimeout(function() {
-                    let errorNotif = document.getElementById('error-notification');
-                    errorNotif.classList.remove('show');
-                    errorNotif.classList.add('fade');
-                }, 5000); // Hide after 5 seconds
-            }
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let radios = document.querySelectorAll('input[name="relationship_guardian"]');
-            let otherInput = document.getElementById("relationship_other");
-            let hiddenInput = document.getElementById("relationship_hidden");
-
-            // Handle radio button selection
-            radios.forEach(radio => {
-                radio.addEventListener("change", function () {
-                    otherInput.value = ""; // Clear other input when radio is selected
-                    hiddenInput.value = this.value; // Set hidden input value
-                });
-            });
-
-            // Handle "Others" text input
-            otherInput.addEventListener("input", function () {
-                radios.forEach(radio => radio.checked = false); // Uncheck all radios
-                hiddenInput.value = this.value; // Set hidden input value
-            });
-        });
-    </script>
 </x-layout>

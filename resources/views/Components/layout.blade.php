@@ -9,6 +9,8 @@
     href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body class="font-sans bg-gray-100 {{ $bodyClass ?? '' }}">
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
@@ -43,6 +45,31 @@
     <div class="w-screen mt-16 px-0 mx-0">
         <div class="row">
             {{ $slot }}
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    @if(session('success'))
+                        Toastify({
+                            text: "{{ session('success') }}",
+                            duration: 3000,
+                            gravity: "right",
+                            position: "right",
+                            backgroundColor: "green",
+                            stopOnFocus: true
+                        }).showToast();
+                    @endif
+        
+                    @if(session('error'))
+                        Toastify({
+                            text: "{{ session('error') }}",
+                            duration: 3000,
+                            gravity: "right",
+                            position: "right",
+                            backgroundColor: "red",
+                            stopOnFocus: true
+                        }).showToast();
+                    @endif
+                });
+            </script>
         </div>
     </div>
     

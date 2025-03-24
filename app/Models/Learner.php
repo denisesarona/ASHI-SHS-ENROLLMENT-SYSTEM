@@ -34,5 +34,6 @@ class Learner extends Model
         'grade10_section',
         'image',
         'chosen_strand',
+        'status',
     ];
 }

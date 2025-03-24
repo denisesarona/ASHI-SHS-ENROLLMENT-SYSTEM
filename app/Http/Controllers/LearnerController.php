@@ -38,6 +38,11 @@ class LearnerController extends Controller
         return view('controlnum', compact('learner'));
     }    
 
+    public function viewStatus()
+    {
+        return view('viewstatus');
+    }
+
     public function showLoginForm()
     {
         return view('auth.login');
@@ -84,6 +89,7 @@ class LearnerController extends Controller
             'grade10_section' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'chosen_strand' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
         ]);
 
         $imagePath = null;
@@ -122,6 +128,7 @@ class LearnerController extends Controller
                 'grade10_section' => $request->grade10_section,
                 'image' => $imagePath,
                 'chosen_strand' => $request->chosen_strand,
+                'status' => $request->status,
             ]);
 
             return redirect()->route('controlnum', ['id' => $learner->id])->with('success', 'Learner enrollment successful.');
@@ -148,9 +155,16 @@ class LearnerController extends Controller
                           ->first();
     
         if ($learner) {
-            return redirect()->route('homepage')->with('success', 'Learner found successfully!');
+            // Store in session to persist across multiple requests
+            session()->put([
+                'last_name' => $learner->last_name,
+                'controlnum' => $learner->id,
+                'status' => $learner->status,
+            ]);
+    
+            return redirect()->route('viewstatus')->with('success', 'Learner found successfully!');
         } else {
-            return redirect()->route('enrollment')->with('error', 'Learner not found.');
+            return redirect()->route('trackenrollment')->with('error', 'Learner not found.');
         }
     }    
 }
