@@ -22,6 +22,11 @@ class LearnerController extends Controller
         return view('enrollment');
     }
 
+    public function showEditEnrollmentForm()
+    {
+        return view('editenrollment');
+    }
+
     public function showStudentVerify()
     {
         return view('studentverify');
@@ -77,6 +82,7 @@ class LearnerController extends Controller
             'age' => 'required|integer',
             'gender' => 'string|max:255',
             'beneficiary' => 'string|max:255',
+            'street' => 'required|string|max:255',
             'baranggay' => 'required|string|max:255',
             'municipality' => 'required|string|max:255',
             'province' => 'required|string|max:255',
@@ -137,6 +143,29 @@ class LearnerController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
+    
+    public function studentVerification(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'last_name' => 'required|string|max:255',
+            'lrn' => 'required|string|max:255',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        // Find the learner with the given last name and control number
+        $learner = Learner::where('lrn', $request->lrn)
+                          ->where('last_name', $request->last_name)
+                          ->first();
+    
+        if (!$learner) {   
+            return redirect()->route('enrollment')->with('success', 'Proceed with the enrollment!');
+        } else {
+            return redirect()->route('studentverify')->with('error', 'Learner already submitted an enrollment form.');
+        }
+    }    
 
     public function trackEnrollmentStatus(Request $request)
     {
@@ -160,6 +189,7 @@ class LearnerController extends Controller
                 'last_name' => $learner->last_name,
                 'controlnum' => $learner->id,
                 'status' => $learner->status,
+                'id' => $learner->id,
             ]);
     
             return redirect()->route('viewstatus')->with('success', 'Learner found successfully!');
@@ -168,27 +198,54 @@ class LearnerController extends Controller
         }
     }    
 
-    public function studentVerification(Request $request)
+    public function viewStatusDetails(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'last_name' => 'required|string|max:255',
-            'lrn' => 'required|string|max:255',
+        if (!$request->has('id') || empty($request->id)) {
+            return redirect()->route('homepage')->with('error', 'ID is required.');
+        }
+
+        $learner = Learner::where('id', $request->id)->first();
+
+        if (!$learner) {
+            return redirect()->route('homepage')->with('error', 'No learner found.');
+        }
+
+        session([
+            'id' => $learner->id,
+            'last_name' => $learner->last_name,
+            'status' => $learner->status,
         ]);
-    
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-    
-        // Find the learner with the given last name and control number
-        $learner = Learner::where('lrn', $request->lrn)
-                          ->where('last_name', $request->last_name)
-                          ->first();
-    
-        if (!$learner) {   
-            return redirect()->route('enrollment')->with('success', 'Proceed with the enrollment!');
-        } else {
-            return redirect()->route('studentverify')->with('error', 'Learner already submitted an enrollment form.');
-        }
-    }    
+
+        return view('viewstatus');
+    }
+
+
+    public function update(Request $request, $id)
+    {
+    $learner = Learner::find($id);
+
+    if (!$learner) {
+        return redirect()->route('viewstatus')->with('error', 'Learner not found.');
+    }
+
+    // Validate the incoming data
+    $validator = Validator::make($request->all(), [
+        'last_name' => 'required|string|max:255',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    // Update the account with the new data
+    $learner->last_name = $request->last_name;
+
+    $learner->save();
+
+    return redirect()->route('homepage')->with('success', 'Learner details updated successfully!');
+    }
+
+
+
 }
 

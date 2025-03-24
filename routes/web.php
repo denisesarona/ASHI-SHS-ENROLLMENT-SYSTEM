@@ -5,6 +5,7 @@ use App\Http\Controllers\LearnerController;
 
 Route::get('/', [LearnerController::class, 'showHomePage'])->name('homepage');
 Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
+Route::get('/editenrollment/{id}/edit', [LearnerController::class, 'showEditEnrollmentForm'])->name('editenrollment');
 Route::get('/studentverify', [LearnerController::class, 'showStudentVerify'])->name('studentverify');
 Route::get('/trackenrollment', [LearnerController::class, 'showTrackEnrollment'])->name('trackenrollment');
 Route::get('/controlnum/{id}', [LearnerController::class, 'showControlNum'])->name('controlnum');
@@ -17,3 +18,5 @@ Route::get('/changepassword', [LearnerController::class, 'showChangePassword'])-
 Route::post('/enrollment', [LearnerController::class, 'registerLearner'])->name('registerLearner');
 Route::post('/trackenrollment', [LearnerController::class, 'trackEnrollmentStatus'])->name('trackEnrollment');
 Route::post('/studentverify', [LearnerController::class, 'StudentVerification'])->name('studentVerify');
+Route::post('/viewStatusDetails', [LearnerController::class, 'viewStatusDetails'])->name('viewStatusDetails');
+Route::put('/update/{id}', [LearnerController::class, 'update'])->name('updateDetails');
