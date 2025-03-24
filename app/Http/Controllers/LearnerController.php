@@ -81,9 +81,14 @@ class LearnerController extends Controller
             'last_school' => 'required|string|max:255',
             'learner_category' => 'required|string|max:255',
             'grade10_section' => 'required|string|max:255',
-            'grade10_card' => 'string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'chosen_strand' => 'required|string|max:255',
         ]);
+
+        $imagePath = null;
+        if($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('image','public');
+        }
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -114,7 +119,7 @@ class LearnerController extends Controller
                 'last_school' => $request->last_school,
                 'learner_category' => $request->learner_category,
                 'grade10_section' => $request->grade10_section,
-                'grade10_card' => $request->grade10_card,
+                'image' => $imagePath,
                 'chosen_strand' => $request->chosen_strand,
             ]);
 

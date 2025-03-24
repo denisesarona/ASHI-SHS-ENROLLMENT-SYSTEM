@@ -32,7 +32,7 @@ class Learner extends Model
         'last_school',
         'learner_category',
         'grade10_section',
-        'grade10_card',
+        'image',
         'chosen_strand',
     ];
 }

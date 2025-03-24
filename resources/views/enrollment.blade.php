@@ -63,31 +63,28 @@
                         <label class="block font-semibold mb-2 text-lg">Gender<span class="text-red-500 font-bold"> *</span></label>
                         <div class="flex items-center space-x-4">
                             <label class="flex items-center">
-                                <input type="radio" name="gender" value="Male" class="mr-2" required> Male
+                                <input type="radio" name="gender" value="Male" class="mr-2 w-6 h-6" required> Male
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="gender" value="Female" class="mr-2" required> Female
+                                <input type="radio" name="gender" value="Female" class="mr-2 w-6 h-6" required> Female
                             </label>
                         </div>
                     </div>                    
                 </div>
                 
-                <!-- 4Ps Beneficiary Section -->
-                <div class="w-full mt-6">
-                    <label class="block font-semibold mb-2 text-lg">
+                <div>
+                    <label class="block font-semibold mb-2 text-lg mt-4">
                         Are you a beneficiary of 4Ps? (Ikaw ba ay benepisyaryo ng 4Ps?)<span class="text-red-500 font-bold"> *</span>
                     </label>
-                    <div class="flex space-x-10">
-                        <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                            <input type="checkbox" class="w-6 h-6" name="bene_yes">
-                            <span>Yes</span> 
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="beneficiary" value="Male" class="mr-2 w-6 h-6" required> Yes
                         </label>
-                        <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                            <input type="checkbox" class="w-6 h-6" name="bene_no">
-                            <span>No</span>
+                        <label class="flex items-center">
+                            <input type="radio" name="beneficiary" value="Female" class="mr-2 w-6 h-6" required> No
                         </label>
                     </div>
-                </div>
+                </div>  
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div>
@@ -117,26 +114,22 @@
                         <input type="number" class="w-full p-3 border rounded" name="guardian_contact" placeholder="Enter Contact">
                     </div>
                 </div>
-                <!-- Relationship with Guardian -->
-                <div class="w-full mt-6">
-                    <label class="block font-semibold mb-2 text-lg">Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)<span class="text-red-500 font-bold"> *</span></label>
-                    <div class="flex justify-between items-center">
-                        <div class="flex space-x-4">
-                            <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                                <input type="checkbox" name="mother" class="w-6 h-6">
-                                <span>Mother (Nanay)</span> 
-                            </label>
-                            <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                                <input type="checkbox" name="father" class="w-6 h-6">
-                                <span>Father (Tatay)</span>
-                            </label>
-                        </div>
+
+                <div>
+                    <label class="block font-semibold mb-2 text-lg mt-4">Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)<span class="text-red-500 font-bold"> *</span></label>
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="relationship_guardian" value="Mother" class="mr-2 w-6 h-6"> Mother
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="relationship_guardian" value="Father" class="mr-2 w-6 h-6"> Father
+                        </label>
                         <div class="w-full">
                             <label class="text-md block mb-1">Others:</label>
-                            <input type="text" class="p-2 border rounded w-full" name="other_relationship" placeholder="Enter Relationship">
+                            <input type="text" class="p-2 border rounded w-full" name="relationship_guardian" placeholder="Enter Relationship with the Guardian">
                         </div>
                     </div>
-                </div>
+                </div>  
 
                 <!-- Last School Information -->
                 <div class="w-full mt-6">
@@ -174,7 +167,7 @@
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal"><i> FRONT and BACK of the Card</i></label>
-                    <input type="file" class="w-full p-3 border rounded mt-3" name="grade10_card">
+                    <input type="file" class="w-full p-3 border rounded mt-3"  name="image" accept="image/*">
                 </div>
 
                 <div class="w-full mt-6 ">
