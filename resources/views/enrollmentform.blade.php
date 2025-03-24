@@ -128,11 +128,11 @@
                 <!-- Last School Information -->
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
-                    <label class="text-sm font-normal mb-2"><i> Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</i></label>
                     <input type="text" class="w-full p-3 border rounded mt-2" placeholder="Enter Last School Year">
                 </div>
                 <div class="w-full mt-6">
-                    <label class="block font-semibold mb-2 text-lg">Last School Attended<span class="text-red-500 font-bold"> *</span></label>
+                    <label class="block font-semibold text-lg">Last School Attended<span class="text-red-500 font-bold"> *</span></label>
+                    <label class="text-sm font-normal mb-2"><i> Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</i></label>
                     <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last School Attended">
                 </div>
 
