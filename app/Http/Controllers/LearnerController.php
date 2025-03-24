@@ -32,10 +32,11 @@ class LearnerController extends Controller
         return view('trackenrollment');
     }
 
-    public function showControlNum()
+    public function showControlNum($id)
     {
-        return view('controlnum');
-    }
+        $learner = Learner::findOrFail($id); // Fetch learner data by ID
+        return view('controlnum', compact('learner'));
+    }    
 
     public function showLoginForm()
     {
@@ -123,7 +124,7 @@ class LearnerController extends Controller
                 'chosen_strand' => $request->chosen_strand,
             ]);
 
-            return redirect()->route('controlnum')->with('success', 'Learner enrollment successful.');
+            return redirect()->route('controlnum', ['id' => $learner->id])->with('success', 'Learner enrollment successful.');
         } catch (\Exception $e) {
             Log::error('Enrollment Error: ' . $e->getMessage()); // Log the actual error message
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
