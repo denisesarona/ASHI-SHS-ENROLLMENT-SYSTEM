@@ -167,5 +167,28 @@ class LearnerController extends Controller
             return redirect()->route('trackenrollment')->with('error', 'Learner not found.');
         }
     }    
+
+    public function studentVerification(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'last_name' => 'required|string|max:255',
+            'lrn' => 'required|string|max:255',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        // Find the learner with the given last name and control number
+        $learner = Learner::where('lrn', $request->lrn)
+                          ->where('last_name', $request->last_name)
+                          ->first();
+    
+        if (!$learner) {   
+            return redirect()->route('enrollment')->with('success', 'Proceed with the enrollment!');
+        } else {
+            return redirect()->route('studentverify')->with('error', 'Learner already submitted an enrollment form.');
+        }
+    }    
 }
 

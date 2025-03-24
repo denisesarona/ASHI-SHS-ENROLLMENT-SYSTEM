@@ -15,4 +15,5 @@ Route::get('/verification', [LearnerController::class, 'showVerification'])->nam
 Route::get('/changepassword', [LearnerController::class, 'showChangePassword'])->name('changepassword');
 
 Route::post('/enrollment', [LearnerController::class, 'registerLearner'])->name('registerLearner');
-Route::post('/trackenrollment', [LearnerController::class, 'trackEnrollmentStatus'])->name('trackenrollment');
+Route::post('/trackenrollment', [LearnerController::class, 'trackEnrollmentStatus'])->name('trackEnrollment');
+Route::post('/studentverify', [LearnerController::class, 'StudentVerification'])->name('studentVerify');
