@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Learner extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'school_year',
+        'grade_level',
+        'last_name',
+        'first_name',
+        'middle_name',
+        'extension_name',
+        'lrn',
+        'birthdate',
+        'age',
+        'gender',
+        'beneficiary',
+        'street',
+        'baranggay',
+        'municipality',
+        'province',
+        'guardian_name',
+        'guardian_contact',
+        'relationship_guardian',
+        'last_sy',
+        'last_school',
+        'learner_category',
+        'grade10_section',
+        'grade10_card',
+        'chosen_strand',
+    ];
+}

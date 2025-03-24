@@ -12,3 +12,5 @@ Route::get('/login', [LearnerController::class, 'showLoginForm'])->name('login')
 Route::get('/forgotpassword', [LearnerController::class, 'showForgotPassword'])->name('forgotpassword');
 Route::get('/verification', [LearnerController::class, 'showVerification'])->name('verifycode');    
 Route::get('/changepassword', [LearnerController::class, 'showChangePassword'])->name('changepassword');
+
+Route::post('/enrollment', [LearnerController::class, 'registerLearner'])->name('registerLearner');

@@ -11,31 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pending_learners', function (Blueprint $table) {
+        Schema::create('learners', function (Blueprint $table) {
             $table->id();
             $table->string('school_year');
             $table->string('grade_level');
             $table->string('last_name');
             $table->string('first_name');
-            $table->string('middle_name');
-            $table->string('extension_name');
-            $table->integer('lrn');
+            $table->string('middle_name')->nullable();
+            $table->string('extension_name')->nullable();
+            $table->string('lrn')->unique();
             $table->date('birthdate');
             $table->integer('age');
             $table->string('gender');
-            $table->string('beneficiary');
-            $table->string('street');
+            $table->string('beneficiary')->nullable();
+            $table->string('street')->nullable();
             $table->string('baranggay');
             $table->string('municipality');
             $table->string('province');
             $table->string('guardian_name');
-            $table->integer('guardian_contact');
-            $table->string('relationship_guardian');
+            $table->string('guardian_contact');
+            $table->string('relationship_guardian')->nullable();
             $table->string('last_sy');
             $table->string('last_school');
             $table->string('learner_category');
             $table->string('grade10_section');
-            $table->string('grade10_card');
+            $table->string('grade10_card')->nullable();
             $table->string('chosen_strand');
             $table->timestamps();
         });
@@ -46,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pending_learners');
+        Schema::dropIfExists('learners');
     }
 };

@@ -1,59 +1,78 @@
 <x-layout>
     <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            </div>
+        @endif
+        
+        @if (session('success'))
+            <div class="alert alert-success" style="background-color: #28a745; color: white; border-color: #28a745;">
+            {{ session('success') }}
+            </div>
+        @endif
+
         <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl">
             <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6">Enrollment Form</h1>
-            <form action="#">
+            <form action="{{ route('registerLearner') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block font-semibold mb-2 text-lg">School Year<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter School Year">
+                        <select class="w-full p-3 border rounded" name="school_year">
+                            <option value="sy">2025-2026</option>
+                        </select>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Grade Level<span class="text-red-500 font-bold"> *</span></label>
-                        <select class="w-full p-3 border rounded">
+                        <select class="w-full p-3 border rounded" name="grade_level">
                             <option value="g11">Grade 11</option>
                         </select>
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Last Name<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last Name">
+                        <input type="text" class="w-full p-3 border rounded" name="last_name" placeholder="Enter Last Name">
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">First Name<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter First Name">
+                        <input type="text" class="w-full p-3 border rounded" name="first_name" placeholder="Enter First Name">
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Middle Name</label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Middle Name">
+                        <input type="text" class="w-full p-3 border rounded" name="middle_name" placeholder="Enter Middle Name">
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Extension Name</label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Extension Name">
+                        <input type="text" class="w-full p-3 border rounded" name="extension_name" placeholder="Enter Extension Name">
                     </div>
 
                     <div>
-                        <label class="block font-semibold mb-2 text-lg">LRN<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter LRN">
+                        <label class="block font-semibold mb-2 text-lg">LRN (Learner Reference Number)<span class="text-red-500 font-bold"> *</span></label>
+                        <input type="number" class="w-full p-3 border rounded" name="lrn" placeholder="Enter LRN">
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Birthdate<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="date" class="w-full p-3 border rounded">
+                        <input type="date" name="birthdate" class="w-full p-3 border rounded">
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Age<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="number" class="w-full p-3 border rounded" placeholder="Enter Age">
+                        <input type="number" class="w-full p-3 border rounded" name="age" placeholder="Enter Age">
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Gender<span class="text-red-500 font-bold"> *</span></label>
                         <div class="flex items-center space-x-4">
                             <label class="flex items-center">
-                                <input type="radio" name="gender" value="Male" class="mr-2"> Male
+                                <input type="radio" name="gender_male" value="Male" class="mr-2"> Male
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="gender" value="Female" class="mr-2"> Female
+                                <input type="radio" name="gender_female" value="Female" class="mr-2"> Female
                             </label>
                         </div>
                     </div>
@@ -66,11 +85,11 @@
                     </label>
                     <div class="flex space-x-10">
                         <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                            <input type="checkbox" class="w-6 h-6">
+                            <input type="checkbox" class="w-6 h-6" name="bene_yes">
                             <span>Yes</span> 
                         </label>
                         <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                            <input type="checkbox" class="w-6 h-6">
+                            <input type="checkbox" class="w-6 h-6" name="bene_no">
                             <span>No</span>
                         </label>
                     </div>
@@ -79,29 +98,29 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div>
                         <label class="block font-semibold mb-2 text-lg">House No./ Street<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Address">
+                        <input type="text" class="w-full p-3 border rounded" name="street" placeholder="Enter Address">
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Barangay<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Barangay">
+                        <input type="text" class="w-full p-3 border rounded" name="baranggay" placeholder="Enter Barangay">
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Municipality/ City<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter City">
+                        <input type="text" class="w-full p-3 border rounded" name="municipality" placeholder="Enter City">
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Province<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Province">
+                        <input type="text" class="w-full p-3 border rounded" name="province" placeholder="Enter Province">
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Guardian's Name<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" placeholder="Enter Guardian's Name">
+                        <input type="text" class="w-full p-3 border rounded" name="guardian_name" placeholder="Enter Guardian's Name">
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Guardian's Contact<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="tel" class="w-full p-3 border rounded" placeholder="Enter Contact">
+                        <input type="number" class="w-full p-3 border rounded" name="guardian_contact" placeholder="Enter Contact">
                     </div>
                 </div>
                 <!-- Relationship with Guardian -->
@@ -110,17 +129,17 @@
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-4">
                             <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                                <input type="checkbox" class="w-6 h-6">
+                                <input type="checkbox" name="mother" class="w-6 h-6">
                                 <span>Mother (Nanay)</span> 
                             </label>
                             <label class="flex items-center space-x-2 p-2 border rounded cursor-pointer">
-                                <input type="checkbox" class="w-6 h-6">
+                                <input type="checkbox" name="father" class="w-6 h-6">
                                 <span>Father (Tatay)</span>
                             </label>
                         </div>
                         <div class="w-full">
                             <label class="text-md block mb-1">Others:</label>
-                            <input type="text" class="p-2 border rounded w-full" placeholder="Enter Relationship">
+                            <input type="text" class="p-2 border rounded w-full" name="other_relationship" placeholder="Enter Relationship">
                         </div>
                     </div>
                 </div>
@@ -128,12 +147,12 @@
                 <!-- Last School Information -->
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
-                    <input type="text" class="w-full p-3 border rounded mt-2" placeholder="Enter Last School Year">
+                    <input type="text" class="w-full p-3 border rounded mt-2" name="last_sy" placeholder="Enter Last School Year">
                 </div>
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Last School Attended<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal mb-2"><i> Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</i></label>
-                    <input type="text" class="w-full p-3 border rounded" placeholder="Enter Last School Attended">
+                    <input type="text" class="w-full p-3 border rounded" name="last_school" placeholder="Enter Last School Attended">
                 </div>
 
                 <!-- Strand Selection -->
@@ -145,7 +164,7 @@
                         <p class="italic text-sm"><strong>REPEATER</strong> - Previously enrolled in G11 but didn't finish.</p>
                         <p class="italic text-sm"><strong>ALS GRADUATE</strong> - ALS Junior High School graduates.</p>
                     </div>
-                    <select class="w-full p-3 border rounded-md mb-4">
+                    <select class="w-full p-3 border rounded-md mb-4" name="learner_category">
                         <option value="regular">Regular</option>
                         <option value="balik-aral">Balik-Aral</option> 
                         <option value="repeater">Repeater</option> 
@@ -155,13 +174,13 @@
 
                 <div class="w-full mt-6">
                     <label class="block font-semibold mb-2 text-lg">Grade 10 Section<span class="text-red-500 font-bold"> *</span></label>
-                    <input type="text" class="w-full p-3 border rounded" placeholder="Enter Grade 10 section">
+                    <input type="text" class="w-full p-3 border rounded" name="grade10_section" placeholder="Enter Grade 10 section">
                 </div>
 
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal"><i> FRONT and BACK of the Card</i></label>
-                    <input type="file" class="w-full p-3 border rounded mt-3">
+                    <input type="file" class="w-full p-3 border rounded mt-3" name="grade10_card">
                 </div>
 
                 <div class="w-full mt-6 ">
@@ -178,7 +197,7 @@
                         <p class="text-md"><strong>Information and Communication Technology</strong> - Computer Systems Servicing (NC II)</p>
                         <p class="text-md"><strong>Information and Communication Technology</strong> - Technical Drafting (NC II) and Illustration (NC II)</p>
                     </div>
-                    <select class="w-full p-3 border rounded-md mb-4">
+                    <select class="w-full p-3 border rounded-md mb-4" name="chosen_strand">
                         <option value="hums">HUMSS - Humanities and Social Sciences</option>
                         <option value="ia-as">Industrial Arts - Automotive Servicing (NC II)</option> 
                         <option value="ia-eim">Industrial Arts - Electrical Installation and Maintenance (NC II)</option> 
@@ -200,4 +219,26 @@
             </form>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show success notification if present
+            if (document.getElementById('success-notification')) {
+                setTimeout(function() {
+                    let successNotif = document.getElementById('success-notification');
+                    successNotif.classList.remove('show');
+                    successNotif.classList.add('fade');
+                }, 5000); // Hide after 5 seconds
+            }
+
+            // Show error notification if present
+            if (document.getElementById('error-notification')) {
+                setTimeout(function() {
+                    let errorNotif = document.getElementById('error-notification');
+                    errorNotif.classList.remove('show');
+                    errorNotif.classList.add('fade');
+                }, 5000); // Hide after 5 seconds
+            }
+        });
+    </script>
 </x-layout>
