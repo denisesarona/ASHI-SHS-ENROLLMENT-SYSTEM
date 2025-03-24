@@ -129,7 +129,29 @@ class LearnerController extends Controller
             Log::error('Enrollment Error: ' . $e->getMessage()); // Log the actual error message
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
-        
     }
+
+    public function trackEnrollmentStatus(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'last_name' => 'required|string|max:255',
+            'controlnum' => 'required|integer',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        // Find the learner with the given last name and control number
+        $learner = Learner::where('id', $request->controlnum)
+                          ->where('last_name', $request->last_name)
+                          ->first();
+    
+        if ($learner) {
+            return redirect()->route('homepage')->with('success', 'Learner found successfully!');
+        } else {
+            return redirect()->route('enrollment')->with('error', 'Learner not found.');
+        }
+    }    
 }
 
