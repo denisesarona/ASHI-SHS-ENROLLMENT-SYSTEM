@@ -87,7 +87,7 @@ class LearnerController extends Controller
 
         $imagePath = null;
         if($request->hasFile('image')){
-            $imagePath = $request->file('image')->store('image','public');
+            $imagePath = $request->file('image')->store('image', 'public');
         }
 
         if ($validator->fails()) {

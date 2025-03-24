@@ -116,7 +116,10 @@
                 </div>
 
                 <div>
-                    <label class="block font-semibold mb-2 text-lg mt-4">Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)<span class="text-red-500 font-bold"> *</span></label>
+                    <label class="block font-semibold mb-2 text-lg mt-4">
+                        Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)
+                        <span class="text-red-500 font-bold"> *</span>
+                    </label>
                     <div class="flex items-center space-x-4">
                         <label class="flex items-center">
                             <input type="radio" name="relationship_guardian" value="Mother" class="mr-2 w-6 h-6"> Mother
@@ -126,10 +129,11 @@
                         </label>
                         <div class="w-full">
                             <label class="text-md block mb-1">Others:</label>
-                            <input type="text" class="p-2 border rounded w-full" name="relationship_guardian" placeholder="Enter Relationship with the Guardian">
+                            <input type="text" class="p-2 border rounded w-full" id="relationship_other" placeholder="Enter Relationship with the Guardian">
+                            <input type="hidden" name="relationship_guardian" id="relationship_hidden">
                         </div>
                     </div>
-                </div>  
+                </div>
 
                 <!-- Last School Information -->
                 <div class="w-full mt-6">
@@ -226,6 +230,27 @@
                     errorNotif.classList.add('fade');
                 }, 5000); // Hide after 5 seconds
             }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let radios = document.querySelectorAll('input[name="relationship_guardian"]');
+            let otherInput = document.getElementById("relationship_other");
+            let hiddenInput = document.getElementById("relationship_hidden");
+
+            // Handle radio button selection
+            radios.forEach(radio => {
+                radio.addEventListener("change", function () {
+                    otherInput.value = ""; // Clear other input when radio is selected
+                    hiddenInput.value = this.value; // Set hidden input value
+                });
+            });
+
+            // Handle "Others" text input
+            otherInput.addEventListener("input", function () {
+                radios.forEach(radio => radio.checked = false); // Uncheck all radios
+                hiddenInput.value = this.value; // Set hidden input value
+            });
         });
     </script>
 </x-layout>

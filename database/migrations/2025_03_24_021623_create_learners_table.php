@@ -30,12 +30,12 @@ return new class extends Migration
             $table->string('province');
             $table->string('guardian_name');
             $table->string('guardian_contact');
-            $table->string('relationship_guardian')->nullable();
+            $table->string('relationship_guardian');
             $table->string('last_sy');
             $table->string('last_school');
             $table->string('learner_category');
             $table->string('grade10_section');
-            $table->string('grade10_card')->nullable();
+            $table->string('image')->nullable();
             $table->string('chosen_strand');
             $table->timestamps();
         });
