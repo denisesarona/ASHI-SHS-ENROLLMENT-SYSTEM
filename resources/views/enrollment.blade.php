@@ -1,20 +1,14 @@
 <x-layout>
     <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-            @if ($errors->any())
-            <div class="alert alert-danger">
+        @if ($errors->any())
+        <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
-            </div>
-        @endif
-        
-        @if (session('success'))
-            <div class="alert alert-success" style="background-color: #28a745; color: white; border-color: #28a745;">
-            {{ session('success') }}
-            </div>
-        @endif
+        </div>
+    @endif    
 
         <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl">
             <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6">Enrollment Form</h1>
@@ -69,13 +63,13 @@
                         <label class="block font-semibold mb-2 text-lg">Gender<span class="text-red-500 font-bold"> *</span></label>
                         <div class="flex items-center space-x-4">
                             <label class="flex items-center">
-                                <input type="radio" name="gender_male" value="Male" class="mr-2"> Male
+                                <input type="radio" name="gender" value="Male" class="mr-2" required> Male
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="gender_female" value="Female" class="mr-2"> Female
+                                <input type="radio" name="gender" value="Female" class="mr-2" required> Female
                             </label>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
                 
                 <!-- 4Ps Beneficiary Section -->

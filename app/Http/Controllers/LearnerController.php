@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log; // Make sure to import Log at the top
 
 class LearnerController extends Controller
 {
@@ -119,8 +120,10 @@ class LearnerController extends Controller
 
             return redirect()->route('controlnum')->with('success', 'Learner enrollment successful.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'There was an error during enrollment. Please try again.');
+            Log::error('Enrollment Error: ' . $e->getMessage()); // Log the actual error message
+            return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
+        }
+        
     }
 }
 
-}
