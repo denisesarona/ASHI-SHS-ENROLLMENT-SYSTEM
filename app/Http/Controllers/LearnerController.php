@@ -69,7 +69,6 @@ class LearnerController extends Controller
         return view('auth.changepassword');
     }
 
-
     public function registerLearner(Request $request){
         $validator = Validator::make($request->all(), [
             'school_year' => 'required|string|max:255',
@@ -145,8 +144,7 @@ class LearnerController extends Controller
         }
     }
     
-    public function studentVerification(Request $request)
-    {
+    public function studentVerification(Request $request){
         $validator = Validator::make($request->all(), [
             'last_name' => 'required|string|max:255',
             'lrn' => 'required|string|max:255',
@@ -168,8 +166,7 @@ class LearnerController extends Controller
         }
     }    
 
-    public function trackEnrollmentStatus(Request $request)
-    {
+    public function trackEnrollmentStatus(Request $request){
         $validator = Validator::make($request->all(), [
             'last_name' => 'required|string|max:255',
             'controlnum' => 'required|integer',
@@ -199,8 +196,7 @@ class LearnerController extends Controller
         }
     }
 
-    public function editEnrollment($id)
-    {
+    public function editEnrollment($id){
         $learner = Learner::findOrFail($id); // Automatically throws 404 if not found
     
         session()->flash('success', 'Learner details found successfully!');
@@ -208,9 +204,7 @@ class LearnerController extends Controller
         return view('editenrollment', compact('learner'));
     }
     
-
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $learner = Learner::findOrFail($id);
 
         // Check if a new image was uploaded
@@ -230,5 +224,23 @@ class LearnerController extends Controller
         return redirect()->route('trackenrollment', $id)->with('success', 'Learner updated successfully!');
     }
 
+    public function loginAdmin(Request $request){
+        $credentials = $request->only('email', 'password');
+
+        // Manually check if the hashed password matches
+        $account = Account::where('email', $credentials['email'])->first();
+
+        if ($account && Hash::check($credentials['password'], $account->password)) {
+            // Passwords match, so proceed with login
+            Auth::login($account);
+            $request->session()->regenerate();
+            return redirect()->route('dashboard')->with('success', 'Login successful');
+        }
+
+        // If it doesn't match
+        return back()->withErrors([
+            'email' => 'Invalid credentials',
+        ])->withInput($request->only('email'));
+    }
 }
 

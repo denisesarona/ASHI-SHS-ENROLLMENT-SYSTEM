@@ -19,4 +19,6 @@ Route::post('/enrollment', [LearnerController::class, 'registerLearner'])->name(
 Route::post('/trackenrollment', [LearnerController::class, 'trackEnrollmentStatus'])->name('trackEnrollment');
 Route::post('/studentverify', [LearnerController::class, 'StudentVerification'])->name('studentVerify');
 
+Route::post('/login', [LearnerController::class, 'loginAdmin'])->name('loginAdmin');
+
 Route::put('/learner/{id}', [LearnerController::class, 'update'])->name('updateLearnerDetails');
