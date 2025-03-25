@@ -214,7 +214,7 @@ class LearnerController extends Controller
         $learner = Learner::findOrFail($id);
         $learner->update($request->all());
 
-        return redirect()->route('trackenrollment', $id)->with('success', 'Learner updated successfully!');
+        return redirect()->route('trackenrollment')->with('success', 'Learner updated successfully!');
     }
 }
 
