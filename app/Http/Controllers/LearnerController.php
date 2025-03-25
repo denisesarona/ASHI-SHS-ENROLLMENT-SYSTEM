@@ -13,31 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class LearnerController extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    public function loginAdmin(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        // Manually check if the hashed password matches
-        $account = Admin::where('email', $credentials['email'])->first();
-
-        if ($account && Hash::check($credentials['password'], $account->password)) {
-            // Passwords match, so proceed with login
-            Auth::login($account);
-            $request->session()->regenerate();
-            return redirect()->route('dashboard')->with('success', 'Login successful');
-        }
-
-        // If it doesn't match
-        return back()->withErrors([
-            'email' => 'Invalid credentials',
-        ])->withInput($request->only('email'));
-    }
-
     public function showHomePage()
     {
         return view('homepage');
@@ -45,33 +20,33 @@ class LearnerController extends Controller
 
     public function showEnrollmentForm()
     {
-        return view('enrollment');
+        return view('learner.enrollment');
     }
 
     public function showEditEnrollmentForm()
     {
-        return view('editenrollment');
+        return view('learner.editenrollment');
     }
 
     public function showStudentVerify()
     {
-        return view('studentverify');
+        return view('learner.studentverify');
     }
 
     public function showTrackEnrollment()
     {
-        return view('trackenrollment');
+        return view('learner.trackenrollment');
     }
 
     public function showControlNum($id)
     {
         $learner = Learner::findOrFail($id); // Fetch learner data by ID
-        return view('controlnum', compact('learner'));
+        return view('learner.controlnum', compact('learner'));
     }    
 
     public function viewStatus()
     {
-        return view('viewstatus');
+        return view('learner.viewstatus');
     }
 
     public function showForgotPassword()
@@ -157,7 +132,7 @@ class LearnerController extends Controller
                 'status' => $request->status,
             ]);
 
-            return redirect()->route('controlnum', ['id' => $learner->id])->with('success', 'Learner enrollment successful.');
+            return redirect()->route('learner.controlnum', ['id' => $learner->id])->with('success', 'Learner enrollment successful.');
         } catch (\Exception $e) {
             Log::error('Enrollment Error: ' . $e->getMessage()); // Log the actual error message
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
@@ -180,9 +155,9 @@ class LearnerController extends Controller
                           ->first();
     
         if (!$learner) {   
-            return redirect()->route('enrollment')->with('success', 'Proceed with the enrollment!');
+            return redirect()->route('learner.enrollment')->with('success', 'Proceed with the enrollment!');
         } else {
-            return redirect()->route('studentverify')->with('error', 'Learner already submitted an enrollment form.');
+            return redirect()->route('learner.studentverify')->with('error', 'Learner already submitted an enrollment form.');
         }
     }    
 
@@ -210,9 +185,9 @@ class LearnerController extends Controller
                 'id' => $learner->id,
             ]);
     
-            return redirect()->route('viewstatus')->with('success', 'Learner found successfully!');
+            return redirect()->route('learner.viewstatus')->with('success', 'Learner found successfully!');
         } else {
-            return redirect()->route('trackenrollment')->with('error', 'Learner not found.');
+            return redirect()->route('learner.trackenrollment')->with('error', 'Learner not found.');
         }
     }
 
@@ -221,7 +196,7 @@ class LearnerController extends Controller
     
         session()->flash('success', 'Learner details found successfully!');
     
-        return view('editenrollment', compact('learner'));
+        return view('learner.editenrollment', compact('learner'));
     }
     
     public function update(Request $request, $id){
@@ -241,7 +216,7 @@ class LearnerController extends Controller
 
         $learner->update($request->except('image'));
 
-        return redirect()->route('trackenrollment', $id)->with('success', 'Learner updated successfully!');
+        return redirect()->route('learner.trackenrollment', $id)->with('success', 'Learner updated successfully!');
     }
 }
 

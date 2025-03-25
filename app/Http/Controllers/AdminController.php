@@ -30,4 +30,19 @@ class AdminController extends Controller
 
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }
+
+    public function showForgotPassword()
+    {
+        return view('auth.forgotpassword');
+    }
+
+    public function showVerification()
+    {
+        return view('auth.verifycode');
+    }
+
+    public function showChangePassword()
+    {
+        return view('auth.changepassword');
+    }
 }
