@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log; // Make sure to import Log at the top
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class LearnerController extends Controller
 {
@@ -208,13 +209,26 @@ class LearnerController extends Controller
     }
     
 
-
     public function update(Request $request, $id)
     {
         $learner = Learner::findOrFail($id);
-        $learner->update($request->all());
 
-        return redirect()->route('trackenrollment')->with('success', 'Learner updated successfully!');
+        // Check if a new image was uploaded
+        if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            if ($learner->image) {
+                Storage::delete('public/' . $learner->image);
+            }
+
+            // Store new image
+            $path = $request->file('image')->store('learners', 'public');
+            $learner->image = $path;
+        }
+
+        $learner->update($request->except('image'));
+
+        return redirect()->route('trackenrollment', $id)->with('success', 'Learner updated successfully!');
     }
+
 }
 

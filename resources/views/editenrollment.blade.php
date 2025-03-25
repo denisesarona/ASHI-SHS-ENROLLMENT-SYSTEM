@@ -172,9 +172,15 @@
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal"><i> FRONT and BACK of the Card</i></label>
-                    <input type="file" class="w-full p-3 border rounded mt-3"  name="image" accept="image/*">
+                    <input type="file" class="w-full p-3 border rounded mt-3" name="image" accept="image/*">
+                
+                    @if($learner->image)
+                        <div class="mt-2">
+                            <img src="{{ asset('storage/' . $learner->image) }}" alt="Grade 10 Card" class="w-64 h-auto rounded">
+                        </div>
+                    @endif
                 </div>
-
+                
                 <div class="w-full mt-6 ">
                     <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
                     <div class="bg-white p-4 rounded-md shadow-inner mb-2">
