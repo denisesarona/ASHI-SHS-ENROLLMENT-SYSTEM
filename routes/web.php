@@ -22,6 +22,7 @@ Route::get('/login', [AdminController::class, 'showLoginForm'])->name('login');
 Route::get('/forgotpassword', [AdminController::class, 'showForgotPassword'])->name('forgotpassword');
 Route::get('/verification', [AdminController::class, 'showVerification'])->name('verifycode');    
 Route::get('/changepassword', [AdminController::class, 'showChangePassword'])->name('changepassword');
+Route::get('/dashboard', [AdminController::class, 'showDashboard'])->name('dashboard');
 
 Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin');
 

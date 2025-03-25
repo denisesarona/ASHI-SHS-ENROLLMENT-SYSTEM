@@ -14,6 +14,26 @@ class AdminController extends Controller
         return view('auth.login');
     }
 
+    public function showForgotPassword()
+    {
+        return view('auth.forgotpassword');
+    }
+
+    public function showVerification()
+    {
+        return view('auth.verifycode');
+    }
+
+    public function showChangePassword()
+    {
+        return view('auth.changepassword');
+    }
+
+    public function showDashboard()
+    {
+        return view('admin.dashboard');
+    }
+
     public function loginAdmin(Request $request)
     {
         $request->validate([
@@ -29,20 +49,5 @@ class AdminController extends Controller
         }
 
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
-    }
-
-    public function showForgotPassword()
-    {
-        return view('auth.forgotpassword');
-    }
-
-    public function showVerification()
-    {
-        return view('auth.verifycode');
-    }
-
-    public function showChangePassword()
-    {
-        return view('auth.changepassword');
     }
 }
