@@ -13,6 +13,31 @@ use Illuminate\Support\Facades\Storage;
 
 class LearnerController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function loginAdmin(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        // Manually check if the hashed password matches
+        $account = Admin::where('email', $credentials['email'])->first();
+
+        if ($account && Hash::check($credentials['password'], $account->password)) {
+            // Passwords match, so proceed with login
+            Auth::login($account);
+            $request->session()->regenerate();
+            return redirect()->route('dashboard')->with('success', 'Login successful');
+        }
+
+        // If it doesn't match
+        return back()->withErrors([
+            'email' => 'Invalid credentials',
+        ])->withInput($request->only('email'));
+    }
+
     public function showHomePage()
     {
         return view('homepage');
@@ -47,11 +72,6 @@ class LearnerController extends Controller
     public function viewStatus()
     {
         return view('viewstatus');
-    }
-
-    public function showLoginForm()
-    {
-        return view('auth.login');
     }
 
     public function showForgotPassword()
@@ -222,25 +242,6 @@ class LearnerController extends Controller
         $learner->update($request->except('image'));
 
         return redirect()->route('trackenrollment', $id)->with('success', 'Learner updated successfully!');
-    }
-
-    public function loginAdmin(Request $request){
-        $credentials = $request->only('email', 'password');
-
-        // Manually check if the hashed password matches
-        $account = Account::where('email', $credentials['email'])->first();
-
-        if ($account && Hash::check($credentials['password'], $account->password)) {
-            // Passwords match, so proceed with login
-            Auth::login($account);
-            $request->session()->regenerate();
-            return redirect()->route('dashboard')->with('success', 'Login successful');
-        }
-
-        // If it doesn't match
-        return back()->withErrors([
-            'email' => 'Invalid credentials',
-        ])->withInput($request->only('email'));
     }
 }
 

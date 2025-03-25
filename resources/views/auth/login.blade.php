@@ -11,7 +11,7 @@
                 @csrf
                 <div class="grid grid-cols-1 gap-4">
                     <div class="relative">
-                        <input type="text" name="username" class="block w-full p-3 border rounded pl-10" placeholder="Username">
+                        <input type="text" name="email" class="block w-full p-3 border rounded pl-10" placeholder="Email">
                         <i class='bx bx-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400'></i>
                     </div>
                     <div class="relative">

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LearnerController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [LearnerController::class, 'showHomePage'])->name('homepage');
 Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
@@ -9,7 +10,6 @@ Route::get('/studentverify', [LearnerController::class, 'showStudentVerify'])->n
 Route::get('/trackenrollment', [LearnerController::class, 'showTrackEnrollment'])->name('trackenrollment');
 Route::get('/controlnum/{id}', [LearnerController::class, 'showControlNum'])->name('controlnum');
 Route::get('/viewstatus', [LearnerController::class, 'viewStatus'])->name('viewstatus');
-Route::get('/login', [LearnerController::class, 'showLoginForm'])->name('login');
 Route::get('/forgotpassword', [LearnerController::class, 'showForgotPassword'])->name('forgotpassword');
 Route::get('/verification', [LearnerController::class, 'showVerification'])->name('verifycode');    
 Route::get('/changepassword', [LearnerController::class, 'showChangePassword'])->name('changepassword');
@@ -18,7 +18,9 @@ Route::get('/learner/{id}/edit', [LearnerController::class, 'editEnrollment'])->
 Route::post('/enrollment', [LearnerController::class, 'registerLearner'])->name('registerLearner');
 Route::post('/trackenrollment', [LearnerController::class, 'trackEnrollmentStatus'])->name('trackEnrollment');
 Route::post('/studentverify', [LearnerController::class, 'StudentVerification'])->name('studentVerify');
-
-Route::post('/login', [LearnerController::class, 'loginAdmin'])->name('loginAdmin');
-
 Route::put('/learner/{id}', [LearnerController::class, 'update'])->name('updateLearnerDetails');
+
+
+Route::get('/login', [AdminController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin');
+
