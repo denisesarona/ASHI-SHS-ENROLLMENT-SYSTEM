@@ -2,7 +2,7 @@
     <section class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
         <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl">
             <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6">Edit Enrollment Form</h1>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('updateLearnerDetails', $learner->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -21,8 +21,8 @@
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Last Name<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" name="last_name" placeholder="Enter Last Name">
-                    </div>
+                        <input type="text" class="w-full p-3 border rounded" value="{{$learner->last_name}}" name="last_name" placeholder="Enter Last Name">
+                    </div>            
                     <div>
                         <label class="block font-semibold mb-2 text-lg">First Name<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border rounded" name="first_name" placeholder="Enter First Name">

@@ -196,56 +196,25 @@ class LearnerController extends Controller
         } else {
             return redirect()->route('trackenrollment')->with('error', 'Learner not found.');
         }
-    }    
-
-    public function viewStatusDetails(Request $request)
-    {
-        if (!$request->has('id') || empty($request->id)) {
-            return redirect()->route('homepage')->with('error', 'ID is required.');
-        }
-
-        $learner = Learner::where('id', $request->id)->first();
-
-        if (!$learner) {
-            return redirect()->route('homepage')->with('error', 'No learner found.');
-        }
-
-        session([
-            'id' => $learner->id,
-            'last_name' => $learner->last_name,
-            'status' => $learner->status,
-        ]);
-
-        return view('viewstatus');
     }
+
+    public function editEnrollment($id)
+    {
+        $learner = Learner::findOrFail($id); // Automatically throws 404 if not found
+    
+        session()->flash('success', 'Learner details found successfully!');
+    
+        return view('editenrollment', compact('learner'));
+    }
+    
 
 
     public function update(Request $request, $id)
     {
-    $learner = Learner::find($id);
+        $learner = Learner::findOrFail($id);
+        $learner->update($request->all());
 
-    if (!$learner) {
-        return redirect()->route('viewstatus')->with('error', 'Learner not found.');
+        return redirect()->route('trackenrollment', $id)->with('success', 'Learner updated successfully!');
     }
-
-    // Validate the incoming data
-    $validator = Validator::make($request->all(), [
-        'last_name' => 'required|string|max:255',
-    ]);
-
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
-
-    // Update the account with the new data
-    $learner->last_name = $request->last_name;
-
-    $learner->save();
-
-    return redirect()->route('homepage')->with('success', 'Learner details updated successfully!');
-    }
-
-
-
 }
 
