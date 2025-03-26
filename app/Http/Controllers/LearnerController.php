@@ -20,33 +20,33 @@ class LearnerController extends Controller
 
     public function showEnrollmentForm()
     {
-        return view('enrollment');
+        return view('learner.enrollment');
     }
 
     public function showEditEnrollmentForm()
     {
-        return view('editenrollment');
+        return view('learner.editenrollment');
     }
 
     public function showStudentVerify()
     {
-        return view('studentverify');
+        return view('learner.studentverify');
     }
 
     public function showTrackEnrollment()
     {
-        return view('trackenrollment');
+        return view('learner.trackenrollment');
     }
 
     public function showControlNum($id)
     {
         $learner = Learner::findOrFail($id); // Fetch learner data by ID
-        return view('controlnum', compact('learner'));
+        return view('learner.controlnum', compact('learner'));
     }    
 
     public function viewStatus()
     {
-        return view('viewstatus');
+        return view('learner.viewstatus');
     }
 
     public function registerLearner(Request $request){
