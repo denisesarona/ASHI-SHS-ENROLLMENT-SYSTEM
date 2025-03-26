@@ -32,10 +32,10 @@
 
             <ul class="space-y-2 font-medium mt-4">
                 <li>
-                    <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-blue-500">
+                    <x-admin-nav-link href="{{ route('dashboard') }}" class="nav-link" data-section="Dashboard" :active="request()->routeIs('dashboard')">
                         <i class='bx bxs-dashboard'></i>
                         <span class="ms-3">Dashboard</span>
-                    </a> 
+                    </x-admin-nav-link>                    
                 </li>
                 <li>
                     <button type="button" class="dropdown-toggle flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
@@ -46,8 +46,8 @@
                         </svg>
                     </button>
                     <ul class="dropdown-menu hidden py-2 space-y-2">
-                        <li><a href="#" class="block p-2 pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">List of Admin</a></li>
-                        <li><a href="#" class="block p-2 pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">Add New Admin</a></li>
+                        <li><x-admin-nav-link href="{{ route('adminlist') }}" class="nav-link pl-10" data-section="AdminList" :active="request()->routeIs('adminlist')">List of Admin</x-admin-nav-link>
+                        <li><x-admin-nav-link href="{{ route('addadmin') }}" class="nav-link pl-10" data-section="AddAdmin" :active="request()->routeIs('addadmin')">Add a new Admin</x-admin-nav-link>
                     </ul>
                 </li>
                 <li>
@@ -59,8 +59,8 @@
                         </svg>
                     </button>
                     <ul class="dropdown-menu hidden py-2 space-y-2">
-                        <li><a href="#" class="block p-2 pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">Pending Learners</a></li>
-                        <li><a href="#" class="block p-2 pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">Enrolled Learners</a></li>
+                        <li><x-admin-nav-link href="{{ route('pendinglearners') }}" class="nav-link pl-10" data-section="PendingLearners" :active="request()->routeIs('pendinglearners')">Pending Learners</x-admin-nav-link>
+                        <li><x-admin-nav-link href="{{ route('enrolledlearners') }}" class="nav-link pl-10" data-section="EnrolledLearners" :active="request()->routeIs('enrolledlearners')">Enrolled Learners</x-admin-nav-link>
                     </ul>
                 </li>
 
