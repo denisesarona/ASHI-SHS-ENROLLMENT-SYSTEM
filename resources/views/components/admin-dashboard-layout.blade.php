@@ -21,9 +21,8 @@
         </svg>
     </button>
 
-    <aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen bg-gray-50 dark:bg-blue-600 transition-transform -translate-x-full sm:translate-x-0">
+    <aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen bg-gray-50 dark:bg-blue-600 shadow-xl transition-transform -translate-x-full sm:translate-x-0">
         <div class="h-full px-3 py-4 overflow-y-auto">
-            
             <!-- Logo and School Name -->
             <div class="flex flex-col items-center pb-4 border-b border-gray-200 dark:border-gray-400">
                 <img src="{{ asset('images/ASHIlogowbg.png') }}" alt="ASHI Logo" class="w-20 h-20 mb-2">
