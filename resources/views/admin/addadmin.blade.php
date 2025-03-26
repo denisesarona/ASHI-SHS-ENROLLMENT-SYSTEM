@@ -1,3 +1,3 @@
 <x-admin-dashboard-layout>
-    Admin Dashboard
+    Add Admin
 </x-admin-dashboard-layout>

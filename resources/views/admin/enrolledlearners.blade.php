@@ -1,3 +1,3 @@
 <x-admin-dashboard-layout>
-    Admin Dashboard
+    Enrolled Learners
 </x-admin-dashboard-layout>

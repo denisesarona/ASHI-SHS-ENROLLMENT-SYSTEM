@@ -17,12 +17,17 @@ Route::post('/trackenrollment', [LearnerController::class, 'trackEnrollmentStatu
 Route::post('/studentverify', [LearnerController::class, 'StudentVerification'])->name('studentVerify');
 Route::put('/learner/{id}', [LearnerController::class, 'update'])->name('updateLearnerDetails');
 
-
 Route::get('/login', [AdminController::class, 'showLoginForm'])->name('login');
 Route::get('/forgotpassword', [AdminController::class, 'showForgotPassword'])->name('forgotpassword');
-Route::get('/verification', [AdminController::class, 'showVerification'])->name('verifycode');    
+Route::get('/verification', [AdminController::class, 'showVerification'])->name('verifycode');
 Route::get('/changepassword', [AdminController::class, 'showChangePassword'])->name('changepassword');
-Route::get('/dashboard', [AdminController::class, 'showDashboard'])->name('dashboard');
+Route::get('/admin/dashboard', [AdminController::class, 'showDashboard'])->name('dashboard');
+Route::get('/admin/adminlist', [AdminController::class, 'showAdminList'])->name('adminlist');
+Route::get('/admin/addadmin', [AdminController::class, 'showAddAdmin'])->name('addadmin');
+Route::get('/admin/pendinglearners', [AdminController::class, 'showPendingLearners'])->name('pendinglearners');
+Route::get('/admin/enrolledlearners', [AdminController::class, 'showEnrolledLearners'])->name('enrolledlearners');
+
 
 Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin');
+
 

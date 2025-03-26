@@ -1,3 +1,3 @@
 <x-admin-dashboard-layout>
-    Admin Dashboard
+    Pending Learners
 </x-admin-dashboard-layout>

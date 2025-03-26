@@ -82,43 +82,34 @@
     </aside>
     
     <div class="p-4 sm:ml-64">
-        Dashboard
-    </div>
-
- 
-    <div class="w-screen mt-16 px-0 mx-0">
-        <div class="row">
-            {{-- Slot where the child content will be inserted --}}
-            {{ $slot }}
+        {{ $slot }}
             
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    @if(session('success'))
-                        Toastify({
-                            text: "{{ session('success') }}",
-                            duration: 3000,
-                            gravity: "right",
-                            position: "right",
-                            backgroundColor: "green",
-                            stopOnFocus: true
-                        }).showToast();
-                    @endif
-        
-                    @if(session('error'))
-                        Toastify({
-                            text: "{{ session('error') }}",
-                            duration: 3000,
-                            gravity: "right",
-                            position: "right",
-                            backgroundColor: "red",
-                            stopOnFocus: true
-                        }).showToast();
-                    @endif
-                });
-            </script>
-        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                @if(session('success'))
+                    Toastify({
+                        text: "{{ session('success') }}",
+                        duration: 3000,
+                        gravity: "right",
+                        position: "right",
+                        backgroundColor: "green",
+                        stopOnFocus: true
+                    }).showToast();
+                @endif
+    
+                @if(session('error'))
+                    Toastify({
+                        text: "{{ session('error') }}",
+                        duration: 3000,
+                        gravity: "right",
+                        position: "right",
+                        backgroundColor: "red",
+                        stopOnFocus: true
+                    }).showToast();
+                @endif
+            });
+        </script>
     </div>
-
     <!-- JavaScript for Sidebar and Dropdown -->
     <script>
         // Sidebar Toggle

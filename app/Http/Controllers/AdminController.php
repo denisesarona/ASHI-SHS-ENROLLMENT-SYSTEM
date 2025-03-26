@@ -34,6 +34,26 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
+    public function showAdminList()
+    {
+        return view('admin.adminlist');
+    }
+
+    public function showAddAdmin()
+    {
+        return view('admin.addadmin');
+    }
+
+    public function showPendingLearners()
+    {
+        return view('admin.pendinglearners');
+    }
+
+    public function showEnrolledLearners()
+    {
+        return view('admin.enrolledlearners');
+    }
+
     public function loginAdmin(Request $request)
     {
         $request->validate([
