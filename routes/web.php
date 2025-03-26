@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LearnerController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmailVerificationController;
 
 Route::get('/', [LearnerController::class, 'showHomePage'])->name('homepage');
 Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
@@ -33,8 +34,11 @@ Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin'
 Route::post('/logout', [AdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::put('/admin/admindetails/{id}', [AdminController::class, 'updatePassword'])->name('updatepassword');
 
-Route::get('/admin/admindetails/verifyadmincode', [EmailVerificationController::class, 'verifyAdminCode'])->name('adminemailverification');
-Route::post('/admin/admindetails/verifyadmincode', [EmailVerificationController::class, 'verifyEmail'])->name('sentadmincode');
+Route::get('/admin/admindetails/verifyadmincode', [EmailVerificationController::class, 'verifyAdminCode'])
+    ->name('adminemailverification');
+Route::post('/admin/verify-code', [EmailVerificationController::class, 'verifyEmail'])->name('sentadmincode');
+
+
 
 
 

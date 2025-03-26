@@ -13,8 +13,7 @@ class EmailVerificationController extends Controller
     {
         return view('auth.adminemailverification', ['email' => $request->email]);
     }
-
-    // Handle verification
+    
     public function verifyEmail(Request $request) {
         $request->validate(['code' => 'required|string']);
 
