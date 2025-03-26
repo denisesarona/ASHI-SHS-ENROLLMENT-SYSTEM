@@ -24,11 +24,15 @@ Route::get('/changepassword', [AdminController::class, 'showChangePassword'])->n
 Route::get('/admin/dashboard', [AdminController::class, 'showDashboard'])->name('dashboard');
 Route::get('/admin/adminlist', [AdminController::class, 'showAdminList'])->name('adminlist');
 Route::get('/admin/addadmin', [AdminController::class, 'showAddAdmin'])->name('addadmin');
+Route::get('/admin/admindetails/verifyadmincode', [AdminController::class, 'verifyAdminCode'])->name('adminemailverification');
 Route::get('/admin/pendinglearners', [AdminController::class, 'showPendingLearners'])->name('pendinglearners');
 Route::get('/admin/enrolledlearners', [AdminController::class, 'showEnrolledLearners'])->name('enrolledlearners');
 Route::get('/admin/admindetails/{id}', [AdminController::class, 'adminDetails'])->name('admindetails');
 
 
 Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin');
+Route::post('/logout', [AdminController::class, 'logoutAdmin'])->name('logoutAdmin');
+Route::put('/admin/admindetails/{id}', [AdminController::class, 'updatePassword'])->name('updatepassword');
+
 
 

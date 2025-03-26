@@ -40,6 +40,11 @@ class AdminController extends Controller
         return view('admin.adminlist' , compact('admins'));
     }
 
+    public function verifyAdminCode()
+    {
+        return view('admin.adminemailverification');
+    }
+
     public function showAddAdmin()
     {
         return view('admin.addadmin');
@@ -78,8 +83,41 @@ class AdminController extends Controller
     
         session()->flash('success', 'Admin details found successfully!');
     
-        return view('admin.details', compact('admin'));
+        return view('admin.admindetails', compact('admin'));
     }
+
+    public function updatePassword(Request $request, $id) {
+        // Validate input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'nullable|min:6|confirmed', // Password is only required if provided
+        ]);
     
+        // Find the admin
+        $admin = Admin::findOrFail($id);
+    
+        // Update name and email
+        $admin->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+    
+        // Update password only if provided
+        if ($request->filled('password')) {
+            $admin->password = Hash::make($request->password);
+            $admin->save();
+        }
+    
+        return back()->with('success', 'Admin details updated successfully!');
+    }
+
+    public function logoutAdmin(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+    }
     
 }

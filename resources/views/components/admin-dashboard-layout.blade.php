@@ -39,7 +39,7 @@
                     </x-admin-nav-link>                    
                 </li>
                 <li>
-                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
+                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
                         <i class='bx bx-user'></i>
                         <span class="flex-1 ms-3 text-left whitespace-nowrap">Administrators</span>
                         <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
@@ -52,7 +52,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
+                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
                         <i class='bx bxs-graduation'></i>
                         <span class="flex-1 ms-3 text-left whitespace-nowrap">Learners</span>
                         <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
@@ -66,7 +66,7 @@
                 </li>
 
                 <li>
-                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
+                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
                         <i class='bx bx-list-check'></i>
                         <span class="flex-1 ms-3 text-left whitespace-nowrap">Enrollment Form</span>
                         <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
@@ -77,6 +77,14 @@
                         <li><a href="#" class="block p-2 pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">School Year</a></li>
                         <li><a href="#" class="block p-2 pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">Strands</a></li>
                     </ul>
+                </li>
+                <li class="absolute bottom-4 left-4 right-4">
+                    <form action="{{ route('logoutAdmin') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="w-full px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition duration-75">
+                            <span class="ms-3">Logout</span>
+                        </button>  
+                    </form>
                 </li>
             </ul>
         </div>
