@@ -26,6 +26,7 @@ Route::get('/admin/adminlist', [AdminController::class, 'showAdminList'])->name(
 Route::get('/admin/addadmin', [AdminController::class, 'showAddAdmin'])->name('addadmin');
 Route::get('/admin/pendinglearners', [AdminController::class, 'showPendingLearners'])->name('pendinglearners');
 Route::get('/admin/enrolledlearners', [AdminController::class, 'showEnrolledLearners'])->name('enrolledlearners');
+Route::get('/admin/admindetails/{id}', [AdminController::class, 'adminDetails'])->name('admindetails');
 
 
 Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin');

@@ -36,7 +36,8 @@ class AdminController extends Controller
 
     public function showAdminList()
     {
-        return view('admin.adminlist');
+        $admins = Admin::all();
+        return view('admin.adminlist' , compact('admins'));
     }
 
     public function showAddAdmin()
@@ -65,9 +66,20 @@ class AdminController extends Controller
 
         if ($admin && Hash::check($request->password, $admin->password)) {
             Auth::guard('admin')->login($admin);
-            return redirect()->route('dashboard')->with('success', 'Login successful');
+            return redirect()->route('dashboard')->with('success', 'Login successfully');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }
+
+    public function adminDetails($id)
+    {
+        $admin = Admin::findOrFail($id); // Fetch admin or show 404 if not found
+    
+        session()->flash('success', 'Admin details found successfully!');
+    
+        return view('admin.details', compact('admin'));
+    }
+    
+    
 }

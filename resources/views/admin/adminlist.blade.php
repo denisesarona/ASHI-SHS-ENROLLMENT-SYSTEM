@@ -8,22 +8,25 @@
                 <thead>
                     <tr class="text-gray-600 text-lg font-semibold">
                         <th class="px-8 py-2">ID</th>
-                        <th class="px-8 py-2">NAME</th>
+                        <th class="px-8 py-2">LAST NAME</th>
                         <th class="px-8 py-2">ROLE</th>
                         <th class="px-8 py-2">VIEW DETAILS</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($admins as $admin)
                     <tr class="text-gray-800 text-lg">
-                        <td class="px-4 py-3">1</td>
-                        <td class="px-4 py-3">Sarona</td>
-                        <td class="px-4 py-3">ADMIN</td>
+                        <td class="px-4 py-3">{{ $admin->id }}</td>
+                        <td class="px-4 py-3">{{ $admin->name }}</td>
+                        <td class="px-4 py-3">{{ $admin->role == 1 ? 'ADMIN' : 'USER' }}</td>
                         <td class="px-4 py-3">
-                            <button class="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-md">
+                            <a href="{{ route('admindetails', ['id' => $admin->id]) }}" 
+                               class="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-md">
                                 VIEW DETAILS
-                            </button>
+                            </a>
                         </td>
                     </tr>
+                    @endforeach                                     
                 </tbody>
             </table>
         </div>
