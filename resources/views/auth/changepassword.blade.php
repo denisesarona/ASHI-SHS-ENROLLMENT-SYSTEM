@@ -12,7 +12,7 @@
                         <input type="password" class="block w-full p-3 border rounded" placeholder="Password">
                     </div>
                     <div class="relative">
-                        <input type="password" class="block w-full p-3 border rounded" placeholder="Confirm Password">
+                        <input type="password" class="block w-full p-3 border rounded" placeholder="Confirm the Password">
                     </div>
                 </div>
                 <button type="submit" class="w-full bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 mt-4">SUBMIT</button>
