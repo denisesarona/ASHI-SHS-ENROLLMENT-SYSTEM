@@ -79,8 +79,6 @@ class AdminController extends Controller
     {
         $admin = Admin::findOrFail($id); // Fetch admin or show 404 if not found
     
-        session()->flash('success', 'Admin details found successfully!');
-    
         return view('admin.admindetails', compact('admin'));
     }
 
@@ -96,7 +94,9 @@ class AdminController extends Controller
         $admin = Admin::findOrFail($id);
     
         // Check if the email is being changed
-        if ($request->email !== $admin->email) {
+        if ($request->email == $admin->email) {
+            return back()->with('error', 'Entered email is already save into database!');
+        } else if ($request->email !== $admin->email){
             $verificationCode = rand(100000, 999999); // Generate a 6-digit code
     
             // Store verification code and new email in verification_codes table
@@ -113,7 +113,7 @@ class AdminController extends Controller
             Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
 
             return redirect()->route('verify.email.form', ['email' => $admin->email])
-                ->with('success', 'A verification code has been sent to your new email. Please verify before the change takes effect.');
+                ->with('success', 'A verification code has been sent to your new email.');
         }
     
         // Update name
