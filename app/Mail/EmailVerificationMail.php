@@ -12,18 +12,21 @@ class EmailVerificationMail extends Mailable
     use Queueable, SerializesModels;
 
     public $verificationCode;
+    public $email;
 
-    public function __construct($verificationCode)
+    public function __construct($email, $verificationCode)
     {
+        $this->email = $email;
         $this->verificationCode = $verificationCode;
     }
 
     public function build()
     {
         return $this->subject('Verify Your Email')
-                    ->view('admin.auth.adminemailverification')
-                    ->with(['code' => $this->verificationCode]);
+                    ->view('emails.adminemailverification')
+                    ->with([
+                        'email' => $this->email,
+                        'code' => $this->verificationCode
+                    ]);
     }
 }
-->view('auth.adminemailverification')
-
