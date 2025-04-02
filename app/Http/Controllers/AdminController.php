@@ -125,7 +125,7 @@ class AdminController extends Controller
             Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
     
             // Redirect to verification page
-            return redirect()->route('adminemailverification', ['email' => $request->email])
+            return redirect()->route('verify.email.form', ['email' => $request->email])
                 ->with('success', 'A verification code has been sent to your email.');
         }
 

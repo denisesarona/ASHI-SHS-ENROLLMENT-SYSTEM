@@ -34,32 +34,29 @@ class EmailVerificationController extends Controller
 
     public function verifyAdminCode(Request $request)
     {
-        return view('auth.adminemailverification', ['email' => $request->email]);
+        return view('admin.verification', ['email' => $request->email]);
     }
 
-    public function verifyEmail(Request $request)
-    {
+    public function verifyEmail(Request $request) {
         $request->validate([
             'email' => 'required|email',
             'code' => 'required|string'
         ]);
-
-        // Find the verification record
+    
+        // Retrieve verification record
         $verification = VerificationCode::where('email', $request->email)
-                    ->where('code', $request->code)
-                    ->where('expires_at', '>=', now())
-                    ->first();
-
+            ->where('code', $request->code)
+            ->where('expires_at', '>=', now()) // Ensure it is not expired
+            ->first();
+    
         if (!$verification) {
             return back()->with('error', 'Invalid or expired verification code.');
         }
 
-        // Mark email as verified
-        VerificationCode::where('email', $verification->email)->update(['email_verified_at' => now()]);
-
+    
         // Delete verification record
         $verification->delete();
-
+    
         return redirect()->route('dashboard')->with('success', 'Email verified successfully.');
-    }
+    }    
 }
