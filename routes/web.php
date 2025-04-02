@@ -34,9 +34,9 @@ Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin'
 Route::post('/logout', [AdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::put('/admin/admindetails/{id}', [AdminController::class, 'updatePassword'])->name('updatepassword');
 
-Route::get('/admin/admindetails/verifyadmincode', [EmailVerificationController::class, 'verifyAdminCode'])
-    ->name('adminemailverification');
-Route::post('/admin/verify-code', [EmailVerificationController::class, 'verifyEmail'])->name('sentadmincode');
+Route::get('/verify-email', [EmailVerificationController::class, 'verifyAdminCode'])->name('verify.email.form');
+Route::post('/send-verification-email', [EmailVerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');
+Route::post('/verify-email', [EmailVerificationController::class, 'verifyEmail'])->name('verify.email');
 
 
 

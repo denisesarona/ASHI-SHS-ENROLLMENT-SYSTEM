@@ -23,7 +23,7 @@ class EmailVerificationMail extends Mailable
     public function build()
     {
         return $this->subject('Verify Your Email')
-                    ->view('emails.adminemailverification')
+                    ->view('email.verification')
                     ->with([
                         'email' => $this->email,
                         'code' => $this->verificationCode
