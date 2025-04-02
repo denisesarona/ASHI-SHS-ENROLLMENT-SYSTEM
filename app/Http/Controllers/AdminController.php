@@ -95,42 +95,38 @@ class AdminController extends Controller
         // Find the admin
         $admin = Admin::findOrFail($id);
     
-        // Check if email is changed
-        $emailChanged = $request->email !== $admin->email;
+        // Check if the email is being changed
+        if ($request->email !== $admin->email) {
+            $verificationCode = rand(100000, 999999); // Generate a 6-digit code
     
-        // Update name and email
-        $admin->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+            // Store verification code and new email in verification_codes table
+            VerificationCode::updateOrCreate(
+                ['email' => $admin->email], // Store under the current email
+                [
+                    'code' => $verificationCode,
+                    'new_email' => $request->email, // Store the new email temporarily
+                    'expires_at' => now()->addMinutes(10),
+                ]
+            );
     
-        // Update password only if provided
+            // Send verification email
+            Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
+
+            return redirect()->route('verify.email.form', ['email' => $admin->email])
+                ->with('success', 'A verification code has been sent to your new email. Please verify before the change takes effect.');
+        }
+    
+        // Update name
+        $admin->update(['name' => $request->name]);
+    
+        // Update password if provided
         if ($request->filled('password')) {
             $admin->password = Hash::make($request->password);
             $admin->save();
         }
     
-        // If email changed, generate and store verification code
-        if ($emailChanged) {
-            $verificationCode = rand(100000, 999999); // 6-digit code
-    
-            // Save to verification_codes table
-            VerificationCode::create([
-                'email' => $request->email,
-                'code' => $verificationCode,
-                'expires_at' => now()->addMinutes(10), // Code valid for 10 mins
-            ]);
-    
-            // Send verification email
-            Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
-    
-            // Redirect to verification page
-            return redirect()->route('verify.email.form', ['email' => $request->email])
-                ->with('success', 'A verification code has been sent to your email.');
-        }
-
         return back()->with('success', 'Admin details updated successfully!');
-    }
+    }    
 
     public function logoutAdmin(Request $request){
         Auth::logout();
