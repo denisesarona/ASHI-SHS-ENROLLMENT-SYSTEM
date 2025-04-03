@@ -108,6 +108,8 @@ class AdminController extends Controller
             $admin->update(['name' => $request->name]);
             $changesMade = true;
         }
+
+        if ($request->password)
     
         // Update password if provided
         if ($request->filled('password')) {
@@ -152,5 +154,26 @@ class AdminController extends Controller
         $request->session()->invalidate();
 
         return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+    }
+
+    public function addNewAdmin(Request $request){
+        $request->validate([
+            'name'=>'required|string|max:255',
+            'email'=>'required|string|email|max:255',
+            'password'=>'required|confirmed',
+        ]);
+
+        try{
+            // Create a new user and hash the password
+            $admin = Admin::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password), 
+            ]);
+
+            return redirect()->route('adminlist')->with('success', 'New admin added successfully!');
+        } catch (\Exception $e){
+            return redirect()->back()->with('error', 'There was an error during add a new admin. Please try again.');
+        }
     }
 }

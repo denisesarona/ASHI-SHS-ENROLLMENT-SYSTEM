@@ -33,10 +33,12 @@ Route::get('/admin/admindetails/{id}', [AdminController::class, 'adminDetails'])
 Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin');
 Route::post('/logout', [AdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::put('/admin/admindetails/{id}', [AdminController::class, 'updatePassword'])->name('updatepassword');
+Route::post('/admin/add-admin', [AdminController::class, 'addNewAdmin'])->name('addadmin');
 
-Route::get('/verify-email', [EmailVerificationController::class, 'verifyAdminCode'])->name('verify.email.form');
-Route::post('/send-verification-email', [EmailVerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');
-Route::post('/verify-email', [EmailVerificationController::class, 'verifyEmail'])->name('verify.email');
+
+Route::get('/admin/admin-details/verify-email', [EmailVerificationController::class, 'verifyAdminCode'])->name('verify.email.form');
+Route::post('/admin/admin-details/send-verification-email', [EmailVerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');
+Route::post('/admin/admin-details/verify-email', [EmailVerificationController::class, 'verifyEmail'])->name('verify.email');
 
 
 

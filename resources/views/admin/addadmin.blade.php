@@ -4,7 +4,7 @@
             <div class="pt-6 text-center mb-10">
                 <h1 class="text-4xl font-bold text-gray-800">Add Admin</h1>
             </div>
-            <form action="" method="POST">
+            <form action="{{ route('addadmin') }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
