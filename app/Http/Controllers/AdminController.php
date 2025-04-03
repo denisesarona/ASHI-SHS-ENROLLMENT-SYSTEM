@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -156,24 +157,29 @@ class AdminController extends Controller
         return redirect()->route('login')->with('success', 'You have been logged out successfully.');
     }
 
-    public function addNewAdmin(Request $request){
+    public function addNewAdmin(Request $request)
+    {
+        // Validate input
         $request->validate([
-            'name'=>'required|string|max:255',
-            'email'=>'required|string|email|max:255',
-            'password'=>'required|confirmed',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:admins,email', // Ensure email is unique
+            'password' => 'required|confirmed', // Ensure password confirmation is validated
         ]);
 
-        try{
-            // Create a new user and hash the password
+        try {
+            // Create new admin and hash the password
             $admin = Admin::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password), 
+                'password' => Hash::make($request->password),
+                'role' => '1',
             ]);
 
             return redirect()->route('adminlist')->with('success', 'New admin added successfully!');
-        } catch (\Exception $e){
-            return redirect()->back()->with('error', 'There was an error during add a new admin. Please try again.');
+        } catch (\Exception $e) {
+            \Log::error('Error adding admin: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'There was an error while adding a new admin. Please check the logs.');
         }
     }
+
 }
