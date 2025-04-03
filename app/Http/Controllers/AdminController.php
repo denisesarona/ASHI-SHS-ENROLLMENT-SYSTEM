@@ -83,20 +83,42 @@ class AdminController extends Controller
     }
 
     public function updatePassword(Request $request, $id) {
+        
         // Validate input
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'password' => 'nullable|min:6|confirmed',
+            'password' => 'required|confirmed', // Ensure password confirmation is validated
         ]);
     
         // Find the admin
         $admin = Admin::findOrFail($id);
     
-        // Check if the email is being changed
-        if ($request->email == $admin->email) {
-            return back()->with('error', 'Entered email is already save into database!');
-        } else if ($request->email !== $admin->email){
+        // Check if the entered email already exists for another admin
+        $existingAdmin = Admin::where('email', $request->email)->where('id', '!=', $id)->first();
+        if ($existingAdmin) {
+            return back()->with('error', 'This email is already in use by another admin.');
+        }
+    
+        // Track if any changes were made
+        $changesMade = false;
+    
+        // Update name if changed
+        if ($request->name !== $admin->name) {
+            $admin->update(['name' => $request->name]);
+            $changesMade = true;
+        }
+    
+        // Update password if provided
+        if ($request->filled('password')) {
+            $hashedPassword = Hash::make($request->password); // Hash the password
+            $admin->password = $hashedPassword;
+            $admin->save(); // Save the changes to the database
+            $changesMade = true;
+        }
+  
+        // If email is changed, send verification but don't update immediately
+        if ($request->email !== $admin->email) {
             $verificationCode = rand(100000, 999999); // Generate a 6-digit code
     
             // Store verification code and new email in verification_codes table
@@ -104,25 +126,21 @@ class AdminController extends Controller
                 ['email' => $admin->email], // Store under the current email
                 [
                     'code' => $verificationCode,
-                    'new_email' => $request->email, // Store the new email temporarily
+                    'new_email' => $request->email, // Temporarily store the new email
                     'expires_at' => now()->addMinutes(10),
                 ]
             );
     
             // Send verification email
-            Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
-
+            Mail::to($request->email)->send(new EmailVerificationMail($admin->email, $verificationCode));
+    
             return redirect()->route('verify.email.form', ['email' => $admin->email])
                 ->with('success', 'A verification code has been sent to your new email.');
         }
     
-        // Update name
-        $admin->update(['name' => $request->name]);
-    
-        // Update password if provided
-        if ($request->filled('password')) {
-            $admin->password = Hash::make($request->password);
-            $admin->save();
+        // If no changes were made, return without success message
+        if (!$changesMade) {
+            return back()->with('info', 'No changes were made.');
         }
     
         return back()->with('success', 'Admin details updated successfully!');
