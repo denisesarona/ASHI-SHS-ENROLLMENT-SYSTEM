@@ -122,15 +122,13 @@
             });
         </script>
     </div>
-    <!-- JavaScript for Sidebar and Dropdown -->
+
     <script>
-        // Sidebar Toggle
         document.getElementById("sidebarToggle").addEventListener("click", function() {
             let sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("-translate-x-full");
         });
     
-        // Dropdown Toggle
         document.querySelectorAll(".dropdown-toggle").forEach(function(button) {
             button.addEventListener("click", function() {
                 let dropdownMenu = this.nextElementSibling; // Get the next sibling which is the dropdown menu
