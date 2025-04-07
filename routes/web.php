@@ -37,8 +37,10 @@ Route::post('/admin/add-admin', [AdminController::class, 'addNewAdmin'])->name('
 
 
 Route::get('/admin/admin-details/verify-email', [EmailVerificationController::class, 'verifyAdminCode'])->name('verify.email.form');
+Route::get('/admin/admin-details/verify-add-admin-email', [EmailVerificationController::class, 'showverifyAddAdmin'])->name('verify.add-admin-email');
 Route::post('/admin/admin-details/send-verification-email', [EmailVerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');
 Route::post('/admin/admin-details/verify-email', [EmailVerificationController::class, 'verifyEmail'])->name('verify.email');
+Route::get('/admin/admin-details/verify-add-admin-email', [EmailVerificationController::class, 'verifyAddAdmin'])->name('verify.add-admin-email');
 
 
 Route::delete('/admin/admin-list/{id}', [AdminController::class, 'destroy'])->name('removeadmin');

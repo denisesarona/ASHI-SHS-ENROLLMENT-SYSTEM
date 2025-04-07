@@ -59,6 +59,11 @@ class AdminController extends Controller
         return view('admin.enrolledlearners');
     }
 
+    public function showverifyAddAdmin()
+    {
+        return view('admin.verification.add-admin');
+    }
+
     public function loginAdmin(Request $request)
     {
         $request->validate([
@@ -109,9 +114,7 @@ class AdminController extends Controller
             $admin->update(['name' => $request->name]);
             $changesMade = true;
         }
-
-        if ($request->password)
-    
+        
         // Update password if provided
         if ($request->filled('password')) {
             $hashedPassword = Hash::make($request->password); // Hash the password
@@ -137,7 +140,7 @@ class AdminController extends Controller
             // Send verification email
             Mail::to($request->email)->send(new EmailVerificationMail($admin->email, $verificationCode));
     
-            return redirect()->route('verify.email.form', ['email' => $admin->email])
+            return redirect()->route('verify.add-admin-email', ['email' => $admin->email])
                 ->with('success', 'A verification code has been sent to your new email.');
         }
     
@@ -159,28 +162,42 @@ class AdminController extends Controller
 
     public function addNewAdmin(Request $request)
     {
-        // Validate input
+        // Validate initial input (but don't check for unique email here yet)
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:admins,email', // Ensure email is unique
-            'password' => 'required|confirmed', // Ensure password confirmation is validated
+            'email' => 'required|email|max:255',
+            'password' => 'required|confirmed',
         ]);
 
-        try {
-            // Create new admin and hash the password
-            $admin = Admin::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role' => '1',
-            ]);
-
-            return redirect()->route('adminlist')->with('success', 'New admin added successfully!');
-        } catch (\Exception $e) {
-            \Log::error('Error adding admin: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'There was an error while adding a new admin. Please check the logs.');
+        // Check if the email already exists in admins table
+        if (Admin::where('email', $request->email)->exists()) {
+            return redirect()->back()->with('error', 'Email is already registered.');
         }
+
+        // Generate verification code
+        $verificationCode = rand(100000, 999999);
+
+        // Store verification record
+        VerificationCode::updateOrCreate(
+            ['email' => $request->email],
+            [
+                'code' => $verificationCode,
+                'new_email' => $request->email,
+                'data' => json_encode([
+                    'name' => $request->name,
+                    'password' => Hash::make($request->password),
+                ]),
+                'expires_at' => now()->addMinutes(10),
+            ]
+        );
+
+        // Send email
+        Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
+
+        return redirect()->route('verify.email.form', ['email' => $request->email])
+            ->with('success', 'A verification code has been sent to your email.');
     }
+
 
     public function destroy($id)
     {
