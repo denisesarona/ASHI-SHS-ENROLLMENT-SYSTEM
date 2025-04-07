@@ -182,4 +182,17 @@ class AdminController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+        $admin = Admin::find($id); // You were missing the variable assignment
+    
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Admin not found!');
+        }
+    
+        $admin->delete();
+    
+        return redirect()->back()->with('success', 'Admin deleted successfully!');
+    }
+    
 }

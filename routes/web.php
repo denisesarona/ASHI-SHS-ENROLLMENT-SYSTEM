@@ -41,6 +41,6 @@ Route::post('/admin/admin-details/send-verification-email', [EmailVerificationCo
 Route::post('/admin/admin-details/verify-email', [EmailVerificationController::class, 'verifyEmail'])->name('verify.email');
 
 
-
+Route::delete('/admin/admin-list/{id}', [AdminController::class, 'destroy'])->name('removeadmin');
 
 
