@@ -59,11 +59,6 @@ class AdminController extends Controller
         return view('admin.enrolledlearners');
     }
 
-    public function showverifyAddAdmin()
-    {
-        return view('admin.verification.add-admin');
-    }
-
     public function loginAdmin(Request $request)
     {
         $request->validate([
@@ -133,14 +128,14 @@ class AdminController extends Controller
                 [
                     'code' => $verificationCode,
                     'new_email' => $request->email, // Temporarily store the new email
-                    'expires_at' => now()->addMinutes(10),
+                    'expires_at' => now()->addMinutes(20),
                 ]
             );
     
             // Send verification email
             Mail::to($request->email)->send(new EmailVerificationMail($admin->email, $verificationCode));
     
-            return redirect()->route('verify.add-admin-email', ['email' => $admin->email])
+            return redirect()->route('verify.email.form', ['email' => $admin->email])
                 ->with('success', 'A verification code has been sent to your new email.');
         }
     
@@ -182,19 +177,22 @@ class AdminController extends Controller
             ['email' => $request->email],
             [
                 'code' => $verificationCode,
-                'new_email' => $request->email,
-                'data' => json_encode([
-                    'name' => $request->name,
-                    'password' => Hash::make($request->password),
-                ]),
-                'expires_at' => now()->addMinutes(10),
+                'expires_at' => now()->addMinutes(20),
             ]
         );
 
+        session([
+            'pending_admin' => [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]
+        ]);
+        
         // Send email
         Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
 
-        return redirect()->route('verify.email.form', ['email' => $request->email])
+        return redirect()->route('verify.add-admin-email', ['email' => $request->email])
             ->with('success', 'A verification code has been sent to your email.');
     }
 

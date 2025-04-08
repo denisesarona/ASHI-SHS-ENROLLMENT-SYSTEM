@@ -4,7 +4,7 @@
             <div class="text-center mb-10">
                 <h1 class="text-4xl font-bold text-gray-800">Verify Email</h1>
             </div>
-            <form action="{{ route('verify.addemail') }}" method="POST" class="flex flex-col space-y-6">
+            <form action="{{ route('verify.add-email') }}" method="POST" class="flex flex-col space-y-6">
                 @csrf
                 <input type="hidden" name="email" value="{{ request()->email }}"> 
                 

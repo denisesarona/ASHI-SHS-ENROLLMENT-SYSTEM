@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\VerificationCode;
+use App\Models\Admin;
 
 class EmailVerificationController extends Controller
 {
@@ -13,6 +14,11 @@ class EmailVerificationController extends Controller
     public function verifyAdminCode(Request $request)
     {
         return view('admin.verification', ['email' => $request->email]);
+    }
+
+    public function showverifyAddAdmin(Request $request)
+    {
+        return view('admin.verificationadd-admin', ['email' => $request->email]);
     }
 
     public function verifyEmail(Request $request)
@@ -58,11 +64,11 @@ class EmailVerificationController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'code' => 'required|string',
+            'code' => 'required|string'
         ]);
 
         $verification = VerificationCode::where('email', $request->email)
-            ->where('code', $request->code)
+            ->where('code', trim($request->code))
             ->where('expires_at', '>=', now())
             ->first();
 
@@ -70,23 +76,29 @@ class EmailVerificationController extends Controller
             return back()->with('error', 'Invalid or expired code.');
         }
 
-        $adminData = json_decode($verification->data, true);
+        // Fetch pending admin data from session
+        $pending = session('pending_admin');
+
+        if (!$pending || $pending['email'] !== $request->email) {
+            return back()->with('error', 'Pending admin data not found. Please register again.');
+        }
 
         // Double check: avoid duplicate email
-        if (Admin::where('email', $verification->new_email)->exists()) {
+        if (Admin::where('email', $request->email)->exists()) {
             return back()->with('error', 'This email is already taken.');
         }
 
         // Create the admin
         Admin::create([
-            'name' => $adminData['name'],
-            'email' => $verification->new_email,
-            'password' => $adminData['password'],
+            'name' => $pending['name'],
+            'email' => $pending['email'],
+            'password' => $pending['password'],
             'role' => '1',
         ]);
 
         // Clean up
         $verification->delete();
+        session()->forget('pending_admin');
 
         return redirect()->route('adminlist')->with('success', 'New admin created successfully!');
     }
