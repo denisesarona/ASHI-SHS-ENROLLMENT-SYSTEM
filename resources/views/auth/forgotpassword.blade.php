@@ -5,11 +5,11 @@
         </div>
         <h2 class="text-2xl font-bold text-black">Forgot your password?</h2>
         <div class="mt-6">
-            <form action="">
+            <form action="{{ route('forgotPassword') }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 gap-4">
                     <div class="relative">
-                        <input type="text" class="block w-full p-3 border rounded pl-10" placeholder="Enter your email">
+                        <input type="text" class="block w-full p-3 border rounded pl-10" name="email" placeholder="Enter your email">
                         <i class='bx bx-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400'></i>
                     </div>
                 </div>

@@ -211,4 +211,18 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Admin deleted successfully!');
     }    
     
+    public function forgotPassword(Request $request){
+
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        if (Admin::where('email', $request->email)->exists()) {
+            // Check if the email already exists in admins table
+            return redirect()->route('verifycode', ['email' => $request->email])
+            ->with('success', 'A verification code has been sent to your email.');
+        } else {
+            return redirect()->back()->with('error', 'Email not registered in database.');
+        }
+    }
 }

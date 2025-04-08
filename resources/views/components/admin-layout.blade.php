@@ -44,6 +44,19 @@
                             stopOnFocus: true
                         }).showToast();
                     @endif
+
+                    @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        Toastify({
+                            text: "{{ $error }}",
+                            duration: 3000,
+                            gravity: "right",
+                            position: "right",
+                            backgroundColor: "red",
+                            stopOnFocus: true
+                        }).showToast();
+                    @endforeach
+                    @endif
                 });
             </script>
         </div>
