@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\VerificationCode;
+use App\Models\Learner;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -51,7 +52,8 @@ class AdminController extends Controller
 
     public function showPendingLearners()
     {
-        return view('admin.pendinglearners');
+        $learners = Learner::all();
+        return view('admin.pendinglearners', compact ('learners'));
     }
 
     public function showEnrolledLearners()
