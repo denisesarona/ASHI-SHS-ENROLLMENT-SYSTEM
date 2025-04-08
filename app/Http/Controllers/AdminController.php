@@ -218,6 +218,26 @@ class AdminController extends Controller
         ]);
 
         if (Admin::where('email', $request->email)->exists()) {
+            // Generate verification code
+            $verificationCode = rand(100000, 999999);
+
+            // Store verification record
+            VerificationCode::updateOrCreate(
+                ['email' => $request->email],
+                [
+                    'code' => $verificationCode,
+                    'expires_at' => now()->addMinutes(20),
+                ]
+            );
+            
+            // Send email
+            Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
+
+            session([
+                'pending_verification' => [
+                    'email' => $request->email,
+                ]
+            ]);
             // Check if the email already exists in admins table
             return redirect()->route('verifycode', ['email' => $request->email])
             ->with('success', 'A verification code has been sent to your email.');

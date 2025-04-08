@@ -5,11 +5,11 @@
         </div>
         <h2 class="text-2xl font-bold text-black">Verify Code</h2> 
         <div class="mt-6">
-            <form action="">
+            <form action="{{route ('verifycode')}}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 gap-4">
                     <div class="relative">
-                        <input type="text" class="block w-full p-3 border rounded" placeholder="Enter code">
+                        <input type="text" class="block w-full p-3 border rounded" name="code" placeholder="Enter code">
                     </div>
                 </div>
                 <button type="submit" class="w-full bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 mt-4">SUBMIT</button>

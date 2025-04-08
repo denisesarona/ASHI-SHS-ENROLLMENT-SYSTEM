@@ -62,8 +62,6 @@ class EmailVerificationController extends Controller
     }
     
     
-
-
     public function verifyAddAdmin(Request $request)
     {
         $request->validate([
@@ -106,4 +104,37 @@ class EmailVerificationController extends Controller
 
         return redirect()->route('adminlist')->with('success', 'New admin created successfully!');
     }
+
+    public function verifyCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string',
+        ]);
+
+        $verificationEmail = session('pending_verification');
+    
+        // Verify the code
+        $verification = VerificationCode::where($verificationEmail)
+            ->where('code', $request->code)
+            ->where('expires_at', '>=', now())
+            ->first();
+    
+        if (!$verification) {
+            return back()->with('error', 'Invalid verification code.');
+        }
+
+        // Clean up
+        $verification->delete();
+        session()->forget('pending_admin');
+
+        session([
+            'pending_password_verification' => [
+                $verificationEmail,
+            ]
+        ]);
+
+        return redirect()->route('changepassword', ['email' => $request->email])
+        ->with('success', 'Valid verification code.');
+    }
+    
 }    
