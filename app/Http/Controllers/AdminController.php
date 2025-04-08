@@ -245,4 +245,38 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Email not registered in database.');
         }
     }
+
+    public function changePassword(Request $request)
+    {
+        // Validate the input password
+        $request->validate([
+            'password' => 'required|confirmed',
+        ]);
+    
+        // Retrieve the email from session
+        $adminEmail = session('pending_password_verification');
+    
+        // Find the admin by email
+        $admin = Admin::where('email', $adminEmail)->first();
+    
+        // If no admin is found, return an error
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Email not registered in database.');
+        }
+    
+        // Update password if provided
+        if ($request->filled('password')) {
+            $hashedPassword = Hash::make($request->password); // Hash the new password
+            $admin->password = $hashedPassword;
+            $admin->save(); // Save the changes to the database
+            
+            // Forget the session
+            session()->forget('pending_password_verification');
+    
+            return redirect()->route('login')->with('success', 'Password changed successfully.');
+        }
+    
+        // Return to the previous page if the password is not provided
+        return redirect()->back()->with('error', 'Password field is required.');
+    }    
 }
