@@ -28,6 +28,7 @@
                         <input type="password" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="password_confirmation" placeholder="Enter confirm password">
                     </div>
+                    <input type="hidden" name="id" value="{{ request('id') }}">
                 </div>
 
                 <button type="submit" class="mt-6 text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-md shadow-md">

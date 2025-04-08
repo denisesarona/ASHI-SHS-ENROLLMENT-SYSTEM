@@ -28,37 +28,41 @@ class EmailVerificationController extends Controller
             'code' => 'required|string',
         ]);
     
-        // Look up the verification record
+        // Get admin ID from session
+        $adminId = session('verify_admin_id');
+        if (!$adminId) {
+            return back()->with('error', 'Session expired. Please try updating your details again.');
+        }
+    
+        // Verify the code
         $verification = VerificationCode::where('email', $request->email)
             ->where('code', $request->code)
             ->where('expires_at', '>=', now())
             ->first();
     
         if (!$verification) {
-            return back()->with('error', 'Invalid or expired verification code.');
+            return back()->with('error', 'Invalid verification code.');
         }
     
-        // Find the admin with the original email
-        $admin = Admin::where('email', $verification->email)->first();
-    
+        // Update admin's email
+        $admin = Admin::find($adminId);
         if (!$admin) {
             return back()->with('error', 'Admin not found.');
         }
     
-        // Prevent overwriting an existing admin's email
-        if (Admin::where('email', $verification->new_email)->exists()) {
-            return back()->with('error', 'The new email is already in use by another account.');
-        }
-    
-        // Perform the email update
-        $admin->email = $verification->new_email;
+        $admin->email = $request->email;
         $admin->save();
     
-        // Clean up verification record
         $verification->delete();
     
-        return redirect()->route('dashboard')->with('success', 'Email updated successfully!');
+        // Clear session key after successful update
+        session()->forget('verify_admin_id');
+    
+        return redirect()->route('admindetails', $adminId)->with('success', 'Email verified and updated successfully!');
     }
+    
+    
+
 
     public function verifyAddAdmin(Request $request)
     {

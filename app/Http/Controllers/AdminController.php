@@ -83,33 +83,34 @@ class AdminController extends Controller
         return view('admin.admindetails', compact('admin'));
     }
 
-    public function updatePassword(Request $request, $id) {
-        
+    public function updatePassword(Request $request, $id)
+    {
         // Validate input
         $request->validate([
+            'id' => 'required|integer',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'password' => 'required|confirmed', // Ensure password confirmation is validated
+            'password' => 'confirmed', // Ensure password confirmation is validated
         ]);
-    
+ 
         // Find the admin
         $admin = Admin::findOrFail($id);
-    
+
         // Check if the entered email already exists for another admin
         $existingAdmin = Admin::where('email', $request->email)->where('id', '!=', $id)->first();
         if ($existingAdmin) {
             return back()->with('error', 'This email is already in use by another admin.');
         }
-    
+
         // Track if any changes were made
         $changesMade = false;
-    
+
         // Update name if changed
         if ($request->name !== $admin->name) {
             $admin->update(['name' => $request->name]);
             $changesMade = true;
         }
-        
+
         // Update password if provided
         if ($request->filled('password')) {
             $hashedPassword = Hash::make($request->password); // Hash the password
@@ -117,35 +118,37 @@ class AdminController extends Controller
             $admin->save(); // Save the changes to the database
             $changesMade = true;
         }
-  
-        // If email is changed, send verification but don't update immediately
+
+                // Check if email is changed
         if ($request->email !== $admin->email) {
             $verificationCode = rand(100000, 999999); // Generate a 6-digit code
-    
-            // Store verification code and new email in verification_codes table
+
+            // Store verification code in verification_codes table
             VerificationCode::updateOrCreate(
-                ['email' => $admin->email], // Store under the current email
+                ['email' => $request->email],
                 [
                     'code' => $verificationCode,
-                    'new_email' => $request->email, // Temporarily store the new email
                     'expires_at' => now()->addMinutes(20),
                 ]
             );
-    
+
             // Send verification email
-            Mail::to($request->email)->send(new EmailVerificationMail($admin->email, $verificationCode));
-    
-            return redirect()->route('verify.email.form', ['email' => $admin->email])
-                ->with('success', 'A verification code has been sent to your new email.');
+            session(['verify_admin_id' => $id]);
+            Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
+            return redirect()->route('verify.email.form', ['email' => $request->email, 'id' => $id])
+                ->with('success', 'A verification code has been sent to your email.');
         }
-    
+
+
         // If no changes were made, return without success message
         if (!$changesMade) {
             return back()->with('info', 'No changes were made.');
         }
-    
+
         return back()->with('success', 'Admin details updated successfully!');
-    }    
+    }
+
+
 
     public function logoutAdmin(Request $request){
         Auth::logout();
