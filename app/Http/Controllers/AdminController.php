@@ -73,7 +73,7 @@ class AdminController extends Controller
             return redirect()->route('dashboard')->with('success', 'Login successfully');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
+        return back()->with('error', 'Invalid credentials.');
     }
 
     public function adminDetails($id)
