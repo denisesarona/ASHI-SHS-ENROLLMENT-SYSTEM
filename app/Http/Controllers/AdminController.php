@@ -196,11 +196,9 @@ class AdminController extends Controller
             ->with('success', 'A verification code has been sent to your email.');
     }
 
-
     public function destroy($id)
     {
-        $admin = Admin::find($id); // You were missing the variable assignment
-    
+        $admin = Admin::find($id); 
         if (!$admin) {
             return redirect()->back()->with('error', 'Admin not found!');
         }
@@ -208,6 +206,6 @@ class AdminController extends Controller
         $admin->delete();
     
         return redirect()->back()->with('success', 'Admin deleted successfully!');
-    }
+    }    
     
 }
