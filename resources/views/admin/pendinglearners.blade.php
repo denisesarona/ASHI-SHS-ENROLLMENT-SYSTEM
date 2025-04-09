@@ -19,27 +19,19 @@
                     @foreach ($learners as $learner)
                     <tr class="text-gray-800 text-md">
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->id }}</td>
-                    
-                        <!-- Name Column (Always Visible) -->
                         <td class="px-4 py-3">{{ $learner->last_name . ', ' . $learner->first_name }}</td>
-                    
-                        <!-- Role Column (Hidden on Small Screens) -->
-                        <td class="px-4 py-3 hidden md:table-cell"></td>
-                    
-                        <!-- View Details Button (Always Visible) -->
+                        <td class="px-4 py-3 hidden md:table-cell">{{ $learner->grade_level}}</td>
+                        <td class="px-4 py-3 hidden md:table-cell">{{ $learner->status}}</td>
                         <td class="px-4 py-3">
                             <a href="{{ route('admindetails', ['id' => $learner->id]) }}" 
                                class="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-md">
                                 VIEW DETAILS
                             </a>
                         </td>
-                    
                         <td class="px-4 py-3 hidden sm:table-cell">
-                            <button data-modal-target="popup-modal-{{ $learner->id }}" data-modal-toggle="popup-modal-{{ $learner->id }}" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
+                            <button data-modal-target="popup-modal-{{ $learner->id }}" data-modal-toggle="popup-modal-{{ $learner->id }}" class=" text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
                                 REMOVE ADMIN
                             </button>
-                        
-                            <!-- Modal (Dynamic ID) -->
                             <div id="popup-modal-{{ $learner->id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative p-4 w-full max-w-md max-h-full">
                                     <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -62,8 +54,7 @@
                                                         class="w-full sm:w-auto text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                                         Yes, I'm sure
                                                     </button>
-                                                </form>
-                                            
+                                                </form                                
                                                 <button data-modal-hide="popup-modal-{{ $learner->id }}" type="button"
                                                     class="w-full sm:w-auto py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                                     No, cancel
