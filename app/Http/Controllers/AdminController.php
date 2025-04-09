@@ -85,6 +85,13 @@ class AdminController extends Controller
         return view('admin.admindetails', compact('admin'));
     }
 
+    public function learnerDetails($id)
+    {
+        $learner = Learner::findOrFail($id); // Fetch admin or show 404 if not found
+    
+        return view('admin.learnerdetails', compact('learner'));
+    }
+
     public function updatePassword(Request $request, $id)
     {
         // Validate input
