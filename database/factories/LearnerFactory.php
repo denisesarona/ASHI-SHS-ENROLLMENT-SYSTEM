@@ -25,7 +25,7 @@ class LearnerFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->optional()->lastName(),
             'extension_name' => $this->faker->optional()->word(),
-            'lrn_index' => $this->faker->unique()->word(),
+            'lrn' => $this->faker->phoneNumber(),
             'birthdate' => $this->faker->date(),
             'age' => $this->faker->numberBetween(5, 18),
             'gender' => $this->faker->randomElement(['Male', 'Female']),
