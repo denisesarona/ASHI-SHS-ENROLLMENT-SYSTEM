@@ -3,7 +3,7 @@
         <div class="pt-8">
             <h1 class="text-4xl font-bold text-center">PENDING LEARNERS</h1>
         </div>
-        <div class="w-full max-w-3xl mt-8">
+        <div class="w-full overflow-x-auto mt-8">
             <table class="w-full text-center">
                 <thead>
                     <tr class="text-gray-600 text-lg font-semibold whitespace-nowrap">
@@ -17,11 +17,11 @@
                 </thead>                
                 <tbody>
                     @foreach ($learners as $learner)
-                    <tr class="text-gray-800 text-lg">
+                    <tr class="text-gray-800 text-md">
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->id }}</td>
                     
                         <!-- Name Column (Always Visible) -->
-                        <td class="px-4 py-3">{{ $learner->name }}</td>
+                        <td class="px-4 py-3">{{ $learner->last_name . ', ' . $learner->first_name }}</td>
                     
                         <!-- Role Column (Hidden on Small Screens) -->
                         <td class="px-4 py-3 hidden md:table-cell"></td>
@@ -43,7 +43,7 @@
                             <div id="popup-modal-{{ $learner->id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative p-4 w-full max-w-md max-h-full">
                                     <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-                                        <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-{{ $admin->id }}">
+                                        <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-{{ $learner->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
