@@ -37,6 +37,7 @@ Route::put('/admin/admindetails/{id}', [AdminController::class, 'updatePassword'
 Route::post('/admin/add-admin', [AdminController::class, 'addNewAdmin'])->name('addadmin');
 Route::post('/forgotpassword', [AdminController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('/changepassword', [AdminController::class, 'changePassword'])->name('changePassword');
+Route::put('/admin/learnerdetails/{id}', [AdminController::class, 'updateLearner'])->name('updatelearner');
 
 Route::get('/admin/admin-details/verify-email', [EmailVerificationController::class, 'verifyAdminCode'])->name('verify.email.form');
 Route::get('/admin/admin-details/verify-add-admin-email', [EmailVerificationController::class, 'showverifyAddAdmin'])->name('verify.add-admin-email');

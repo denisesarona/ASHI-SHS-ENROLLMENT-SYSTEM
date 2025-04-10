@@ -288,4 +288,10 @@ class AdminController extends Controller
         // Return to the previous page if the password is not provided
         return redirect()->back()->with('error', 'Password field is required.');
     }    
+
+    public function updateLearner(Request $request, $id)
+    {
+ 
+        return back()->with('success', 'Admin details updated successfully!');
+    }
 }
