@@ -11,12 +11,22 @@
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Last Name</label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="name" value="{{ $learner->last_name }}">
+                               name="last_name" value="{{ $learner->last_name }}" placeholder="Enter Last Name">
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">First Name</label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="name" value="{{ $learner->first_name }}">
+                               name="first_name" value="{{ $learner->first_name }}" placeholder="Enter First Name">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Middle Name</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="middle_name" value="{{ $learner->middle_name }}" placeholder="Enter Middle Name">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Extension Name</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="extension_name" value="{{ $learner->extension_name }}" placeholder="Enter Extension Name">
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Email</label>
