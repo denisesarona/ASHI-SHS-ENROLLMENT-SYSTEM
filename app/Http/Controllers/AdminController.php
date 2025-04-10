@@ -291,7 +291,6 @@ class AdminController extends Controller
 
     public function updateLearner(Request $request, $id)
     {
- 
         return back()->with('success', 'Admin details updated successfully!');
     }
 }

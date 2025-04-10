@@ -23,7 +23,7 @@
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->grade_level}}</td>
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->status}}</td>
                         <td class="px-4 py-3">
-                            <a href="{{ route('admindetails', ['id' => $learner->id]) }}" 
+                            <a href="{{ route('learnerdetails', ['id' => $learner->id]) }}" 
                                class="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-md">
                                 VIEW DETAILS
                             </a>

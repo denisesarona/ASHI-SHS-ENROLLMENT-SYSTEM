@@ -4,29 +4,19 @@
             <div class="pt-6 text-center mb-10">
                 <h1 class="text-4xl font-bold text-gray-800">Learner Details</h1>
             </div>
-            <form action="{{}}" method="POST">
+            <form action="" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Name</label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="name" value="{{ $learner->name }}">
+                               name="name" value="{{ $learner->last_name }}">
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Email</label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="email" value="{{ $learner->email }}">
-                    </div>
-                    <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">New Password</label>
-                        <input type="password" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="password" placeholder="Enter new password">
-                    </div>
-                    <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Confirm Password</label>
-                        <input type="password" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="password_confirmation" placeholder="Enter confirm password">
                     </div>
                     <input type="hidden" name="id" value="{{ request('id') }}">
                 </div>
