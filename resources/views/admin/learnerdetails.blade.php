@@ -34,8 +34,7 @@
                                name="email" value="{{ $learner->email }}">
                     </div>
                     <input type="hidden" name="id" value="{{ request('id') }}">
-                </div>
-
+                </div>s
                 <button type="submit" class="mt-6 text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-md shadow-md">
                     Update Details
                 </button>
