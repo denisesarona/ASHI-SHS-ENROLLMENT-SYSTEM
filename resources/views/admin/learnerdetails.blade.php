@@ -8,47 +8,45 @@
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Last Name -->
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Last Name</label>
-                        <input type="text" name="last_name" value="{{ $learner->last_name }}" placeholder="Enter Last Name" class="input" />
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="last_name" value="{{ $learner->last_name }}" placeholder="Enter Last Name">
                     </div>
-            
-                    <!-- First Name -->
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">First Name</label>
-                        <input type="text" name="first_name" value="{{ $learner->first_name }}" placeholder="Enter First Name" class="input" />
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="first_name" value="{{ $learner->first_name }}" placeholder="Enter First Name">
                     </div>
-            
-                    <!-- Middle Name -->
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Middle Name</label>
-                        <input type="text" name="middle_name" value="{{ $learner->middle_name }}" placeholder="Enter Middle Name" class="input" />
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="middle_name" value="{{ $learner->middle_name }}" placeholder="Enter Middle Name">
                     </div>
-            
-                    <!-- Extension Name -->
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Extension Name</label>
-                        <input type="text" name="extension_name" value="{{ $learner->extension_name }}" placeholder="Enter Extension Name" class="input" />
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="extension_name" value="{{ $learner->extension_name }}" placeholder="Enter Extension Name">
                     </div>
-            
-                    <!-- LRN -->
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">LRN</label>
-                        <input type="text" name="lrn" value="{{ $learner->lrn }}" class="input" />
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Learners Reference Number (LRN)</label>
+                        <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="lrn" value="{{ $learner->lrn }}" placeholder="Enter LRN">
                     </div>
-            
-                    <!-- Birthdate -->
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Birthdate</label>
-                        <input type="date" name="birthdate" value="{{ $learner->birthdate }}" class="input" />
+                        <input type="date" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="birthdate" value="{{ $learner->birthdate }}">
                     </div>
-            
-                    <!-- Age -->
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Age</label>
-                        <input type="number" name="age" value="{{ $learner->age }}" class="input" />
+                        <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="age" value="{{ $learner->age }}" placeholder="Enter Age">
                     </div>
+                    
+                    
+             
+            
             
                     <!-- Gender -->
                     <div>
@@ -175,3 +173,4 @@
         </div>
     </div>
 </x-admin-dashboard-layout>
+
