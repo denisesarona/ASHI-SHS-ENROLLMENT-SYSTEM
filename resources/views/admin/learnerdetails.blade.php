@@ -1,37 +1,35 @@
 <x-admin-dashboard-layout>
     <div class="min-h-screen flex flex-col items-center bg-white p-8 shadow-lg rounded-xl">
         <div class="pt-8">
-            <div class="pt-6 text-center mb-10">
-                <h1 class="text-4xl font-bold text-gray-800">Learner Details</h1>
-            </div>
-            <form action="" method="POST">
+            <h1 class="text-4xl font-bold text-center mb-10">LEARNERS DETAILS</h1>
+            <form action="{{ route('updatelearner', $learner->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">School Year</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">School Year<span class="text-red-500 font-bold"> *</span></label>
                         <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="school_year" value="{{ $learner->school_year }}" disabled>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Grade Level</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Grade Level<span class="text-red-500 font-bold"> *</span></label>
                         <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="grade_level" value="{{ $learner->grade_level }}" disabled>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Last Name</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Last Name<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="last_name" value="{{ $learner->last_name }}" placeholder="Enter Last Name">
+                               name="last_name" value="{{ $learner->last_name }}" placeholder="Enter Last Name" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">First Name</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">First Name<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="first_name" value="{{ $learner->first_name }}" placeholder="Enter First Name">
+                               name="first_name" value="{{ $learner->first_name }}" placeholder="Enter First Name" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Middle Name</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Middle Name<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="middle_name" value="{{ $learner->middle_name }}" placeholder="Enter Middle Name">
+                               name="middle_name" value="{{ $learner->middle_name }}" placeholder="Enter Middle Name" required>
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Extension Name</label>
@@ -39,19 +37,19 @@
                                name="extension_name" value="{{ $learner->extension_name }}" placeholder="Enter Extension Name">
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Learners Reference Number (LRN)</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Learners Reference Number (LRN)<span class="text-red-500 font-bold"> *</span></label>
                         <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="lrn" value="{{ $learner->lrn }}" placeholder="Enter LRN">
+                               name="lrn" value="{{ $learner->lrn }}" placeholder="Enter LRN" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Birthdate</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Birthdate<span class="text-red-500 font-bold"> *</span></label>
                         <input type="date" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="birthdate" value="{{ $learner->birthdate }}">
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Age</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Age<span class="text-red-500 font-bold"> *</span></label>
                         <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="age" value="{{ $learner->age }}" placeholder="Enter Age">
+                               name="age" value="{{ $learner->age }}" placeholder="Enter Age" required>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Gender<span class="text-red-500 font-bold"> *</span></label>
@@ -77,45 +75,45 @@
                     </div>
                     
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">House No./ Street</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">House No./ Street<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                            name="street" value="{{ $learner->street }}" placeholder="Enter House No./ Street">
+                            name="street" value="{{ $learner->street }}" placeholder="Enter House No./ Street" required>
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Baranggay</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Baranggay<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="baranggay" value="{{ $learner->baranggay }}" placeholder="Enter Baranggay">
+                               name="baranggay" value="{{ $learner->baranggay }}" placeholder="Enter Baranggay" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Municipality</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Municipality<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="municipality" value="{{ $learner->municipality }}" placeholder="Enter Municipality">
+                               name="municipality" value="{{ $learner->municipality }}" placeholder="Enter Municipality" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Province</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Province<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="province" value="{{ $learner->province }}" placeholder="Enter Province">
+                               name="province" value="{{ $learner->province }}" placeholder="Enter Province" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Guardian Name</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Guardian Name<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="guardian_name" value="{{ $learner->guardian_name }}" placeholder="Enter Guardian Name">
+                               name="guardian_name" value="{{ $learner->guardian_name }}" placeholder="Enter Guardian Name" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Guardian's Contact</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Guardian's Contact<span class="text-red-500 font-bold"> *</span></label>
                         <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="guardian_contact" value="{{ $learner->guardian_contact }}" placeholder="Enter Guardian's Contact">
+                               name="guardian_contact" value="{{ $learner->guardian_contact }}" placeholder="Enter Guardian's Contact" required>
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Relationship with the Guardian (Kaano-ano mo ang iyong Guardian?)<span class="text-red-500 font-bold"> *</span></label>
                         <div class="flex items-center space-x-4">
                             <label class="flex items-center">
-                                <input type="radio" name="relationship_guardian" value="Mother" class="mr-2 w-6 h-6" required {{ $learner->relationship_guardian == 'Mother' ? 'checked' : '' }}> Mother
+                                <input type="radio" name="relationship_guardian" value="Mother" class="mr-2 w-6 h-6"{{ $learner->relationship_guardian == 'Mother' ? 'checked' : '' }}> Mother
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="relationship_guardian" value="Father" class="mr-2 w-6 h-6" required {{ $learner->relationship_guardian == 'Father' ? 'checked' : '' }}> Father
+                                <input type="radio" name="relationship_guardian" value="Father" class="mr-2 w-6 h-6"{{ $learner->relationship_guardian == 'Father' ? 'checked' : '' }}> Father
                             </label>
                             <div class="w-full">
                                 <label class="text-md block mb-1">Others:</label>
@@ -128,16 +126,16 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700">Last School Year Attended</label>
+                        <label class="block font-semibold text-lg text-gray-700">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
                         <label class="text-sm font-normal mb-2"><i> EXAMPLE: 2024-2025</i></label>
                         <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="lastt_sy" value="{{ $learner->last_sy }}" placeholder="Enter Last School Year Attended">
+                               name="lastt_sy" value="{{ $learner->last_sy }}" placeholder="Enter Last School Year Attended" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700">Last School Attended</label>
+                        <label class="block font-semibold text-lg text-gray-700">Last School Attended<span class="text-red-500 font-bold"> *</span></label>
                         <label class="text-sm font-normal mb-2"><i> Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</i></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="last_school" value="{{ $learner->last_school }}" placeholder="Enter Last School Attended">
+                               name="last_school" value="{{ $learner->last_school }}" placeholder="Enter Last School Attended" required>
                     </div>
                 </div>
                 <div class="w-full mt-6 justify-items-center text-center bg-gray-100 p-4 mb-4">
@@ -159,9 +157,9 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Grade 10 section</label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Grade 10 section<span class="text-red-500 font-bold"> *</span></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="grade10_section" value="{{ $learner->grade10_section }}" placeholder="Enter Grade 10 section">
+                               name="grade10_section" value="{{ $learner->grade10_section }}" placeholder="Enter Grade 10 section" required>
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span></label>
@@ -175,7 +173,7 @@
                     </div>
                 </div>
                 <div class="w-full mt-6 bg-gray-100 p-4">
-                    <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
+                    <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS<span class="text-red-500 font-bold"> *</span></label>
                     <div class="bg-white p-4 rounded-md shadow-inner mb-2">
                         <p class="text-md"><strong>HUMSS</strong> - Humanities and Social Sciences</p>
                         <p class="text-md"><strong>Industrial Arts</strong> - Automotive Servicing (NC II)</p>

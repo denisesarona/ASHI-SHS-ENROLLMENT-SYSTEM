@@ -201,7 +201,7 @@ class LearnerController extends Controller
 
         $learner->update($request->except('image'));
 
-        return redirect()->route('trackenrollment', $id)->with('success', 'Learner updated successfully!');
+        return redirect()->route('trackenrollment', $id)->with('success', 'Learner details updated successfully!');
     }
 }
 
