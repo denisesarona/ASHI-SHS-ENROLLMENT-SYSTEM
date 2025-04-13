@@ -128,25 +128,85 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Last School Year Attended</label>
+                        <label class="block font-semibold text-lg text-gray-700">Last School Year Attended</label>
+                        <label class="text-sm font-normal mb-2"><i> EXAMPLE: 2024-2025</i></label>
                         <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="lastt_sy" value="{{ $learner->last_sy }}" placeholder="Enter Last School Year Attended">
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700">Last School Attended</label>
                         <label class="text-sm font-normal mb-2"><i> Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</i></label>
-                        <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="last_school" value="{{ $learner->guardian_contact }}" placeholder="Enter Guardian's Contact">
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="last_school" value="{{ $learner->last_school }}" placeholder="Enter Last School Attended">
                     </div>
+                </div>
+                <div class="w-full mt-6 justify-items-center text-center bg-gray-100 p-4 mb-4">
+                    <label class="block font-semibold mb-4 text-lg">
+                        Choose a Learner's Category <span class="text-red-500 font-bold"> *</span>
+                    </label>
+                    <div class="w-full bg-white p-4 rounded-md mb-4 text-start">
+                        <p class="italic text-sm"><strong>REGULAR</strong> - G10 graduates of SY 2023-2024.</p>
+                        <p class="italic text-sm"><strong>BALIK-ARAL</strong> - G10 graduates of SY 2022-2023 or earlier who haven't enrolled in G11.</p>
+                        <p class="italic text-sm"><strong>REPEATER</strong> - Previously enrolled in G11 but didn't finish.</p>
+                        <p class="italic text-sm"><strong>ALS GRADUATE</strong> - ALS Junior High School graduates.</p>
+                    </div>
+                    <select class="w-full block p-4 border rounded-md mb-4" name="learner_category">
+                        <option value="regular" {{ $learner->learner_category == 'regular' ? 'selected' : '' }}>Regular</option>
+                        <option value="balik-aral" {{ $learner->learner_category == 'balik-aral' ? 'selected' : '' }}>Balik-Aral</option>
+                        <option value="repeater" {{ $learner->learner_category == 'repeater' ? 'selected' : '' }}>Repeater</option>
+                        <option value="als-graduate" {{ $learner->learner_category == 'als-graduate' ? 'selected' : '' }}>ALS Graduate</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Grade 10 section</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               name="grade10_section" value="{{ $learner->grade10_section }}" placeholder="Enter Grade 10 section">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span></label>
+                        <input type="file" class="w-full p-3 border rounded" name="image" accept="image/*">
+                    
+                        @if($learner->image)
+                            <div class="mt-2">
+                                <img src="{{ asset('storage/' . $learner->image) }}" alt="Grade 10 Card" class="w-64 h-auto rounded">
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="w-full mt-6 bg-gray-100 p-4">
+                    <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
+                    <div class="bg-white p-4 rounded-md shadow-inner mb-2">
+                        <p class="text-md"><strong>HUMSS</strong> - Humanities and Social Sciences</p>
+                        <p class="text-md"><strong>Industrial Arts</strong> - Automotive Servicing (NC II)</p>
+                        <p class="text-md"><strong>Industrial Arts</strong> - Electrical Installation and Maintenance (NC II)</p>
+                        <p class="text-md"><strong>Industrial Arts</strong> - Electronic Products Assembly and Servicing (NC II)</p>
+                        <p class="text-md"><strong>Industrial Arts</strong> - Shielded Metal Arc Welding (NC I & NC II)</p>
+                        <p class="text-md"><strong>Home Economics</strong> - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</p>
+                        <p class="text-md"><strong>Home Economics</strong> - Dressmaking (NC II) and Tailoring (NC II)</p>
+                        <p class="text-md"><strong>Home Economics</strong> - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</p>
+                        <p class="text-md"><strong>Information and Communication Technology</strong> - Computer Systems Servicing (NC II)</p>
+                        <p class="text-md"><strong>Information and Communication Technology</strong> - Technical Drafting (NC II) and Illustration (NC II)</p>
+                    </div>
+                    <select class="w-full p-3 border rounded-md mb-4" value="{{$learner->chosen_strand}}" name="chosen_strand">
+                        <option value="hums" {{ $learner->chosen_strand == 'hums' ? 'selected' : '' }}>HUMSS - Humanities and Social Sciences</option>
+                        <option value="ia-as" {{ $learner->chosen_strand == 'ia-as' ? 'selected' : '' }}>Industrial Arts - Automotive Servicing (NC II)</option> 
+                        <option value="ia-eim" {{ $learner->chosen_strand == 'ia-eim' ? 'selected' : '' }}>Industrial Arts - Electrical Installation and Maintenance (NC II)</option> 
+                        <option value="ia-epas" {{ $learner->chosen_strand == 'ia-epas' ? 'selected' : '' }}>Industrial Arts - Electronic Products Assembly and Servicing (NC II)</option>   
+                        <option value="ia-smaw" {{ $learner->chosen_strand == 'ia-smaw' ? 'selected' : '' }}>Industrial Arts - Shielded Metal Arc Welding (NC I & NC II)</option>
+                        <option value="he-brpfbs" {{ $learner->chosen_strand == 'he-brpfbs' ? 'selected' : '' }}>Home Economics - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</option> 
+                        <option value="he-dt" {{ $learner->chosen_strand == 'he-dt' ? 'selected' : '' }}>Home Economics - Dressmaking (NC II) and Tailoring (NC II)</option> 
+                        <option value="he-hbc" {{ $learner->chosen_strand == 'he-hbc' ? 'selected' : '' }}>Home Economics - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</option>   
+                        <option value="ict-css" {{ $learner->chosen_strand == 'ict-css' ? 'selected' : '' }}>Information and Communication Technology - Computer Systems Servicing (NC II)</option>
+                        <option value="ict-td" {{ $learner->chosen_strand == 'ict-td' ? 'selected' : '' }}>Information and Communication Technology - Technical Drafting (NC II) and Illustration (NC II)</option>  
+                    </select>
+                </div>
 
-                    <!-- Hidden ID -->
-                    <input type="hidden" name="id" value="{{ request('id') }}">
-            
-                    <div class="mt-6 text-center">
-                        <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600">
-                            Submit Enrollment
-                        </button>
-                    </div>
+                <input type="hidden" name="id" value="{{ request('id') }}">
+                <div class="mt-6 text-center">
+                    <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600">
+                        Submit Enrollment
+                    </button>
                 </div>
             </form>           
         </div>
