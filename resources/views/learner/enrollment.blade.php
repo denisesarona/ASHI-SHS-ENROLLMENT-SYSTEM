@@ -20,16 +20,16 @@
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Last Name<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" name="last_name" placeholder="Enter Last Name">
+                        <input type="text" class="w-full p-3 border rounded" name="last_name" placeholder="Enter Last Name" required>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">First Name<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" name="first_name" placeholder="Enter First Name">
+                        <input type="text" class="w-full p-3 border rounded" name="first_name" placeholder="Enter First Name" required>
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Middle Name</label>
-                        <input type="text" class="w-full p-3 border rounded" name="middle_name" placeholder="Enter Middle Name">
+                        <input type="text" class="w-full p-3 border rounded" name="middle_name" placeholder="Enter Middle Name" required>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Extension Name</label>
@@ -38,7 +38,7 @@
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">LRN (Learner Reference Number)<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="number" class="w-full p-3 border rounded" name="lrn" placeholder="Enter LRN">
+                        <input type="number" class="w-full p-3 border rounded" name="lrn" placeholder="Enter LRN" required>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Birthdate<span class="text-red-500 font-bold"> *</span></label>
@@ -47,7 +47,7 @@
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Age<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="number" class="w-full p-3 border rounded" name="age" placeholder="Enter Age">
+                        <input type="number" class="w-full p-3 border rounded" name="age" placeholder="Enter Age" required>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Gender<span class="text-red-500 font-bold"> *</span></label>
@@ -83,25 +83,25 @@
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Barangay<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" name="baranggay" placeholder="Enter Barangay">
+                        <input type="text" class="w-full p-3 border rounded" name="baranggay" placeholder="Enter Barangay" required>
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Municipality/ City<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" name="municipality" placeholder="Enter City">
+                        <input type="text" class="w-full p-3 border rounded" name="municipality" placeholder="Enter City" required>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Province<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" name="province" placeholder="Enter Province">
+                        <input type="text" class="w-full p-3 border rounded" name="province" placeholder="Enter Province" required>
                     </div>
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Guardian's Name<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="text" class="w-full p-3 border rounded" name="guardian_name" placeholder="Enter Guardian's Name">
+                        <input type="text" class="w-full p-3 border rounded" name="guardian_name" placeholder="Enter Guardian's Name" required>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Guardian's Contact<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="number" class="w-full p-3 border rounded" name="guardian_contact" placeholder="Enter Contact">
+                        <input type="number" class="w-full p-3 border rounded" name="guardian_contact" placeholder="Enter Contact" required>
                     </div>
                 </div>
 
@@ -120,20 +120,22 @@
                         <div class="w-full">
                             <label class="text-md block mb-1">Others:</label>
                             <input type="text" class="p-2 border rounded w-full" id="relationship_other" placeholder="Enter Relationship with the Guardian">
+                            <!-- Hidden input field for "Others" value -->
                             <input type="hidden" name="relationship_guardian" id="relationship_hidden">
                         </div>
                     </div>
                 </div>
+                
 
                 <!-- Last School Information -->
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
-                    <input type="text" class="w-full p-3 border rounded mt-2" name="last_sy" placeholder="Enter Last School Year">
+                    <input type="text" class="w-full p-3 border rounded mt-2" name="last_sy" placeholder="Enter Last School Year" required>
                 </div>
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Last School Attended<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal mb-2"><i> Buong pangalan ng Paaralan (e.g. Amaya School of Home Industries)</i></label>
-                    <input type="text" class="w-full p-3 border rounded" name="last_school" placeholder="Enter Last School Attended">
+                    <input type="text" class="w-full p-3 border rounded" name="last_school" placeholder="Enter Last School Attended" required>
                 </div>
 
                 <!-- Strand Selection -->
@@ -155,13 +157,13 @@
 
                 <div class="w-full mt-6">
                     <label class="block font-semibold mb-2 text-lg">Grade 10 Section<span class="text-red-500 font-bold"> *</span></label>
-                    <input type="text" class="w-full p-3 border rounded" name="grade10_section" placeholder="Enter Grade 10 section">
+                    <input type="text" class="w-full p-3 border rounded" name="grade10_section" placeholder="Enter Grade 10 section" required>
                 </div>
 
                 <div class="w-full mt-6">
                     <label class="block font-semibold text-lg">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal"><i> FRONT and BACK of the Card</i></label>
-                    <input type="file" class="w-full p-3 border rounded mt-3"  name="image" accept="image/*">
+                    <input type="file" class="w-full p-3 border rounded mt-3"  name="image" accept="image/*" required>
                 </div>
 
                 <div class="w-full mt-6 ">
@@ -202,4 +204,35 @@
             </form>
         </div>
     </section>
+
+    <script>
+        // When the user types in the "Others" input field
+        document.getElementById('relationship_other').addEventListener('input', function() {
+            var relationshipInput = document.getElementById('relationship_other').value;
+            if (relationshipInput) {
+                // If "Others" is entered, set the hidden input to the value entered
+                document.getElementById('relationship_hidden').value = relationshipInput;
+            } else {
+                // If "Others" is cleared, reset the hidden input
+                document.getElementById('relationship_hidden').value = '';
+            }
+        });
+    
+        // When any radio button is selected, update the hidden input field
+        document.querySelectorAll('input[name="relationship_guardian"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                // If "Mother" or "Father" is selected, disable the "Others" input field
+                if (this.value === 'Mother' || this.value === 'Father') {
+                    document.getElementById('relationship_other').disabled = true;
+                    document.getElementById('relationship_other').value = ''; // Clear "Others" input if it's active
+                    document.getElementById('relationship_hidden').value = this.value; // Set the hidden field
+                } else if (this.value === 'Others') {
+                    // If "Others" is selected, enable the "Others" input field
+                    document.getElementById('relationship_other').disabled = false;
+                    document.getElementById('relationship_hidden').value = ''; // Clear the hidden field for custom input
+                }
+            });
+        });
+    </script>
+    
 </x-layout>

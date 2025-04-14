@@ -73,7 +73,7 @@ class LearnerController extends Controller
             'last_school' => 'required|string|max:255',
             'learner_category' => 'required|string|max:255',
             'grade10_section' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
             'chosen_strand' => 'required|string|max:255',
             'status' => 'required|string|max:255',
         ]);
@@ -84,8 +84,9 @@ class LearnerController extends Controller
         }
 
         if ($validator->fails()) {
+            dd($validator->errors()); // Show the exact error messages
             return redirect()->back()->withErrors($validator)->withInput();
-        }
+        }        
 
         try {
             
