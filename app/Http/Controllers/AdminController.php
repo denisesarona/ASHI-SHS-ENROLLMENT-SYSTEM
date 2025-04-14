@@ -311,4 +311,16 @@ class AdminController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
+
+    public function removeLearner($id)
+    {
+        $learner = Learner::find($id); 
+        if (!$learner) {
+            return redirect()->back()->with('error', 'Learner not found!');
+        }
+    
+        $learner->delete();
+    
+        return redirect()->back()->with('success', 'Learner deleted successfully!');
+    }   
 }
