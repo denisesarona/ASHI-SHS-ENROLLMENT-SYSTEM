@@ -128,7 +128,7 @@
                     <div>
                         <label class="block font-semibold text-lg text-gray-700">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
                         <label class="text-sm font-normal mb-2"><i> EXAMPLE: 2024-2025</i></label>
-                        <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="lastt_sy" value="{{ $learner->last_sy }}" placeholder="Enter Last School Year Attended" required>
                     </div>
                     <div>
