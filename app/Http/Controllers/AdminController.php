@@ -293,22 +293,21 @@ class AdminController extends Controller
     {
         $learner = Learner::findOrFail($id);
 
-        // Check if a new image was uploaded
         if ($request->hasFile('image')) {
-            // Delete old image if it exists
             if ($learner->image) {
                 Storage::delete('public/' . $learner->image);
             }
 
-            // Store new image
             $path = $request->file('image')->store('learners', 'public');
             $learner->image = $path;
         }
 
-        try{
-            $learner->update($request->except('image'));
+        try {
+            $learner->fill($request->except('image'));
+            $learner->save();
+
             return back()->with('success', 'Learner details updated successfully!');
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }

@@ -2,7 +2,7 @@
     <div class="min-h-screen flex flex-col items-center bg-white p-8 shadow-lg rounded-xl">
         <div class="pt-8">
             <h1 class="text-4xl font-bold text-center mb-10">LEARNERS DETAILS</h1>
-            <form action="{{ route('updatelearner', $learner->id) }}" method="POST">
+            <form action="{{ route('updatelearner', $learner->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
