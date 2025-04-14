@@ -25,7 +25,8 @@ class LearnerController extends Controller
 
     public function showEditEnrollmentForm()
     {
-        return view('learner.editenrollment');
+        $learner = Learner::first();
+        return view('learner.editenrollment', compact ('learner'));
     }
 
     public function showStudentVerify()

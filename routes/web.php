@@ -11,7 +11,7 @@ Route::get('/studentverify', [LearnerController::class, 'showStudentVerify'])->n
 Route::get('/trackenrollment', [LearnerController::class, 'showTrackEnrollment'])->name('trackenrollment');
 Route::get('/controlnum/{id}', [LearnerController::class, 'showControlNum'])->name('controlnum');
 Route::get('/viewstatus', [LearnerController::class, 'viewStatus'])->name('viewstatus');
-Route::get('/learner/{id}/edit', [LearnerController::class, 'editEnrollment'])->name('editenrollment');
+Route::get('/learner/{id}/edit', [LearnerController::class, 'showEditEnrollmentForm'])->name('editenrollment');
 
 Route::post('/enrollment', [LearnerController::class, 'registerLearner'])->name('registerLearner');
 Route::post('/trackenrollment', [LearnerController::class, 'trackEnrollmentStatus'])->name('trackEnrollment');
