@@ -17,6 +17,7 @@
                 </thead>                
                 <tbody>
                     @foreach ($learners as $learner)
+                        @if ($learner->status == 'pending')
                     <tr class="text-gray-800 text-md">
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->id }}</td>
                         <td class="px-4 py-3">{{ $learner->last_name . ', ' . $learner->first_name }}</td>
@@ -97,6 +98,7 @@
                             </div>      
                         </td>                               
                     </tr>                    
+                        @endif
                     @endforeach                                     
                 </tbody>
             </table>

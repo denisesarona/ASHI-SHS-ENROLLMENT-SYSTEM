@@ -58,7 +58,8 @@ class AdminController extends Controller
 
     public function showEnrolledLearners()
     {
-        return view('admin.enrolledlearners');
+        $learners = Learner::all();
+        return view('admin.enrolledlearners', compact ('learners'));
     }
 
     public function loginAdmin(Request $request)
