@@ -29,6 +29,7 @@ Route::get('/admin/pendinglearners', [AdminController::class, 'showPendingLearne
 Route::get('/admin/enrolledlearners', [AdminController::class, 'showEnrolledLearners'])->name('enrolledlearners');
 Route::get('/admin/admindetails/{id}', [AdminController::class, 'adminDetails'])->name('admindetails');
 Route::get('/admin/learnerdetails/{id}', [AdminController::class, 'learnerDetails'])->name('learnerdetails');
+Route::put('/admin/pendinglearnerdetails{id}', [AdminController::class, 'updateLearnerStatus'])->name('updatelearnerstatus');
 
 
 Route::post('/login', [AdminController::class, 'loginAdmin'])->name('loginAdmin');

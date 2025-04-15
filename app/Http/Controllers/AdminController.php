@@ -323,4 +323,18 @@ class AdminController extends Controller
     
         return redirect()->back()->with('success', 'Learner deleted successfully!');
     }   
+
+    public function updateLearnerStatus(Request $request, $id)
+    {
+        $learner = Learner::findOrFail($id);
+    
+        try {
+            $learner->status = $request->status; // Set status from the form input
+            $learner->save();
+    
+            return back()->with('success', 'Learner status updated successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
+        }
+    }
 }

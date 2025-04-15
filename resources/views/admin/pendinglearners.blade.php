@@ -38,7 +38,7 @@
                                         </button>
                                         <div class="p-4 md:p-5 text-center">
                                             <h3 class="mb-4 text-lg font-medium text-gray-800 dark:text-gray-200">Update Learner Status</h3>
-                                            <form action="" method="POST">
+                                            <form action="{{ route('updatelearnerstatus', ['id' => $learner->id]) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <select name="status" class="w-full p-2 border rounded-lg mb-4">
