@@ -21,7 +21,38 @@
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->id }}</td>
                         <td class="px-4 py-3">{{ $learner->last_name . ', ' . $learner->first_name }}</td>
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->grade_level}}</td>
-                        <td class="px-4 py-3 hidden md:table-cell">{{ $learner->status}}</td>
+                        <td class="px-4 py-3 hidden md:table-cell">
+                            <button data-modal-target="status-modal-{{ $learner->id }}" data-modal-toggle="status-modal-{{ $learner->id }}" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-sm uppercase">
+                                {{ ucfirst($learner->status) }}
+                            </button>
+                        
+                            <!-- Status Modal -->
+                            <div id="status-modal-{{ $learner->id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div class="relative p-4 w-full max-w-md max-h-full">
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <button type="button" class="absolute top-3 end-2.5 text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="status-modal-{{ $learner->id }}">
+                                            <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l12 12M13 1 1 13" />
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                        <div class="p-4 md:p-5 text-center">
+                                            <h3 class="mb-4 text-lg font-medium text-gray-800 dark:text-gray-200">Update Learner Status</h3>
+                                            <form action="" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <select name="status" class="w-full p-2 border rounded-lg mb-4">
+                                                    <option value="pending" {{ $learner->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                                                    <option value="enrolled" {{ $learner->status === 'enrolled' ? 'selected' : '' }}>Enrolled</option>
+                                                </select>
+                                                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Update Status</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        
                         <td class="px-4 py-3">
                             <a href="{{ route('learnerdetails', ['id' => $learner->id]) }}" 
                                class="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-md">
@@ -29,7 +60,7 @@
                             </a>
                         </td>
                         <td class="px-4 py-3 hidden sm:table-cell">
-                            <button data-modal-target="popup-modal-{{ $learner->id }}" data-modal-toggle="popup-modal-{{ $learner->id }}" class=" text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
+                            <button data-modal-target="popup-modal-{{ $learner->id }}" data-modal-toggle="popup-modal-{{ $learner->id }}" class=" text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-80" type="button">
                                 REMOVE
                             </button>
                             <div id="popup-modal-{{ $learner->id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
