@@ -69,6 +69,7 @@
                 </li>
 
                 <li>
+                    <x-admin-nav-link href="{{ route('viewenrollmentform') }}" class="nav-link pl-10" data-section="AdminList" :active="request()->routeIs('viewenrollmentform')">Enrollment Form</x-admin-nav-link>
                     <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
                         <i class='bx bx-list-check'></i>
                         <span class="flex-1 ms-3 text-left whitespace-nowrap">Enrollment Form</span>

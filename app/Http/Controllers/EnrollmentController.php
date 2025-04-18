@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/EnrollmentController.php
-
 namespace App\Http\Controllers;
 
 use App\Models\Enrollment;
@@ -9,9 +7,10 @@ use Illuminate\Http\Request;
 
 class EnrollmentController extends Controller
 {
-    public function create()
+    public function viewEnrollmentForm()
     {
-        return view('admin.enrollment.create'); // your blade file
+        $enrollments = Enrollment::all();
+        return view('admin.enrollmentform', compact('enrollments'));
     }
 
     public function store(Request $request)
@@ -22,7 +21,6 @@ class EnrollmentController extends Controller
             'strands' => 'nullable|string',
         ]);
 
-        // Convert strands into an array if comma-separated
         if ($validated['strands']) {
             $validated['strands'] = array_map('trim', explode(',', $validated['strands']));
         }
@@ -30,11 +28,5 @@ class EnrollmentController extends Controller
         Enrollment::create($validated);
 
         return redirect()->back()->with('success', 'Enrollment settings saved!');
-    }
-
-    public function index()
-    {
-        $enrollments = Enrollment::all();
-        return view('admin.enrollment.index', compact('enrollments'));
     }
 }

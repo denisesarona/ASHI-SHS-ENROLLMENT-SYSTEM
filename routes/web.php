@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LearnerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\EnrollmentController;
 //LearnerController 
 Route::get('/', [LearnerController::class, 'showHomePage'])->name('homepage');
 Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
@@ -49,5 +50,7 @@ Route::post('/verification', [EmailVerificationController::class, 'verifyCode'])
 
 Route::delete('/admin/admin-list/{id}', [AdminController::class, 'destroy'])->name('removeadmin');
 Route::delete('/admin/pendinglearnerdetails/{id}', [AdminController::class, 'removeLearner'])->name('removelearner');
+
+Route::get('/admin/enrollmentform', [EnrollmentController::class, 'viewEnrollmentForm'])->name('viewenrollmentform');
 
 
