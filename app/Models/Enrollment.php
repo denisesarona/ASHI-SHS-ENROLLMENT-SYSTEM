@@ -6,19 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enrollment extends Model
 {
-    // app/Models/Enrollment.php
+    protected $fillable = ['school_year', 'grade_level', 'strands'];
 
-    namespace App\Models;
-
-    use Illuminate\Database\Eloquent\Model;
-
-    class Enrollment extends Model
-    {
-        protected $fillable = ['school_year', 'grade_level', 'strands'];
-
-        protected $casts = [
-            'strands' => 'array',
-        ];
-    }
-
+    protected $casts = [
+        'strands' => 'array',
+    ];
 }
