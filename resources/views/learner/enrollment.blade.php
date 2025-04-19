@@ -5,16 +5,17 @@
             <form action="{{ route('registerLearner') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    @foreach ($enrollments as $enrollment)
                     <div>
                         <label class="block font-semibold mb-2 text-lg">School Year<span class="text-red-500 font-bold"> *</span></label>
                         <select class="w-full p-3 border rounded" name="school_year">
-                            <option value="sy">2025-2026</option>
+                            <option value="{{ $enrollment->school_year }}">{{ $enrollment->school_year }}</option>
                         </select>
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Grade Level<span class="text-red-500 font-bold"> *</span></label>
                         <select class="w-full p-3 border rounded" name="grade_level">
-                            <option value="g11">Grade 11</option>
+                            <option value="{{ $enrollment->grade_level }}">{{ $enrollment->grade_level }}</option>
                         </select>
                     </div>
 
@@ -201,6 +202,7 @@
                         Submit Enrollment
                     </button>
                 </div>
+                @endforeach
             </form>
         </div>
     </section>

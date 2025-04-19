@@ -15,14 +15,14 @@
                         <div>
                             <label class="block font-semibold text-lg text-gray-700 mb-2">School Year</label>
                             <input type="text" name="school_year" placeholder="e.g. 2025-2026"
-                                   value="{{ old('school_year', $enrollment->school_year) }}"
+                                   value="{{ $enrollment->school_year }}"
                                    class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
 
                         <div>
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Grade Level</label>
                             <input type="text" name="grade_level" placeholder="e.g. Grade 11"
-                                   value="{{ old('grade_level', $enrollment->grade_level) }}"
+                                   value="{{ $enrollment->grade_level}}"
                                    class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
 

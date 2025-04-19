@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Learner; 
+use App\Models\Enrollment; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -20,7 +21,8 @@ class LearnerController extends Controller
 
     public function showEnrollmentForm()
     {
-        return view('learner.enrollment');
+        $enrollments = Enrollment::all();
+        return view('learner.enrollment', compact('enrollments'));
     }
 
     public function showEditEnrollmentForm()
