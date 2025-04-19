@@ -14,21 +14,23 @@ class EnrollmentController extends Controller
         $enrollments = Enrollment::all();
         return view('admin.enrollmentform', compact('enrollments'));
     }
-
-    public function store(Request $request)
+    
+    public function updateForm(Request $request)
     {
         $validated = $request->validate([
+            'id' => 'required|exists:enrollments,id',
             'school_year' => 'required|string',
             'grade_level' => 'required|string',
             'strands' => 'nullable|string',
         ]);
-
+    
         if ($validated['strands']) {
-            $validated['strands'] = array_map('trim', explode(',', $validated['strands']));
+            $validated['strands'] = implode(', ', array_map('trim', explode(',', $validated['strands'])));
         }
-
-        Enrollment::create($validated);
-
-        return redirect()->back()->with('success', 'Enrollment settings saved!');
-    }
+    
+        $enrollment = Enrollment::findOrFail($validated['id']);
+        $enrollment->update($validated);
+    
+        return redirect()->back()->with('success', 'Enrollment configuration updated!');
+    }    
 }

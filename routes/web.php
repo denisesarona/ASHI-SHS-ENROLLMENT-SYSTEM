@@ -52,5 +52,6 @@ Route::delete('/admin/admin-list/{id}', [AdminController::class, 'destroy'])->na
 Route::delete('/admin/pendinglearnerdetails/{id}', [AdminController::class, 'removeLearner'])->name('removelearner');
 
 Route::get('/admin/enrollmentform', [EnrollmentController::class, 'viewEnrollmentForm'])->name('viewenrollmentform');
+Route::put('/admin/enrollmentform', [EnrollmentController::class, 'updateForm'])->name('updateform');
 
 

@@ -6,7 +6,7 @@
             </div>
 
             @foreach ($enrollments as $enrollment)
-                <form action="" method="POST"
+                <form action="{{ route('updateform')}}" method="POST"
                       class="bg-gray-100 p-6 rounded-lg shadow-md">
                     @csrf
                     @method('PUT')
@@ -34,6 +34,7 @@
                         </div>
                     </div>
 
+                    <input type="hidden" name="id" value="{{ $enrollment->id }}">
                     <div class="flex justify-end mt-6">
                         <button type="submit"
                                 class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md shadow-md">
