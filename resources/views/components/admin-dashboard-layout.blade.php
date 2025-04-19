@@ -69,18 +69,7 @@
                 </li>
 
                 <li>
-                    <x-admin-nav-link href="{{ route('viewenrollmentform') }}" class="nav-link pl-10" data-section="AdminList" :active="request()->routeIs('viewenrollmentform')">Enrollment Form</x-admin-nav-link>
-                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
-                        <i class='bx bx-list-check'></i>
-                        <span class="flex-1 ms-3 text-left whitespace-nowrap">Enrollment Form</span>
-                        <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"></path>
-                        </svg>
-                    </button>
-                    <ul class="dropdown-menu hidden py-2 space-y-2">
-                        <li><a href="#" class="block p-2 pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">School Year</a></li>
-                        <li><a href="#" class="block p-2 pl-10 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">Strands</a></li>
-                    </ul>
+                    <x-admin-nav-link href="{{ route('viewenrollmentform') }}" class="nav-link" data-section="AdminList" :active="request()->routeIs('viewenrollmentform')"><i class='bx bx-list-check'></i> Enrollment Form</x-admin-nav-link>
                 </li>
                 <li class="absolute bottom-4 left-4 right-4">
                     <form action="{{ route('logoutAdmin') }}" method="POST">
