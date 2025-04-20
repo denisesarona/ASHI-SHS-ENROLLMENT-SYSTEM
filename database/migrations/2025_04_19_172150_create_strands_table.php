@@ -9,13 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('strands', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('track_id');
+            $table->string('name'); // e.g. "STEM", "ABM", "HE"
             $table->timestamps();
+    
+            $table->foreign('track_id')->references('id')->on('tracks')->onDelete('cascade');
         });
-    }
+    }    
 
     /**
      * Reverse the migrations.
