@@ -28,23 +28,40 @@ class EnrollmentController extends Controller
         return view('admin.enrollmentform', compact('enrollments', 'tracks'));
     }
      
-    
     public function updateForm(Request $request)
     {
-        $validated = $request->validate([
-            'id' => 'required|exists:enrollments,id',
+        // Validate input
+        $request->validate([
             'school_year' => 'required|string',
             'grade_level' => 'required|string',
-            'strands' => 'nullable|string',
+            'track_id' => 'nullable|exists:tracks,id',
+            'new_track_name' => 'nullable|string',
+            'strand_ids' => 'array',
         ]);
     
-        if ($validated['strands']) {
-            $validated['strands'] = implode(', ', array_map('trim', explode(',', $validated['strands'])));
+        // Check if a new track is entered
+        if ($request->has('new_track_name') && $request->new_track_name != '') {
+            // Create the new track if it doesn't already exist
+            $track = Track::create(['name' => $request->new_track_name]);
+    
+            // Set the track_id to the newly created track
+            $track_id = $track->id;
+        } else {
+            // Use the selected track if no new track is entered
+            $track_id = $request->track_id;
         }
     
-        $enrollment = Enrollment::findOrFail($validated['id']);
-        $enrollment->update($validated);
+        // Update the enrollment
+        $enrollment = Enrollment::findOrFail($request->id);
+        $enrollment->update([
+            'school_year' => $request->school_year,
+            'grade_level' => $request->grade_level,
+            'track_id' => $track_id,
+        ]);
     
-        return redirect()->back()->with('success', 'Enrollment configuration updated!');
-    }    
+        // Update strands
+        $enrollment->strands()->sync($request->strand_ids);
+    
+        return redirect()->route('viewenrollmentform')->with('success', 'Enrollment form updated successfully');
+    }     
 }

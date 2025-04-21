@@ -11,4 +11,8 @@ class Strand extends Model
         return $this->belongsTo(Track::class);
     }
 
+    public function enrollments()
+    {
+        return $this->belongsToMany(Enrollment::class);
+    }
 }
