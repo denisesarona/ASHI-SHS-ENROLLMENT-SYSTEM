@@ -30,38 +30,30 @@ class EnrollmentController extends Controller
      
     public function updateForm(Request $request)
     {
-        // Validate input
-        $request->validate([
-            'school_year' => 'required|string',
-            'grade_level' => 'required|string',
-            'track_id' => 'nullable|exists:tracks,id',
-            'new_track_name' => 'nullable|string',
-            'strand_ids' => 'array',
-        ]);
-    
-        // Check if a new track is entered
-        if ($request->has('new_track_name') && $request->new_track_name != '') {
-            // Create the new track if it doesn't already exist
-            $track = Track::create(['name' => $request->new_track_name]);
-    
-            // Set the track_id to the newly created track
-            $track_id = $track->id;
-        } else {
-            // Use the selected track if no new track is entered
-            $track_id = $request->track_id;
-        }
-    
-        // Update the enrollment
         $enrollment = Enrollment::findOrFail($request->id);
-        $enrollment->update([
-            'school_year' => $request->school_year,
-            'grade_level' => $request->grade_level,
-            'track_id' => $track_id,
-        ]);
-    
-        // Update strands
-        $enrollment->strands()->sync($request->strand_ids);
-    
-        return redirect()->route('viewenrollmentform')->with('success', 'Enrollment form updated successfully');
-    }     
+        $enrollment->school_year = $request->school_year;
+        $enrollment->grade_level = $request->grade_level;
+
+        // Handle track creation or selection
+        if ($request->filled('new_track_name')) {
+            $track = Track::create(['name' => $request->new_track_name]);
+        } elseif ($request->filled('track_id')) {
+            $track = Track::find($request->track_id);
+        }
+
+        // Handle new strand creation and associate with the track
+        if ($request->filled('new_strand_name') && isset($track)) {
+            $strand = new Strand([
+                'name' => $request->new_strand_name,
+            ]);
+            $strand->track()->associate($track); // if using belongsTo
+            $strand->save();
+
+            $enrollment->strands()->attach($strand->id); // assuming many-to-many
+        }
+
+        $enrollment->save();
+
+        return redirect()->back()->with('success', 'Enrollment form updated successfully.');
+    }
 }
