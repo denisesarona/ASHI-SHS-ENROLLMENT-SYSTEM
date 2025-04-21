@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tracks', function (Blueprint $table) {
+        Schema::create('strands', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // e.g. "Academic Track", "TVL Track"
+            $table->foreignId('track_id')
+                  ->constrained('tracks')
+                  ->onDelete('cascade'); // optional, good for cleanup
+            $table->string('name');
             $table->timestamps();
-        });
+        });        
     }    
 
     /**
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tracks');
+        Schema::dropIfExists('strands');
     }
 };
