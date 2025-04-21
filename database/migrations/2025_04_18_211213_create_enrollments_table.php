@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('school_year');
             $table->string('grade_level');
-            $table->json('strands')->nullable(); // If multiple strands
             $table->timestamps();
         });
     }
