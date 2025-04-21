@@ -199,7 +199,7 @@
                         @foreach ($tracks as $track)
                             @foreach ($track->strands as $strand)
                                 <option value="{{ $strand->id }}"
-                                    {{ old('chosen_strand', $enrollment->chosen_strand ?? '') == $strand->id ? 'selected' : '' }}>
+                                    {{ old('chosen_strand', $learner->chosen_strand ?? '') == $strand->id ? 'selected' : '' }}>
                                     {{ $track->name }} - {{ $strand->name }}
                                 </option>
                             @endforeach

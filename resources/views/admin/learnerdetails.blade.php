@@ -5,15 +5,16 @@
             <form action="{{ route('updatelearner', $learner->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">School Year<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="school_year" value="{{ $learner->school_year }}" disabled>
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Grade Level<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="number" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="grade_level" value="{{ $learner->grade_level }}" disabled>
                     </div>
                     <div>
@@ -172,32 +173,30 @@
                         @endif
                     </div>
                 </div>
-                <div class="w-full mt-6 bg-gray-100 p-4">
-                    <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS<span class="text-red-500 font-bold"> *</span></label>
+                <div class="w-full mt-6">
+                    <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
                     <div class="bg-white p-4 rounded-md shadow-inner mb-2">
-                        <p class="text-md"><strong>HUMSS</strong> - Humanities and Social Sciences</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Automotive Servicing (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Electrical Installation and Maintenance (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Electronic Products Assembly and Servicing (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Shielded Metal Arc Welding (NC I & NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Dressmaking (NC II) and Tailoring (NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</p>
-                        <p class="text-md"><strong>Information and Communication Technology</strong> - Computer Systems Servicing (NC II)</p>
-                        <p class="text-md"><strong>Information and Communication Technology</strong> - Technical Drafting (NC II) and Illustration (NC II)</p>
+                
+                        @foreach ($tracks as $track)
+                            @foreach ($track->strands as $strand)
+                                <p class="text-md">
+                                    <strong>{{ $track->name }}</strong> - {{ $strand->name }}
+                                </p>
+                            @endforeach
+                        @endforeach
+                
                     </div>
-                    <select class="w-full p-3 border rounded-md mb-4" value="{{$learner->chosen_strand}}" name="chosen_strand">
-                        <option value="hums" {{ $learner->chosen_strand == 'hums' ? 'selected' : '' }}>HUMSS - Humanities and Social Sciences</option>
-                        <option value="ia-as" {{ $learner->chosen_strand == 'ia-as' ? 'selected' : '' }}>Industrial Arts - Automotive Servicing (NC II)</option> 
-                        <option value="ia-eim" {{ $learner->chosen_strand == 'ia-eim' ? 'selected' : '' }}>Industrial Arts - Electrical Installation and Maintenance (NC II)</option> 
-                        <option value="ia-epas" {{ $learner->chosen_strand == 'ia-epas' ? 'selected' : '' }}>Industrial Arts - Electronic Products Assembly and Servicing (NC II)</option>   
-                        <option value="ia-smaw" {{ $learner->chosen_strand == 'ia-smaw' ? 'selected' : '' }}>Industrial Arts - Shielded Metal Arc Welding (NC I & NC II)</option>
-                        <option value="he-brpfbs" {{ $learner->chosen_strand == 'he-brpfbs' ? 'selected' : '' }}>Home Economics - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</option> 
-                        <option value="he-dt" {{ $learner->chosen_strand == 'he-dt' ? 'selected' : '' }}>Home Economics - Dressmaking (NC II) and Tailoring (NC II)</option> 
-                        <option value="he-hbc" {{ $learner->chosen_strand == 'he-hbc' ? 'selected' : '' }}>Home Economics - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</option>   
-                        <option value="ict-css" {{ $learner->chosen_strand == 'ict-css' ? 'selected' : '' }}>Information and Communication Technology - Computer Systems Servicing (NC II)</option>
-                        <option value="ict-td" {{ $learner->chosen_strand == 'ict-td' ? 'selected' : '' }}>Information and Communication Technology - Technical Drafting (NC II) and Illustration (NC II)</option>  
-                    </select>
+
+                    <select name="chosen_strand" class="w-full p-3 border rounded-md mb-4">
+                        @foreach ($tracks as $track)
+                            @foreach ($track->strands as $strand)
+                                <option value="{{ $strand->id }}"
+                                    {{ old('chosen_strand', $learner->chosen_strand ?? '') == $strand->id ? 'selected' : '' }}>
+                                    {{ $track->name }} - {{ $strand->name }}
+                                </option>
+                            @endforeach
+                        @endforeach
+                    </select>                             
                 </div>
 
                 <input type="hidden" name="id" value="{{ request('id') }}">

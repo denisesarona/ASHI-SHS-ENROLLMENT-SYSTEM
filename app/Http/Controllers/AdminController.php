@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\VerificationCode;
 use App\Models\Learner;
+use App\Models\Track;
+use App\Models\Strand;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -88,9 +90,9 @@ class AdminController extends Controller
 
     public function learnerDetails($id)
     {
-        $learner = Learner::findOrFail($id); // Fetch admin or show 404 if not found
-    
-        return view('admin.learnerdetails', compact('learner'));
+        $learner = Learner::findOrFail($id); 
+        $tracks = Track::with('strands')->get();
+        return view('admin.learnerdetails', compact('learner', 'tracks'));
     }
 
     public function updatePassword(Request $request, $id)
@@ -245,7 +247,7 @@ class AdminController extends Controller
 
             session([
                 'pending_verification' => [
-                    'email' => $request->email,
+                    'email' => $request->email, 
                 ]
             ]);
             // Check if the email already exists in admins table
