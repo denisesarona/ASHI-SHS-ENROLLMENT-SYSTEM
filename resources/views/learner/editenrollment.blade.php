@@ -181,35 +181,33 @@
                     @endif
                 </div>
                 
-                <div class="w-full mt-6 ">
+                <div class="w-full mt-6">
                     <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
                     <div class="bg-white p-4 rounded-md shadow-inner mb-2">
-                        <p class="text-md"><strong>HUMSS</strong> - Humanities and Social Sciences</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Automotive Servicing (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Electrical Installation and Maintenance (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Electronic Products Assembly and Servicing (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Shielded Metal Arc Welding (NC I & NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Dressmaking (NC II) and Tailoring (NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</p>
-                        <p class="text-md"><strong>Information and Communication Technology</strong> - Computer Systems Servicing (NC II)</p>
-                        <p class="text-md"><strong>Information and Communication Technology</strong> - Technical Drafting (NC II) and Illustration (NC II)</p>
+                
+                        @foreach ($tracks as $track)
+                            @foreach ($track->strands as $strand)
+                                <p class="text-md">
+                                    <strong>{{ $track->name }}</strong> - {{ $strand->name }}
+                                </p>
+                            @endforeach
+                        @endforeach
+                
                     </div>
-                    <select class="w-full p-3 border rounded-md mb-4" value="{{$learner->chosen_strand}}" name="chosen_strand">
-                        <option value="hums" {{ $learner->chosen_strand == 'hums' ? 'selected' : '' }}>HUMSS - Humanities and Social Sciences</option>
-                        <option value="ia-as" {{ $learner->chosen_strand == 'ia-as' ? 'selected' : '' }}>Industrial Arts - Automotive Servicing (NC II)</option> 
-                        <option value="ia-eim" {{ $learner->chosen_strand == 'ia-eim' ? 'selected' : '' }}>Industrial Arts - Electrical Installation and Maintenance (NC II)</option> 
-                        <option value="ia-epas" {{ $learner->chosen_strand == 'ia-epas' ? 'selected' : '' }}>Industrial Arts - Electronic Products Assembly and Servicing (NC II)</option>   
-                        <option value="ia-smaw" {{ $learner->chosen_strand == 'ia-smaw' ? 'selected' : '' }}>Industrial Arts - Shielded Metal Arc Welding (NC I & NC II)</option>
-                        <option value="he-brpfbs" {{ $learner->chosen_strand == 'he-brpfbs' ? 'selected' : '' }}>Home Economics - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</option> 
-                        <option value="he-dt" {{ $learner->chosen_strand == 'he-dt' ? 'selected' : '' }}>Home Economics - Dressmaking (NC II) and Tailoring (NC II)</option> 
-                        <option value="he-hbc" {{ $learner->chosen_strand == 'he-hbc' ? 'selected' : '' }}>Home Economics - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</option>   
-                        <option value="ict-css" {{ $learner->chosen_strand == 'ict-css' ? 'selected' : '' }}>Information and Communication Technology - Computer Systems Servicing (NC II)</option>
-                        <option value="ict-td" {{ $learner->chosen_strand == 'ict-td' ? 'selected' : '' }}>Information and Communication Technology - Technical Drafting (NC II) and Illustration (NC II)</option>  
-                    </select>
+
+                    <select name="chosen_strand" class="w-full p-3 border rounded-md mb-4">
+                        @foreach ($tracks as $track)
+                            @foreach ($track->strands as $strand)
+                                <option value="{{ $strand->id }}"
+                                    {{ old('chosen_strand', $enrollment->chosen_strand ?? '') == $strand->id ? 'selected' : '' }}>
+                                    {{ $track->name }} - {{ $strand->name }}
+                                </option>
+                            @endforeach
+                        @endforeach
+                    </select>                             
                 </div>
 
-                <input type="hidden" value="Pending" name="status">
+                <input type="hidden" value="pending" name="status">
 
                 <div class="mt-6 text-center">
                     <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600">
@@ -220,7 +218,6 @@
         </div>
     </section>
 
-    
     <script>
         // When the user types in the "Others" input field
         document.getElementById('relationship_other').addEventListener('input', function() {

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Learner; 
+use App\Models\Strand;
+use App\Models\Track;
 use App\Models\Enrollment; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,13 +24,15 @@ class LearnerController extends Controller
     public function showEnrollmentForm()
     {
         $enrollments = Enrollment::all();
-        return view('learner.enrollment', compact('enrollments'));
+        $tracks = Track::with('strands')->get(); // eager load strands
+        return view('learner.enrollment', compact('enrollments', 'tracks'));
     }
-
+    
     public function showEditEnrollmentForm()
     {
         $learner = Learner::first();
-        return view('learner.editenrollment', compact ('learner'));
+        $tracks = Track::with('strands')->get();
+        return view('learner.editenrollment', compact ('learner', 'tracks'));
     }
 
     public function showStudentVerify()
@@ -53,13 +57,14 @@ class LearnerController extends Controller
     }
 
     public function registerLearner(Request $request){
+        
         $validator = Validator::make($request->all(), [
             'school_year' => 'required|string|max:255',
             'grade_level' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'middle_name' => 'required|string|max:255',
-            'extension_name' => 'string|max:255',
+            'extension_name' => 'nullable|string',
             'lrn' => 'required|string|max:255',
             'birthdate' => 'required|date',
             'age' => 'required|integer',
@@ -71,13 +76,13 @@ class LearnerController extends Controller
             'province' => 'required|string|max:255',
             'guardian_name' => 'required|string|max:255',
             'guardian_contact' => 'required|string|max:255',
-            'relationship_guardian' => 'string|max:255',
+            'relationship_guardian' => 'nullable|string',
             'last_sy' => 'required|string|max:255',
             'last_school' => 'required|string|max:255',
             'learner_category' => 'required|string|max:255',
             'grade10_section' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
-            'chosen_strand' => 'required|string|max:255',
+            'chosen_strand' => 'required|string',
             'status' => 'required|string|max:255',
         ]);
 

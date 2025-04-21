@@ -167,35 +167,34 @@
                     <input type="file" class="w-full p-3 border rounded mt-3"  name="image" accept="image/*" required>
                 </div>
 
-                <div class="w-full mt-6 ">
+                <div class="w-full mt-6">
                     <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
                     <div class="bg-white p-4 rounded-md shadow-inner mb-2">
-                        <p class="text-md"><strong>HUMSS</strong> - Humanities and Social Sciences</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Automotive Servicing (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Electrical Installation and Maintenance (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Electronic Products Assembly and Servicing (NC II)</p>
-                        <p class="text-md"><strong>Industrial Arts</strong> - Shielded Metal Arc Welding (NC I & NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Dressmaking (NC II) and Tailoring (NC II)</p>
-                        <p class="text-md"><strong>Home Economics</strong> - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</p>
-                        <p class="text-md"><strong>Information and Communication Technology</strong> - Computer Systems Servicing (NC II)</p>
-                        <p class="text-md"><strong>Information and Communication Technology</strong> - Technical Drafting (NC II) and Illustration (NC II)</p>
+                
+                        @foreach ($tracks as $track)
+                            @foreach ($track->strands as $strand)
+                                <p class="text-md">
+                                    <strong>{{ $track->name }}</strong> - {{ $strand->name }}
+                                </p>
+                            @endforeach
+                        @endforeach
+                
                     </div>
-                    <select class="w-full p-3 border rounded-md mb-4" name="chosen_strand">
-                        <option value="hums">HUMSS - Humanities and Social Sciences</option>
-                        <option value="ia-as">Industrial Arts - Automotive Servicing (NC II)</option> 
-                        <option value="ia-eim">Industrial Arts - Electrical Installation and Maintenance (NC II)</option> 
-                        <option value="ia-epas">Industrial Arts - Electronic Products Assembly and Servicing (NC II)</option>   
-                        <option value="ia-smaw">Industrial Arts - Shielded Metal Arc Welding (NC I & NC II)</option>
-                        <option value="he-brpfbs">Home Economics - Bread & Pastry Production (NC II), Food & Beverage Services (NC II) and Cookery (NC II)</option> 
-                        <option value="he-dt">Home Economics - Dressmaking (NC II) and Tailoring (NC II)</option> 
-                        <option value="he-hbc">Home Economics - Hairdressing (NC II), Beauty Care (NC II) and Nail Care (NC II)</option>   
-                        <option value="ict-css">Information and Communication Technology - Computer Systems Servicing (NC II)</option>
-                        <option value="ict-td">Information and Communication Technology - Technical Drafting (NC II) and Illustration (NC II)</option>  
-                    </select>
-                </div>
 
-                <input type="hidden" value="Pending" name="status">
+                    <select name="chosen_strand" class="w-full p-3 border rounded-md mb-4">
+                        @foreach ($tracks as $track)
+                            @foreach ($track->strands as $strand)
+                                <option value="{{ $strand->id }}"
+                                    {{ old('chosen_strand', $enrollment->chosen_strand ?? '') == $strand->id ? 'selected' : '' }}>
+                                    {{ $track->name }} - {{ $strand->name }}
+                                </option>
+                            @endforeach
+                        @endforeach
+                    </select>                             
+                </div>
+                
+
+                <input type="hidden" value="pending" name="status">
 
                 <div class="mt-6 text-center">
                     <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600">
