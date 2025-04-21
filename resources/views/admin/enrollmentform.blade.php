@@ -8,33 +8,23 @@
             <form action="{{ route('updateform') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
                 @csrf
                 @method('PUT')
-            
                 @foreach ($enrollments as $enrollment)
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            
-                        <!-- School Year and Grade Level -->
                         <div>
                             <label class="block font-semibold text-lg text-gray-700 mb-2">School Year</label>
-                            <input type="text" name="school_year" placeholder="e.g. 2025-2026"
-                                   value="{{ old('school_year', $enrollment->school_year) }}"
-                                   class="w-full p-3 border border-gray-300 rounded-md">
+                            <input type="text" name="school_year" value="{{ old('school_year', $enrollment->school_year) }}" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. 2025-2026">
                         </div>
-            
+
                         <div>
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Grade Level</label>
-                            <input type="text" name="grade_level" placeholder="e.g. Grade 11"
-                                   value="{{ old('grade_level', $enrollment->grade_level) }}"
-                                   class="w-full p-3 border border-gray-300 rounded-md">
+                            <input type="text" name="grade_level" value="{{ old('grade_level', $enrollment->grade_level) }}" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Grade 11">
                         </div>
-            
-                        <!-- Enter New Strand -->
+
                         <div class="col-span-1 sm:col-span-2">
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Enter New Strand Name</label>
-                            <input type="text" name="new_strand_name" placeholder="e.g. ICT Strand"
-                                   class="w-full p-3 border border-gray-300 rounded-md">
+                            <input type="text" name="new_strand_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. ICT Strand">
                         </div>
-            
-                        <!-- Select Existing Track or Enter New Track -->
+
                         <div class="col-span-1 sm:col-span-2">
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Assign to Track</label>
                             <select name="track_id" class="w-full p-3 border border-gray-300 rounded-md">
@@ -44,61 +34,95 @@
                                 @endforeach
                             </select>
                         </div>
-            
+
                         <div class="col-span-1 sm:col-span-2">
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Or Enter a New Track Name</label>
-                            <input type="text" name="new_track_name" placeholder="e.g. Academic Track"
-                                   class="w-full p-3 border border-gray-300 rounded-md">
+                            <input type="text" name="new_track_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Academic Track">
                         </div>
                     </div>
-            
-                    <!-- Hidden Enrollment ID -->
+
                     <input type="hidden" name="id" value="{{ $enrollment->id }}">
-            
+
                     <div class="flex justify-end mt-6">
                         <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md shadow-md">
                             Save
                         </button>
                     </div>
                 @endforeach
-            </form>            
-            <!-- Display Tracks and Associated Strands -->
+            </form>
+
             <div class="w-full max-w-6xl mt-12">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">Existing Tracks and Strands</h2>
                 <div class="overflow-x-auto">
-                    <table class="min-w-full no-border rounded-lg shadow">
+                    <table class="min-w-full rounded-lg shadow">
                         <thead class="bg-gray-100 text-left">
                             <tr>
                                 <th class="px-6 py-3 text-md font-semibold text-gray-700 border-b">TRACK NAME</th>
                                 <th class="px-6 py-3 text-md font-semibold text-gray-700 border-b">STRANDS</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bg-white">
                             @forelse ($tracks as $track)
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="px-6 py-4 text-gray-800 font-medium">{{ $track->name }}</td>
-                                    <td class="px-6 py-4 text-gray-700">
-                                        @if ($track->strands->count())
-                                            <ul class="list-disc ml-4">
-                                                @foreach ($track->strands as $strand)
-                                                    <li>{{ $strand->name }}</li>
-                                                @endforeach
-                                            </ul>
-                                        @else
-                                            <span class="italic text-gray-400">No strands</span>
-                                        @endif
+                                <tr class="border-b">
+                                    <td class="px-6 py-4 text-gray-800 font-medium flex justify-between">
+                                        {{ $track->name }}
+                                        <button data-modal-target="delete-track-{{ $track->id }}" data-modal-toggle="delete-track-{{ $track->id }}" class="text-red-400 hover:text-red-600 text-xs ml-2">
+                                            Delete
+                                        </button>
+
+                                        <!-- Track Delete Modal -->
+                                        <div id="delete-track-{{ $track->id }}" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
+                                            <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+                                                <h3 class="text-lg font-semibold mb-4">Are you sure you want to delete this track and its strands?</h3>
+                                                <form action="" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="flex justify-end gap-4">
+                                                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Yes</button>
+                                                        <button type="button" data-modal-hide="delete-track-{{ $track->id }}" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg">Cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="px-6 py-4">
+                                        <ul class="space-y-2">
+                                            @foreach ($track->strands as $strand)
+                                                <li class="flex items-center justify-between">
+                                                    {{ $strand->name }}
+                                                    <button data-modal-target="delete-strand-{{ $strand->id }}" data-modal-toggle="delete-strand-{{ $strand->id }}" class="text-red-500 hover:text-red-700 text-xs ml-2">
+                                                        Delete
+                                                    </button>
+
+                                                    <!-- Strand Delete Modal -->
+                                                    <div id="delete-strand-{{ $strand->id }}" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
+                                                        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+                                                            <h3 class="text-lg font-semibold mb-4">Are you sure you want to delete this strand?</h3>
+                                                            <form action="" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <div class="flex justify-end gap-4">
+                                                                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Yes</button>
+                                                                    <button type="button" data-modal-hide="delete-strand-{{ $strand->id }}" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg">Cancel</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="2" class="px-6 py-4 text-center text-gray-500 italic">No tracks found.</td>
+                                    <td colspan="2" class="px-6 py-4 text-center text-gray-500">No tracks and strands available.</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 </x-admin-dashboard-layout>
