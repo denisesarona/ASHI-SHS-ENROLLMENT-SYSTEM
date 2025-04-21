@@ -56,4 +56,33 @@ class EnrollmentController extends Controller
 
         return redirect()->back()->with('success', 'Enrollment form updated successfully.');
     }
+
+    public function removeTrack($id)
+    {
+        $track = Track::findOrFail($id);
+    
+        // Delete related strands first
+        $track->strands()->delete();
+    
+        // Delete track
+        $track->delete();
+    
+        return redirect()->back()->with('success', 'Track and its strands deleted successfully.');
+    }
+    
+
+    public function removeStrand($id)
+    {
+        $strand = Strand::findOrFail($id);
+        if (!$strand) {
+            return redirect()->back()->with('error', 'Strand not found!');
+        }
+    
+        $strand->delete();
+    
+        return redirect()->back()->with('success', 'Strand deleted successfully!');
+    }    
 }
+
+
+

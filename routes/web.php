@@ -54,4 +54,7 @@ Route::delete('/admin/pendinglearnerdetails/{id}', [AdminController::class, 'rem
 Route::get('/admin/enrollmentform', [EnrollmentController::class, 'viewEnrollmentForm'])->name('viewenrollmentform');
 Route::put('/admin/enrollmentform', [EnrollmentController::class, 'updateForm'])->name('updateform');
 
+Route::delete('/admin/enrollmentform/tracks/{id}', [EnrollmentController::class, 'removeTrack'])->name('removetrack');
+Route::delete('/admin/enrollmentform/strands/{id}', [EnrollmentController::class, 'removeStrand'])->name('removestrand');
+
 

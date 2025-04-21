@@ -71,10 +71,10 @@
                                         </button>
 
                                         <!-- Track Delete Modal -->
-                                        <div id="delete-track-{{ $track->id }}" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
-                                            <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-                                                <h3 class="text-lg font-semibold mb-4">Are you sure you want to delete this track and its strands?</h3>
-                                                <form action="" method="POST">
+                                        <div id="delete-track-{{ $track->id }}" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 justify-center items-center w-full h-full bg-black bg-opacity-50">
+                                            <div class="bg-white p-6 text-center rounded-lg shadow-lg max-w-md w-full">
+                                                <h3 class="text-lg font-semibold mb-8">Are you sure you want to delete this track and its strands?</h3>
+                                                <form action="{{ route('removetrack', ['id' => $track->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <div class="flex justify-end gap-4">
@@ -96,10 +96,10 @@
                                                     </button>
 
                                                     <!-- Strand Delete Modal -->
-                                                    <div id="delete-strand-{{ $strand->id }}" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
-                                                        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-                                                            <h3 class="text-lg font-semibold mb-4">Are you sure you want to delete this strand?</h3>
-                                                            <form action="" method="POST">
+                                                    <div id="delete-strand-{{ $strand->id }}" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 justify-center items-center w-full h-full bg-black bg-opacity-50">
+                                                        <div class="bg-white p-6 text-center rounded-lg shadow-lg max-w-md w-full">
+                                                            <h3 class="text-lg font-semibold mb-8">Are you sure you want to delete this strand?</h3>
+                                                            <form action="{{ route('removestrand', ['id' => $strand->id]) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <div class="flex justify-end gap-4">
