@@ -28,9 +28,9 @@ class LearnerController extends Controller
         return view('learner.enrollment', compact('enrollments', 'tracks'));
     }
     
-    public function showEditEnrollmentForm()
+    public function showEditEnrollmentForm($id)
     {
-        $learner = Learner::first();
+        $learner = Learner::findOrFail($id);
         $tracks = Track::with('strands')->get();
         return view('learner.editenrollment', compact ('learner', 'tracks'));
     }

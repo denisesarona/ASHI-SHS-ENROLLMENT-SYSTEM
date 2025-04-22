@@ -17,7 +17,7 @@
                         </a>
                     </div>
                 </div>        
-            @else
+            @elseif ($learner->status == 'pending')
                 <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl">
                     <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6">Edit Enrollment Form</h1>
                     <form action="{{ route('updateLearnerDetails', $learner->id) }}" method="POST" enctype="multipart/form-data">
@@ -32,7 +32,7 @@
                             </div>
                             <div>
                                 <label class="block font-semibold mb-2 text-lg">Grade Level<span class="text-red-500 font-bold"> *</span></label>
-                                <select class="w-full p-3 border rounded" name="grade_level">/
+                                <select class="w-full p-3 border rounded" name="grade_level">
                                     <option value="{{$learner->grade_level}}">Grade 11</option>
                                 </select>
                             </div>
