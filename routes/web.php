@@ -58,5 +58,6 @@ Route::put('/admin/enrollmentform/update-category', [EnrollmentController::class
 
 Route::delete('/admin/enrollmentform/tracks/{id}', [EnrollmentController::class, 'removeTrack'])->name('removetrack');
 Route::delete('/admin/enrollmentform/strands/{id}', [EnrollmentController::class, 'removeStrand'])->name('removestrand');
+Route::delete('/admin/enrollmentform/categories/{id}', [EnrollmentController::class, 'removeCategory'])->name('removecategory');
 
 

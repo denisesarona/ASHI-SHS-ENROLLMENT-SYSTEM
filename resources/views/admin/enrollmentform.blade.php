@@ -36,11 +36,11 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div class="col-span-1 sm:col-span-2">
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Category Name</label>
-                            <input type="text" name="name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Regular">
+                            <input type="text" name="name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Repeater">
                         </div>
                         <div class="col-span-1 sm:col-span-2">
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Category's Description</label>
-                            <input type="text" name="description" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Regular">
+                            <input type="text" name="description" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Previously enrolled in G11 but didn't finish.">
                         </div>
                     </div>
                     <div class="flex justify-end mt-6">
@@ -73,7 +73,7 @@
                                             <div id="delete-category-{{ $category->id }}" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 justify-center items-center w-full h-full bg-black bg-opacity-50">
                                                 <div class="bg-white p-6 text-center rounded-lg shadow-lg max-w-md w-full">
                                                     <h3 class="text-lg font-semibold mb-8">Are you sure you want to delete this category?</h3>
-                                                    <form action="" method="POST">
+                                                    <form action="{{ route('removecategory', ['id' => $category->id]) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <div class="flex justify-end gap-4">
@@ -86,7 +86,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr><td colspan="2" class="px-6 py-4 text-center text-gray-500">No categories available.</td></tr>
+                                    <tr><td colspan="3" class="px-6 py-4 text-center text-gray-500">No categories available.</td></tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -182,7 +182,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="2" class="px-6 py-4 text-center text-gray-500">No tracks and strands available.</td>
+                                        <td colspan="3" class="px-6 py-4 text-center text-gray-500">No tracks and strands available.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

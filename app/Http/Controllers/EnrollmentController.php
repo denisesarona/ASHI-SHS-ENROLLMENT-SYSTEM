@@ -107,6 +107,20 @@ class EnrollmentController extends Controller
     
         return redirect()->back()->with('success', 'Strand deleted successfully!');
     }    
+
+    
+    public function removeCategory($id)
+    {
+        $category = Category::findOrFail($id);
+    
+        if (!$category) {
+            return redirect()->back()->with('error', 'Category not found!');
+        }
+
+        $category->delete();
+    
+        return redirect()->back()->with('success', 'Category deleted successfully.');
+    }
 }
 
 
