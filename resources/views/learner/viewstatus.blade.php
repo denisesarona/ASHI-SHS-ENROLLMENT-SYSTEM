@@ -4,7 +4,7 @@
             <h1 class="text-2xl sm:text-3xl p-10 font-bold text-center mb-6">Learner Enrollment Status</h1>
             <p class="block mb-4 text-lg"><strong>Last Name (Apelyido):</strong> {{ session('last_name', 'N/A') }}</p>
             <p class="block mb-4 text-lg"><strong>Control Number (ID):</strong> {{ session('id', 'N/A') }}</p>
-            <p class="block mb-4 text-lg"><strong>Status:</strong> {{ session('status', 'N/A') }}</p>
+            <p class="block mb-4 text-lg uppercase"><strong>Status:</strong> {{ session('status', 'N/A') }}</p>
             
             <div class="text-center mt-6">
                 <form action="{{ route('editenrollment', ['id' => session('id')]) }}" method="GET">
