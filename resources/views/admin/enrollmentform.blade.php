@@ -4,51 +4,78 @@
             <div class="text-center">
                 <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">Enrollment Form Configuration</h1>
             </div>
-
+        
             <form action="{{ route('updateform') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
                 @csrf
                 @method('PUT')
+        
                 @foreach ($enrollments as $enrollment)
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block font-semibold text-lg text-gray-700 mb-2">School Year</label>
                             <input type="text" name="school_year" value="{{ old('school_year', $enrollment->school_year) }}" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. 2025-2026">
                         </div>
-
+        
                         <div>
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Grade Level</label>
                             <input type="text" name="grade_level" value="{{ old('grade_level', $enrollment->grade_level) }}" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Grade 11">
                         </div>
-
-                        <div class="col-span-1 sm:col-span-2">
-                            <label class="block font-semibold text-lg text-gray-700 mb-2">Enter New Strand Name</label>
-                            <input type="text" name="new_strand_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. ICT Strand">
-                        </div>
-
-                        <div class="col-span-1 sm:col-span-2">
-                            <label class="block font-semibold text-lg text-gray-700 mb-2">Assign to Track</label>
-                            <select name="track_id" class="w-full p-3 border border-gray-300 rounded-md">
-                                <option value="">Select Existing Track</option>
-                                @foreach ($tracks as $track)
-                                    <option value="{{ $track->id }}">{{ $track->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-span-1 sm:col-span-2">
-                            <label class="block font-semibold text-lg text-gray-700 mb-2">Or Enter a New Track Name</label>
-                            <input type="text" name="new_track_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Academic Track">
-                        </div>
                     </div>
-
+        
                     <input type="hidden" name="id" value="{{ $enrollment->id }}">
-
-                    <div class="flex justify-end mt-6">
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md shadow-md">
-                            Save
-                        </button>
-                    </div>
                 @endforeach
+        
+                <div class="flex justify-end mt-6">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md shadow-md">
+                        Save
+                    </button>
+                </div>
+            </form>
+    
+        <form action="" method="POST" class="bg-gray-100 mt-10 p-6 rounded-lg shadow-md">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="col-span-1 sm:col-span-2">
+                    <label class="block font-semibold text-lg text-gray-700 mb-2">Enter New Learner's Category</label>
+                    <input type="text" name="new_category" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Regular">
+                </div>
+            </div>
+            <div class="flex justify-end mt-6">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md shadow-md">
+                    Save
+                </button>
+            </div>
+        </form>
+
+            <form action="" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="col-span-1 sm:col-span-2">
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Enter New Strand Name</label>
+                        <input type="text" name="new_strand_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. ICT Strand">
+                    </div>
+
+                    <div class="col-span-1 sm:col-span-2">
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Assign to Track</label>
+                        <select name="track_id" class="w-full p-3 border border-gray-300 rounded-md">
+                            <option value="">Select Existing Track</option>
+                            @foreach ($tracks as $track)
+                                <option value="{{ $track->id }}">{{ $track->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-span-1 sm:col-span-2">
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Or Enter a New Track Name</label>
+                        <input type="text" name="new_track_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Academic Track">
+                    </div>
+                </div>
+
+                <input type="hidden" name="id" value="{{ $enrollment->id }}">
+
+                <div class="flex justify-end mt-6">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md shadow-md">
+                        Save
+                    </button>
+                </div>
             </form>
 
             <div class="w-full max-w-6xl mt-12">
