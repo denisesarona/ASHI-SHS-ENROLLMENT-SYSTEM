@@ -26,7 +26,7 @@ class LearnerController extends Controller
     {
         $enrollments = Enrollment::all();
         $categories = Category::all();
-        $tracks = Track::with('strands')->get(); // eager load strands
+        $tracks = Track::with('strands')->get();
         return view('learner.enrollment', compact('enrollments', 'tracks', 'categories'));
     }
     
@@ -50,7 +50,7 @@ class LearnerController extends Controller
 
     public function showControlNum($id)
     {
-        $learner = Learner::findOrFail($id); // Fetch learner data by ID
+        $learner = Learner::findOrFail($id);
         return view('learner.controlnum', compact('learner'));
     }    
 

@@ -96,28 +96,29 @@
 
             {{-- Track and Strand Form + Table in One Card --}}
             <div class="bg-gray-100 p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Track and Strand Configuration</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Strand and Specilization Configuration</h2>
                 <form action="{{ route('updatetrackstrand') }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div class="col-span-1 sm:col-span-2">
                             <label class="block font-semibold text-lg text-gray-700 mb-2">Strand Name</label>
-                            <input type="text" name="new_strand_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. ICT Strand">
+                            <input type="text" name="new_track_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. ICT">
                         </div>
                         <div class="col-span-1 sm:col-span-2">
-                            <label class="block font-semibold text-lg text-gray-700 mb-2">Assign to Track</label>
+                            <label class="block font-semibold text-lg text-gray-700 mb-2">Specialization Name</label>
+                            <input type="text" name="new_strand_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Computer Systems Servicing">
+                        </div>
+                        <div class="col-span-1 sm:col-span-2">
+                            <label class="block font-semibold text-lg text-gray-700 mb-2">Assign to Specialization</label>
                             <select name="track_id" class="w-full p-3 border border-gray-300 rounded-md">
-                                <option value="">Select Existing Track</option>
+                                <option value="">Select Existing Strand</option>
                                 @foreach ($tracks as $track)
                                     <option value="{{ $track->id }}">{{ $track->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-span-1 sm:col-span-2">
-                            <label class="block font-semibold text-lg text-gray-700 mb-2">Or Enter a New Track Name</label>
-                            <input type="text" name="new_track_name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Academic Track">
-                        </div>
+                        
                     </div>
                     <input type="hidden" name="id" value="{{ $enrollment->id }}">
                     <div class="flex justify-end mt-6">
@@ -127,13 +128,13 @@
 
                 {{-- Existing Tracks and Strands Table --}}
                 <div class="bg-white p-5 mt-4 rounded-1xl">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Existing Tracks and Strands</h3>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Existing Strands and Specialization</h3>
                     <div class="overflow-x-auto">
                         <table class="min-w-full rounded-lg shadow">
                             <thead class="bg-blue-100 text-left">
                                 <tr>
-                                    <th class="px-6 py-3 text-md font-semibold text-gray-700 border-b">TRACK NAME</th>
-                                    <th class="px-6 py-3 text-md font-semibold text-gray-700 border-b">STRANDS</th>
+                                    <th class="px-6 py-3 text-md font-semibold text-gray-700 border-b">STRAND NAME</th>
+                                    <th class="px-6 py-3 text-md font-semibold text-gray-700 border-b">SPECIALIZATIONS</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white">

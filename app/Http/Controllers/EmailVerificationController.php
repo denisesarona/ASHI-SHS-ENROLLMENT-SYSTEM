@@ -28,13 +28,11 @@ class EmailVerificationController extends Controller
             'code' => 'required|string',
         ]);
     
-        // Get admin ID from session
         $adminId = session('verify_admin_id');
         if (!$adminId) {
             return back()->with('error', 'Session expired. Please try updating your details again.');
         }
     
-        // Verify the code
         $verification = VerificationCode::where('email', $request->email)
             ->where('code', $request->code)
             ->where('expires_at', '>=', now())
@@ -43,8 +41,7 @@ class EmailVerificationController extends Controller
         if (!$verification) {
             return back()->with('error', 'Invalid verification code.');
         }
-    
-        // Update admin's email
+
         $admin = Admin::find($adminId);
         if (!$admin) {
             return back()->with('error', 'Admin not found.');
@@ -55,7 +52,6 @@ class EmailVerificationController extends Controller
     
         $verification->delete();
     
-        // Clear session key after successful update
         session()->forget('verify_admin_id');
     
         return redirect()->route('admindetails', $adminId)->with('success', 'Email verified and updated successfully!');
@@ -78,19 +74,16 @@ class EmailVerificationController extends Controller
             return back()->with('error', 'Invalid or expired code.');
         }
 
-        // Fetch pending admin data from session
         $pending = session('pending_admin');
 
         if (!$pending || $pending['email'] !== $request->email) {
             return back()->with('error', 'Pending admin data not found. Please register again.');
         }
 
-        // Double check: avoid duplicate email
         if (Admin::where('email', $request->email)->exists()) {
             return back()->with('error', 'This email is already taken.');
         }
 
-        // Create the admin
         Admin::create([
             'name' => $pending['name'],
             'email' => $pending['email'],
@@ -98,7 +91,6 @@ class EmailVerificationController extends Controller
             'role' => '1',
         ]);
 
-        // Clean up
         $verification->delete();
         session()->forget('pending_admin');
 
@@ -113,7 +105,6 @@ class EmailVerificationController extends Controller
 
         $verificationEmail = session('pending_verification');
     
-        // Verify the code
         $verification = VerificationCode::where($verificationEmail)
             ->where('code', $request->code)
             ->where('expires_at', '>=', now())
@@ -123,7 +114,6 @@ class EmailVerificationController extends Controller
             return back()->with('error', 'Invalid verification code.');
         }
 
-        // Clean up
         $verification->delete();
         session()->forget('pending_admin');
 
@@ -136,5 +126,4 @@ class EmailVerificationController extends Controller
         return redirect()->route('changepassword', ['email' => $request->email])
         ->with('success', 'Valid verification code.');
     }
-    
 }    

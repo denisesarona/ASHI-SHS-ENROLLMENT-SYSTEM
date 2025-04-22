@@ -84,7 +84,7 @@ class AdminController extends Controller
 
     public function adminDetails($id)
     {
-        $admin = Admin::findOrFail($id); // Fetch admin or show 404 if not found
+        $admin = Admin::findOrFail($id);
     
         return view('admin.admindetails', compact('admin'));
     }
@@ -100,45 +100,38 @@ class AdminController extends Controller
 
     public function updatePassword(Request $request, $id)
     {
-        // Validate input
         $request->validate([
             'id' => 'required|integer',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'password' => 'confirmed', // Ensure password confirmation is validated
+            'password' => 'confirmed',
         ]);
  
-        // Find the admin
+
         $admin = Admin::findOrFail($id);
 
-        // Check if the entered email already exists for another admin
         $existingAdmin = Admin::where('email', $request->email)->where('id', '!=', $id)->first();
         if ($existingAdmin) {
             return back()->with('error', 'This email is already in use by another admin.');
         }
 
-        // Track if any changes were made
         $changesMade = false;
 
-        // Update name if changed
         if ($request->name !== $admin->name) {
             $admin->update(['name' => $request->name]);
             $changesMade = true;
         }
 
-        // Update password if provided
         if ($request->filled('password')) {
-            $hashedPassword = Hash::make($request->password); // Hash the password
+            $hashedPassword = Hash::make($request->password);
             $admin->password = $hashedPassword;
-            $admin->save(); // Save the changes to the database
+            $admin->save();
             $changesMade = true;
         }
 
-                // Check if email is changed
         if ($request->email !== $admin->email) {
-            $verificationCode = rand(100000, 999999); // Generate a 6-digit code
+            $verificationCode = rand(100000, 999999);
 
-            // Store verification code in verification_codes table
             VerificationCode::updateOrCreate(
                 ['email' => $request->email],
                 [
@@ -147,15 +140,12 @@ class AdminController extends Controller
                 ]
             );
 
-            // Send verification email
             session(['verify_admin_id' => $id]);
             Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
             return redirect()->route('verify.email.form', ['email' => $request->email, 'id' => $id])
                 ->with('success', 'A verification code has been sent to your email.');
         }
 
-
-        // If no changes were made, return without success message
         if (!$changesMade) {
             return back()->with('info', 'No changes were made.');
         }
@@ -175,22 +165,18 @@ class AdminController extends Controller
 
     public function addNewAdmin(Request $request)
     {
-        // Validate initial input (but don't check for unique email here yet)
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'required|confirmed',
         ]);
 
-        // Check if the email already exists in admins table
         if (Admin::where('email', $request->email)->exists()) {
             return redirect()->back()->with('error', 'Email is already registered.');
         }
 
-        // Generate verification code
         $verificationCode = rand(100000, 999999);
 
-        // Store verification record
         VerificationCode::updateOrCreate(
             ['email' => $request->email],
             [
@@ -207,7 +193,6 @@ class AdminController extends Controller
             ]
         ]);
         
-        // Send email
         Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
 
         return redirect()->route('verify.add-admin-email', ['email' => $request->email])
@@ -233,10 +218,8 @@ class AdminController extends Controller
         ]);
 
         if (Admin::where('email', $request->email)->exists()) {
-            // Generate verification code
             $verificationCode = rand(100000, 999999);
 
-            // Store verification record
             VerificationCode::updateOrCreate(
                 ['email' => $request->email],
                 [
@@ -245,7 +228,6 @@ class AdminController extends Controller
                 ]
             );
             
-            // Send email
             Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
 
             session([
@@ -253,7 +235,6 @@ class AdminController extends Controller
                     'email' => $request->email, 
                 ]
             ]);
-            // Check if the email already exists in admins table
             return redirect()->route('verifycode', ['email' => $request->email])
             ->with('success', 'A verification code has been sent to your email.');
         } else {
@@ -263,35 +244,28 @@ class AdminController extends Controller
 
     public function changePassword(Request $request)
     {
-        // Validate the input password
         $request->validate([
             'password' => 'required|confirmed',
         ]);
     
-        // Retrieve the email from session
         $adminEmail = session('pending_password_verification');
     
-        // Find the admin by email
         $admin = Admin::where('email', $adminEmail)->first();
     
-        // If no admin is found, return an error
         if (!$admin) {
             return redirect()->back()->with('error', 'Email not registered in database.');
         }
-    
-        // Update password if provided
+
         if ($request->filled('password')) {
-            $hashedPassword = Hash::make($request->password); // Hash the new password
+            $hashedPassword = Hash::make($request->password); 
             $admin->password = $hashedPassword;
-            $admin->save(); // Save the changes to the database
+            $admin->save(); 
             
-            // Forget the session
             session()->forget('pending_password_verification');
     
             return redirect()->route('login')->with('success', 'Password changed successfully.');
         }
     
-        // Return to the previous page if the password is not provided
         return redirect()->back()->with('error', 'Password field is required.');
     }    
 
@@ -335,7 +309,7 @@ class AdminController extends Controller
         $learner = Learner::findOrFail($id);
     
         try {
-            $learner->status = $request->status; // Set status from the form input
+            $learner->status = $request->status;
             $learner->save();
     
             return back()->with('success', 'Learner status updated successfully!');

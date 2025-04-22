@@ -23,7 +23,7 @@
                         <td class="px-4 py-3">{{ $learner->last_name . ', ' . $learner->first_name }}</td>
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->grade_level}}</td>
                         <td class="px-4 py-3 hidden md:table-cell">
-                            <button data-modal-target="status-modal-{{ $learner->id }}" data-modal-toggle="status-modal-{{ $learner->id }}" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-sm uppercase">
+                            <button data-modal-target="status-modal-{{ $learner->id }}" data-modal-toggle="status-modal-{{ $learner->id }}" class="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-sm uppercase">
                                 {{ ucfirst($learner->status) }}
                             </button>
                         

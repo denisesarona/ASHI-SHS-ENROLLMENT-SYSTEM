@@ -179,7 +179,7 @@
                     </div>
                 </div>
                 <div class="w-full mt-6 p-4 bg-gray-100">
-                    <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
+                    <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS AND SPECIALIZATION</label>
                     <div class="bg-white p-4 border rounded-md mb-2">
                 
                         @foreach ($tracks as $track)

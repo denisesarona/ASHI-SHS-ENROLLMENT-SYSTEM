@@ -127,21 +127,42 @@
     </div>
 
     <script>
-        document.getElementById("sidebarToggle").addEventListener("click", function() {
-            let sidebar = document.getElementById("sidebar");
+        const sidebar = document.getElementById("sidebar");
+        const sidebarToggle = document.getElementById("sidebarToggle");
+    
+        // Toggle sidebar visibility on button click
+        sidebarToggle.addEventListener("click", function() {
             sidebar.classList.toggle("-translate-x-full");
         });
     
+        // Toggle dropdown menus
         document.querySelectorAll(".dropdown-toggle").forEach(function(button) {
             button.addEventListener("click", function() {
-                let dropdownMenu = this.nextElementSibling; // Get the next sibling which is the dropdown menu
-                let dropdownIcon = this.querySelector("svg"); // Get the icon inside the button
-                
+                let dropdownMenu = this.nextElementSibling;
+                let dropdownIcon = this.querySelector("svg");
                 dropdownMenu.classList.toggle("hidden");
                 dropdownIcon.classList.toggle("rotate-180");
             });
         });
+    
+        // Close sidebar when clicking outside of it on small screens
+        document.addEventListener("click", function(event) {
+            const isClickInside = sidebar.contains(event.target) || sidebarToggle.contains(event.target);
+            const isMobile = window.innerWidth < 640;
+    
+            if (!isClickInside && isMobile && !sidebar.classList.contains("-translate-x-full")) {
+                sidebar.classList.add("-translate-x-full");
+            }
+        });
+    
+        // Optional: Close sidebar on resize back to desktop
+        window.addEventListener("resize", function () {
+            if (window.innerWidth >= 640) {
+                sidebar.classList.remove("-translate-x-full");
+            }
+        });
     </script>
+    
     
 </body>
 </html>
