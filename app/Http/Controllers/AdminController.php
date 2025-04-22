@@ -7,6 +7,7 @@ use App\Models\VerificationCode;
 use App\Models\Learner;
 use App\Models\Track;
 use App\Models\Strand;
+use App\Models\Category;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -92,7 +93,9 @@ class AdminController extends Controller
     {
         $learner = Learner::findOrFail($id); 
         $tracks = Track::with('strands')->get();
-        return view('admin.learnerdetails', compact('learner', 'tracks'));
+        $categories = Category::all();
+
+        return view('admin.learnerdetails', compact('learner', 'tracks', 'categories'));
     }
 
     public function updatePassword(Request $request, $id)
