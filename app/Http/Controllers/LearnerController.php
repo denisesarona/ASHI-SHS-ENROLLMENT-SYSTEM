@@ -6,6 +6,7 @@ use App\Models\Learner;
 use App\Models\Strand;
 use App\Models\Track;
 use App\Models\Enrollment; 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -24,15 +25,17 @@ class LearnerController extends Controller
     public function showEnrollmentForm()
     {
         $enrollments = Enrollment::all();
+        $categories = Category::all();
         $tracks = Track::with('strands')->get(); // eager load strands
-        return view('learner.enrollment', compact('enrollments', 'tracks'));
+        return view('learner.enrollment', compact('enrollments', 'tracks', 'categories'));
     }
     
     public function showEditEnrollmentForm($id)
     {
         $learner = Learner::findOrFail($id);
         $tracks = Track::with('strands')->get();
-        return view('learner.editenrollment', compact ('learner', 'tracks'));
+        $categories = Category::all();
+        return view('learner.editenrollment', compact ('learner', 'tracks', 'categories'));
     }
 
     public function showStudentVerify()

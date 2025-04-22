@@ -163,22 +163,25 @@
                             <input type="text" class="w-full p-3 border rounded" value="{{$learner->last_school}}" name="last_school" placeholder="Enter Last School Attended">
                         </div>
 
-                        <div class="w-full mt-6">
-                            <label class="block font-semibold mb-4 text-lg">
-                                Choose a Learner's Category <span class="text-red-500 font-bold"> *</span>
-                            </label>
-                            <div class="bg-white p-4 rounded-md shadow-inner mb-4">
-                                <p class="italic text-sm"><strong>REGULAR</strong> - G10 graduates of SY 2023-2024.</p>
-                                <p class="italic text-sm"><strong>BALIK-ARAL</strong> - G10 graduates of SY 2022-2023 or earlier who haven't enrolled in G11.</p>
-                                <p class="italic text-sm"><strong>REPEATER</strong> - Previously enrolled in G11 but didn't finish.</p>
-                                <p class="italic text-sm"><strong>ALS GRADUATE</strong> - ALS Junior High School graduates.</p>
+                        <div class="w-full mt-6 p-4 bg-gray-100 mb-4">
+                            <label class="block font-semibold mb-2 text-lg p-2 text-center">Choose a Learner's Category <span class="text-red-500 font-bold"> *</span></label>
+                            <div class="bg-white p-4 border shadow rounded-md mb-2">
+                        
+                                @foreach ($categories as $category)
+                                    <p class="text-sm"><i>
+                                        <strong class="uppercase">{{ $category->name }}</strong> - {{ $category->description }}
+                                    </i></p>
+                                @endforeach
                             </div>
-                            <select class="w-full p-3 border rounded-md mb-4" name="learner_category">
-                                <option value="regular" {{ $learner->learner_category == 'regular' ? 'selected' : '' }}>Regular</option>
-                                <option value="balik-aral" {{ $learner->learner_category == 'balik-aral' ? 'selected' : '' }}>Balik-Aral</option>
-                                <option value="repeater" {{ $learner->learner_category == 'repeater' ? 'selected' : '' }}>Repeater</option>
-                                <option value="als-graduate" {{ $learner->learner_category == 'als-graduate' ? 'selected' : '' }}>ALS Graduate</option>
-                            </select>
+        
+                            <select name="learner_category" class="w-full p-3 border rounded-md mb-4">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ old('learner_category', $learner->learner_category ?? '') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>                             
                         </div>
                         
 
@@ -201,7 +204,7 @@
                         
                         <div class="w-full mt-6">
                             <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS</label>
-                            <div class="bg-white p-4 rounded-md shadow-inner mb-2">
+                            <div class="bg-white p-4 rounded-md border shadow mb-2">
                         
                                 @foreach ($tracks as $track)
                                     @foreach ($track->strands as $strand)
