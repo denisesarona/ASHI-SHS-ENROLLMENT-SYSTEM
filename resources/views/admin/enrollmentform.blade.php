@@ -5,7 +5,7 @@
                 <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">Enrollment Form Configuration</h1>
             </div>
         
-            <form action="{{ route('updateform') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <form action="{{ route('updatesy') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
                 @csrf
                 @method('PUT')
         
@@ -31,22 +31,10 @@
                     </button>
                 </div>
             </form>
-    
-        <form action="" method="POST" class="bg-gray-100 mt-10 p-6 rounded-lg shadow-md">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="col-span-1 sm:col-span-2">
-                    <label class="block font-semibold text-lg text-gray-700 mb-2">Enter New Learner's Category</label>
-                    <input type="text" name="new_category" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Regular">
-                </div>
-            </div>
-            <div class="flex justify-end mt-6">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md shadow-md">
-                    Save
-                </button>
-            </div>
-        </form>
 
-            <form action="" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <form action="{{ route('updatetrackstrand') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
+                @csrf
+                @method('PUT')
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="col-span-1 sm:col-span-2">
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Enter New Strand Name</label>

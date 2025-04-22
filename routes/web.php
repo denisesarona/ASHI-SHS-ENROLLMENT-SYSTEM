@@ -52,7 +52,8 @@ Route::delete('/admin/admin-list/{id}', [AdminController::class, 'destroy'])->na
 Route::delete('/admin/pendinglearnerdetails/{id}', [AdminController::class, 'removeLearner'])->name('removelearner');
 
 Route::get('/admin/enrollmentform', [EnrollmentController::class, 'viewEnrollmentForm'])->name('viewenrollmentform');
-Route::put('/admin/enrollmentform', [EnrollmentController::class, 'updateForm'])->name('updateform');
+Route::put('/admin/enrollmentform/updatesy-gradelevel', [EnrollmentController::class, 'updateSY'])->name('updatesy');
+Route::put('/admin/enrollmentform/update-category', [EnrollmentController::class, 'updateTrackStrand'])->name('updatetrackstrand');
 
 Route::delete('/admin/enrollmentform/tracks/{id}', [EnrollmentController::class, 'removeTrack'])->name('removetrack');
 Route::delete('/admin/enrollmentform/strands/{id}', [EnrollmentController::class, 'removeStrand'])->name('removestrand');

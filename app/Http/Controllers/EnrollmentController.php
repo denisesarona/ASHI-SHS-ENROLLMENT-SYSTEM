@@ -28,12 +28,20 @@ class EnrollmentController extends Controller
         return view('admin.enrollmentform', compact('enrollments', 'tracks'));
     }
      
-    public function updateForm(Request $request)
+    public function updateSY(Request $request)
     {
         $enrollment = Enrollment::findOrFail($request->id);
         $enrollment->school_year = $request->school_year;
         $enrollment->grade_level = $request->grade_level;
 
+        $enrollment->save();
+
+        return redirect()->back()->with('success', 'School Year and Grade Level updated successfully.');
+    }
+
+    public function updateTrackStrand(Request $request)
+    {
+        $enrollment = Enrollment::findOrFail($request->id);
         // Handle track creation or selection
         if ($request->filled('new_track_name')) {
             $track = Track::create(['name' => $request->new_track_name]);
@@ -54,7 +62,7 @@ class EnrollmentController extends Controller
 
         $enrollment->save();
 
-        return redirect()->back()->with('success', 'Enrollment form updated successfully.');
+        return redirect()->back()->with('success', 'Tracks and Strands updated successfully.');
     }
 
     public function removeTrack($id)
