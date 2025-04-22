@@ -7,6 +7,7 @@ use App\Models\VerificationCode;
 use App\Models\Learner;
 use App\Models\Track;
 use App\Models\Strand;
+use App\Models\Category;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
