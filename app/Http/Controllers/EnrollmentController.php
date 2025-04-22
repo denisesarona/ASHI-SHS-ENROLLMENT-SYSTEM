@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Enrollment;
 use App\Models\Track;
 use App\Models\Strand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,21 @@ class EnrollmentController extends Controller
 
         return redirect()->back()->with('success', 'School Year and Grade Level updated successfully.');
     }
+
+    public function updateCategory(Request $request)
+    {
+        if ($request->filled(['name', 'description'])) {
+            Category::create([
+                'name' => $request->name,
+                'description' => $request->description
+            ]);
+
+            return redirect()->back()->with('success', 'Category added successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Please fill in all required fields.');
+        }
+    }
+
 
     public function updateTrackStrand(Request $request)
     {

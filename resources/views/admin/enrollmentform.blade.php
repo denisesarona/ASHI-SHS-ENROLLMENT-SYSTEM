@@ -66,11 +66,17 @@
                 </div>
             </form>
 
-            <form action="" method="POST" class="bg-gray-100 mt-10 p-6 rounded-lg shadow-md">
+            <form action="{{ route('updatecategory') }}" method="POST" class="bg-gray-100 mt-10 p-6 rounded-lg shadow-md">
+                @csrf
+                @method('PUT')
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="col-span-1 sm:col-span-2">
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Enter New Learner's Category</label>
-                        <input type="text" name="new_category" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Regular">
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Learner's Category Name</label>
+                        <input type="text" name="name" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Regular">
+                    </div>
+                    <div class="col-span-1 sm:col-span-2">
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Learner's Category's Description</label>
+                        <input type="text" name="description" class="w-full p-3 border border-gray-300 rounded-md" placeholder="e.g. Regular">
                     </div>
                 </div>
                 <div class="flex justify-end mt-6">
