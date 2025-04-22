@@ -25,8 +25,9 @@ class EnrollmentController extends Controller
     
         $enrollments = Enrollment::all();
         $tracks = Track::all();
+        $categories = Category::all();
     
-        return view('admin.enrollmentform', compact('enrollments', 'tracks'));
+        return view('admin.enrollmentform', compact('enrollments', 'tracks', 'categories'));
     }
      
     public function updateSY(Request $request)
