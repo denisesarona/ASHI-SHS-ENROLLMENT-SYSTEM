@@ -63,7 +63,7 @@ class LearnerController extends Controller
             'grade_level' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
+            'middle_name' => 'string|max:255',
             'extension_name' => 'nullable|string',
             'lrn' => 'required|string|max:255',
             'birthdate' => 'required|date',
@@ -97,38 +97,45 @@ class LearnerController extends Controller
         }        
 
         try {
-            
-            $learner = Learner::create([
-                'school_year' => $request->school_year,
-                'grade_level' => $request->grade_level,
-                'last_name' => $request->last_name,
-                'first_name' => $request->first_name,
-                'middle_name' => $request->middle_name,
-                'extension_name' => $request->extension_name,
-                'lrn' => $request->lrn,
-                'birthdate' => $request->birthdate,
-                'age' => $request->age,
-                'gender' => $request->gender,
-                'beneficiary' => $request->beneficiary,
-                'street' => $request->street,
-                'baranggay' => $request->baranggay,
-                'municipality' => $request->municipality,
-                'province' => $request->province,
-                'guardian_name' => $request->guardian_name,
-                'guardian_contact' => $request->guardian_contact,
-                'relationship_guardian' => $request->relationship_guardian,
-                'last_sy' => $request->last_sy,
-                'last_school' => $request->last_school,
-                'learner_category' => $request->learner_category,
-                'grade10_section' => $request->grade10_section,
-                'image' => $imagePath,
-                'chosen_strand' => $request->chosen_strand,
-                'status' => $request->status,
-            ]);
 
-            return redirect()->route('controlnum', ['id' => $learner->id])->with('success', 'Learner enrollment successful.');
-        } catch (\Exception $e) {
-            Log::error('Enrollment Error: ' . $e->getMessage()); // Log the actual error message
+            $learner = Learner::where('lrn', $request->lrn)
+                          ->where('last_name', $request->last_name)
+                          ->first();
+    
+            if (!$learner) {   
+                $learner = Learner::create([
+                    'school_year' => $request->school_year,
+                    'grade_level' => $request->grade_level,
+                    'last_name' => $request->last_name,
+                    'first_name' => $request->first_name,
+                    'middle_name' => $request->middle_name,
+                    'extension_name' => $request->extension_name,
+                    'lrn' => $request->lrn,
+                    'birthdate' => $request->birthdate,
+                    'age' => $request->age,
+                    'gender' => $request->gender,
+                    'beneficiary' => $request->beneficiary,
+                    'street' => $request->street,
+                    'baranggay' => $request->baranggay,
+                    'municipality' => $request->municipality,
+                    'province' => $request->province,
+                    'guardian_name' => $request->guardian_name,
+                    'guardian_contact' => $request->guardian_contact,
+                    'relationship_guardian' => $request->relationship_guardian,
+                    'last_sy' => $request->last_sy,
+                    'last_school' => $request->last_school,
+                    'learner_category' => $request->learner_category,
+                    'grade10_section' => $request->grade10_section,
+                    'image' => $imagePath,
+                    'chosen_strand' => $request->chosen_strand,
+                    'status' => $request->status,
+                ]);
+                return redirect()->route('controlnum', ['id' => $learner->id])->with('success', 'Learner enrollment successful.');
+            } else {
+                return redirect()->route('enrollment')->with('error', 'Learner already submitted an enrollment form.');
+            }
+            
+        } catch (\Exception $e) {   
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }

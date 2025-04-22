@@ -28,9 +28,9 @@
                                name="first_name" value="{{ $learner->first_name }}" placeholder="Enter First Name" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Middle Name<span class="text-red-500 font-bold"> *</span></label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Middle Name</label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="middle_name" value="{{ $learner->middle_name }}" placeholder="Enter Middle Name" required>
+                               name="middle_name" value="{{ $learner->middle_name }}" placeholder="Enter Middle Name">
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Extension Name</label>

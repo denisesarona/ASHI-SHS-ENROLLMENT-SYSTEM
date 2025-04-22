@@ -30,7 +30,7 @@
 
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Middle Name</label>
-                        <input type="text" class="w-full p-3 border rounded" name="middle_name" placeholder="Enter Middle Name" required>
+                        <input type="text" class="w-full p-3 border rounded" name="middle_name" placeholder="Enter Middle Name">
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Extension Name</label>
@@ -43,7 +43,7 @@
                     </div>
                     <div>
                         <label class="block font-semibold mb-2 text-lg">Birthdate<span class="text-red-500 font-bold"> *</span></label>
-                        <input type="date" name="birthdate" class="w-full p-3 border rounded">
+                        <input type="date" name="birthdate" class="w-full p-3 border rounded" required>
                     </div>
 
                     <div>
@@ -69,10 +69,10 @@
                     </label>
                     <div class="flex items-center space-x-4">
                         <label class="flex items-center">
-                            <input type="radio" name="beneficiary" value="Male" class="mr-2 w-6 h-6" required> Yes
+                            <input type="radio" name="beneficiary" value="Yes" class="mr-2 w-6 h-6" required> Yes
                         </label>
                         <label class="flex items-center">
-                            <input type="radio" name="beneficiary" value="Female" class="mr-2 w-6 h-6" required> No
+                            <input type="radio" name="beneficiary" value="No" class="mr-2 w-6 h-6" required> No
                         </label>
                     </div>
                 </div>  
@@ -121,7 +121,7 @@
                         <div class="w-full">
                             <label class="text-md block mb-1">Others:</label>
                             <input type="text" class="p-2 border rounded w-full" id="relationship_other" placeholder="Enter Relationship with the Guardian">
-                            <!-- Hidden input field for "Others" value -->
+                        
                             <input type="hidden" name="relationship_guardian" id="relationship_hidden">
                         </div>
                     </div>
