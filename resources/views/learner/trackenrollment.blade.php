@@ -7,19 +7,19 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col space-y-2">
                         <label class="font-semibold text-lg">Last Name (Apelyido):</label>
-                        <input type="text" class="p-3 border rounded" name="last_name" placeholder="Enter Last Name">
+                        <input type="text" class="p-3 border rounded" name="last_name" placeholder="Enter Last Name" required>
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label class="font-semibold text-lg">First Name (Pangalan):</label>
-                        <input type="text" class="p-3 border rounded" name="first_name" placeholder="Enter First Name">
+                        <input type="text" class="p-3 border rounded" name="first_name" placeholder="Enter First Name" required>
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label class="font-semibold text-lg">LRN (Learner's Reference Number):</label>
-                        <input type="number" class="p-3 border rounded" name="lrn" placeholder="Enter LRN">
+                        <input type="number" class="p-3 border rounded" name="lrn" placeholder="Enter LRN" required>
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label class="font-semibold text-lg">Control Number:</label>
-                        <input type="number" class="p-3 border rounded" name="controlnum" placeholder="Enter Control Number">
+                        <input type="number" class="p-3 border rounded" name="controlnum" placeholder="Enter Control Number" required>
                     </div>
                 </div>
 
