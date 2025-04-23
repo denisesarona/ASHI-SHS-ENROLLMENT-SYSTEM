@@ -168,6 +168,8 @@ class LearnerController extends Controller
     public function trackEnrollmentStatus(Request $request){
         $validator = Validator::make($request->all(), [
             'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'lrn' => 'required|string|max:255',
             'controlnum' => 'required|integer',
         ]);
     
@@ -178,6 +180,8 @@ class LearnerController extends Controller
         // Find the learner with the given last name and control number
         $learner = Learner::where('id', $request->controlnum)
                           ->where('last_name', $request->last_name)
+                          ->where('first_name', $request->first_name)
+                          ->where('lrn', $request->lrn)
                           ->first();
     
         if ($learner) {
