@@ -6,6 +6,12 @@
                 @csrf
                 <label class="block font-semibold mb-2 text-lg">Last Name (Apelyido):</label>
                 <input type="text" class="w-full p-3 border rounded mb-6" name="last_name" placeholder="Enter Last Name">
+
+                <label class="block font-semibold mb-2 text-lg">First Name (Pangalan):</label>
+                <input type="text" class="w-full p-3 border rounded mb-6" name="first_name" placeholder="Enter First Name">
+
+                <label class="block font-semibold mb-2 text-lg">LRN (Learner's Reference Number)</label>
+                <input type="number" class="w-full p-3 border rounded mb-6" name="lrn" placeholder="Enter LRN">
                 
                 <label class="block font-semibold mb-2 text-lg">Control Number</label>
                 <input type="number" class="w-full p-3 border rounded mb-6" name="controlnum" placeholder="Enter Control Number">
