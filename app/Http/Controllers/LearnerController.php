@@ -188,6 +188,7 @@ class LearnerController extends Controller
             // Store in session to persist across multiple requests
             session()->put([
                 'last_name' => $learner->last_name,
+                'first_name' => $learner->first_name,
                 'controlnum' => $learner->id,
                 'status' => $learner->status,
                 'id' => $learner->id,

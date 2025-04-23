@@ -3,8 +3,8 @@
         <div class="bg-gray-200 p-12 sm:p-10 rounded-lg shadow-md w-full -mt-20 max-w-lg">
             <h1 class="text-2xl sm:text-3xl p-2 font-bold text-center mb-6">Learner Enrollment Status</h1>
             
-            <p class="block mb-4 text-lg"><strong>Last Name (Apelyido):</strong> {{ session('last_name', 'N/A') }}</p>
-            <p class="block mb-4 text-lg"><strong>Control Number (ID):</strong> {{ session('id', 'N/A') }}</p>
+            <p class="block mb-4 text-lg"><strong>Full Name:</strong> {{ session('last_name', 'N/A') }},  {{ session('first_name', 'N/A') }}</p>
+            <p class="block mb-4 text-lg"><strong>Control Number:</strong> {{ session('id', 'N/A') }}</p>
             <p class="block mb-4 text-lg uppercase"><strong>Status:</strong> {{ session('status', 'N/A') }}</p>
             
             <div class="text-center mt-6">
