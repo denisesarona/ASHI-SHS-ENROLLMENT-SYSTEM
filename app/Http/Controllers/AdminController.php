@@ -9,6 +9,7 @@ use App\Models\Track;
 use App\Models\Strand;
 use App\Models\Category;
 use App\Models\Enrollment;
+use App\Models\Section;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -53,7 +54,12 @@ class AdminController extends Controller
     {
         return view('admin.addadmin');
     }
-
+    
+    public function showSection()
+    {
+        $sections = Section::all();
+        return view('admin.sections', compact ('sections'));
+    }
     public function showPendingLearners()
     {
         $learners = Learner::all();

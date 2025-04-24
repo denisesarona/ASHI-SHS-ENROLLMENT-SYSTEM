@@ -48,6 +48,7 @@ Route::post('/admin/admin-details/verify-email', [EmailVerificationController::c
 Route::get('/admin/admin-details/verify-add-admin-email', [EmailVerificationController::class, 'verifyAddAdmin'])->name('verify.add-email');
 Route::post('/verification', [EmailVerificationController::class, 'verifyCode'])->name('verifycode');
 Route::get('/admin/summary', [AdminController::class, 'showSummary'])->name('showsummary');
+Route::get('/admin/sections', [AdminController::class, 'showSection'])->name('showsections');
 
 Route::delete('/admin/admin-list/{id}', [AdminController::class, 'destroy'])->name('removeadmin');
 Route::delete('/admin/pendinglearnerdetails/{id}', [AdminController::class, 'removeLearner'])->name('removelearner');
