@@ -20,6 +20,7 @@
             <thead class="bg-gray-100 text-sm text-gray-600">
                 <tr>
                     <th class="px-4 py-2">Section Name</th>
+                    <th>Number of Assigned students SY </th>
                     <th class="px-4 py-2">Action</th>
                 </tr>
             </thead>
@@ -27,8 +28,9 @@
                 @foreach($sections as $section)
                     <tr class="border-b">
                         <td class="px-4 py-2">{{ $section->name }}</td>
+                        <td class="px-4 py-2">30</td>
                         <td class="px-4 py-2">
-                            <form action="{{ route('admin.deleteSection', $section->id) }}" method="POST" class="inline-block">
+                            <form action="" method="POST" class="inline-block">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500">Delete</button>

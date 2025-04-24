@@ -3,6 +3,16 @@
         <div class="pt-8">
             <h1 class="text-4xl font-bold text-center">ENROLLED LEARNERS SY</h1>
         </div>
+
+        <div class="flex justify-end w-full mt-4">
+            <form action="" method="POST">
+                @csrf
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                    Auto-Assign Learners to Sections
+                </button>
+            </form>
+        </div>
+        
         <div class="w-full overflow-x-auto mt-8">
             <table class="w-full text-center">
                 <thead>
