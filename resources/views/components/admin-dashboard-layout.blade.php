@@ -65,6 +65,7 @@
                     <ul class="dropdown-menu hidden py-2 space-y-2">
                         <li><x-admin-nav-link href="{{ route('pendinglearners') }}" class="nav-link pl-10" data-section="PendingLearners" :active="request()->routeIs('pendinglearners')">Pending Learners</x-admin-nav-link>
                         <li><x-admin-nav-link href="{{ route('enrolledlearners') }}" class="nav-link pl-10" data-section="EnrolledLearners" :active="request()->routeIs('enrolledlearners')">Enrolled Learners</x-admin-nav-link>
+                        <li><x-admin-nav-link href="{{ route('showsummary') }}" class="nav-link pl-10" data-section="LearnersRecords" :active="request()->routeIs('showsummary')">Learners Records</x-admin-nav-link>
                     </ul>
                 </li>
 

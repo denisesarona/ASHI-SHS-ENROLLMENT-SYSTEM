@@ -59,6 +59,11 @@ class AdminController extends Controller
         return view('admin.pendinglearners', compact ('learners'));
     }
 
+    public function showSummary()
+    {
+        return view('admin.summary');
+    }
+
     public function showEnrolledLearners()
     {
         $learners = Learner::all();
