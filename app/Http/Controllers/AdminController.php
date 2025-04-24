@@ -8,6 +8,7 @@ use App\Models\Learner;
 use App\Models\Track;
 use App\Models\Strand;
 use App\Models\Category;
+use App\Models\Enrollment;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -61,7 +62,8 @@ class AdminController extends Controller
 
     public function showSummary()
     {
-        return view('admin.summary');
+        $enrollments = Enrollment::all();
+        return view('admin.summary', compact('enrollments'));
     }
 
     public function showEnrolledLearners()

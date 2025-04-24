@@ -7,24 +7,19 @@
         <!-- Filter Section -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <!-- School Year -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
-                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                    <option>2024-2025</option>
-                    <option>2023-2024</option>
-                    <option>2022-2023</option>
-                </select>
-            </div>
-    
-            <!-- Strand -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Strand</label>
-                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                    <option>BSIT</option>
-                    <option>BSA</option>
-                    <option>BEED</option>
-                </select>
-            </div>
+            @php
+            $schoolYears = $enrollments->pluck('school_year')->unique();
+            @endphp
+        
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
+            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                @foreach ($schoolYears as $year)
+                    <option value="{{ $year }}">{{ $year }}</option>
+                @endforeach
+            </select>
+        </div>
+        
     
             <!-- Specialization -->
             <div>
