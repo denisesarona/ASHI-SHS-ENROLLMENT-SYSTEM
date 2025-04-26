@@ -334,26 +334,33 @@ class AdminController extends Controller
     public function autoAssignSections()
     {
         $learners = Learner::where('status', 'enrolled')->whereNull('section_id')->get()->groupBy('strand');
-
+    
         foreach ($learners as $strand => $group) {
-            // Get sections matching this strand
-            $sections = Section::where('strand', $strand)->get();
-
-            if ($sections->isEmpty()) {
-                continue; // Skip if no section for this strand
+    
+            $strandModel = \App\Models\Strand::where('name', $strand)->first();
+    
+            if (!$strandModel) {
+                continue;
             }
-
+    
+            $sections = $strandModel->sections;
+    
+            if ($sections->isEmpty()) {
+                continue;
+            }
+    
             $sectionCount = $sections->count();
             $i = 0;
-
+    
             foreach ($group as $learner) {
-                $section = $sections[$i % $sectionCount]; // Distribute evenly
+                $section = $sections[$i % $sectionCount];
                 $learner->section_id = $section->id;
                 $learner->save();
                 $i++;
             }
         }
-
+    
         return redirect()->back()->with('success', 'Learners auto-assigned to sections successfully!');
     }
+    
 }

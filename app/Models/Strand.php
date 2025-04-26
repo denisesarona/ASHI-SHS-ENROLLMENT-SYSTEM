@@ -20,4 +20,9 @@ class Strand extends Model
     {
         return $this->belongsToMany(Enrollment::class);
     }
+
+    public function sections()
+    {
+        return $this->belongsToMany(Section::class, 'section_strand');
+    }
 }
