@@ -3,8 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Section extends Model
 {
-    //
+    use HasFactory;
+
+    protected $fillable = ['name', 'strand'];
+
+    public function learners()
+    {
+        return $this->hasMany(Learner::class);
+    }
 }
