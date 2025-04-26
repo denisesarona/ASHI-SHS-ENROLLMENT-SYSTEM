@@ -36,4 +36,9 @@ class Learner extends Model
         'chosen_strand',
         'status',
     ];
+    
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
 }

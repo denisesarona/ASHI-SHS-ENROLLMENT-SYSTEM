@@ -5,7 +5,7 @@
         </div>
 
         <div class="flex justify-end w-full mt-4">
-            <form action="" method="POST">
+            <form action="{{ route('auto.assign.sections') }}" method="POST">
                 @csrf
                 <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
                     Auto-Assign Learners to Sections

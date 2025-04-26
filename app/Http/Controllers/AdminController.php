@@ -330,4 +330,31 @@ class AdminController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
+
+    public function autoAssignSections()
+    {
+        // Get all enrolled learners without a section
+        $learners = Learner::where('status', 'enrolled')->whereNull('section_id')->get()->groupBy('strand');
+
+        foreach ($learners as $strand => $group) {
+            // Get sections matching this strand
+            $sections = Section::where('strand', $strand)->get();
+
+            if ($sections->isEmpty()) {
+                continue; // Skip if no section for this strand
+            }
+
+            $sectionCount = $sections->count();
+            $i = 0;
+
+            foreach ($group as $learner) {
+                $section = $sections[$i % $sectionCount]; // Distribute evenly
+                $learner->section_id = $section->id;
+                $learner->save();
+                $i++;
+            }
+        }
+
+        return redirect()->back()->with('success', 'Learners auto-assigned to sections successfully!');
+    }
 }
