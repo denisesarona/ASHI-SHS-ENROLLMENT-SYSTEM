@@ -21,6 +21,7 @@
                         <th class="px-8 py-2">FULL NAME</th>
                         <th class="px-8 py-2 hidden md:table-cell">GRADE LEVEL</th>
                         <th class="px-8 py-2 hidden md:table-cell">STATUS</th>
+                        <th class="px-8 py-2 hidden md:table-cell">SECTION</th>
                         <th class="px-8 py-2">VIEW DETAILS</th>
                         <th class="px-8 py-2 hidden md:table-cell">REMOVE</th>
                     </tr>
@@ -63,6 +64,9 @@
                                 </div>
                             </div>
                         </td>
+                        <td class="px-4 py-3 hidden md:table-cell">
+                            {{ $learner->section->name ?? 'Unassigned' }}
+                        </td>                        
                         
                         <td class="px-4 py-3">
                             <a href="{{ route('learnerdetails', ['id' => $learner->id]) }}" 

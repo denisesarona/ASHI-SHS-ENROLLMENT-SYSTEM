@@ -333,7 +333,6 @@ class AdminController extends Controller
 
     public function autoAssignSections()
     {
-        // Get all enrolled learners without a section
         $learners = Learner::where('status', 'enrolled')->whereNull('section_id')->get()->groupBy('strand');
 
         foreach ($learners as $strand => $group) {
