@@ -58,7 +58,8 @@ class AdminController extends Controller
     public function showSection()
     {
         $sections = Section::all();
-        return view('admin.sections', compact ('sections'));
+        $strands = Strand::all();
+        return view('admin.sections', compact ('sections', 'strands'));
     }
     public function showPendingLearners()
     {
@@ -331,50 +332,74 @@ class AdminController extends Controller
 
     public function autoAssignSections()
     {
-        // Group learners by their strand
+        // Get all learners who are enrolled and have no section
         $learners = Learner::where('status', 'enrolled')
             ->whereNull('section_id')
-            ->get()
-            ->groupBy('strand');
+            ->get();
     
-        foreach ($learners as $strand => $group) { // <-- Added curly brace here
-            $strandModel = \App\Models\Strand::where('strand_name', $strand)->first();
+        $sections = Section::all(); // Assuming you have a Section model
     
-            if (!$strandModel) {
-                continue;
+        if ($sections->isEmpty()) {
+            return redirect()->back()->with('error', 'No sections available.');
+        }
+    
+        $sectionCapacities = []; // track number of students assigned per section
+        foreach ($sections as $section) {
+            $sectionCapacities[$section->id] = 0; // initialize
+        }
+    
+        $maxStudentsPerSection = 50; // maximum allowed students per section
+        $sectionIndex = 0;
+        $sectionsArray = $sections->values(); // to access by index
+    
+        foreach ($learners as $learner) {
+            $assigned = false;
+    
+            // Try to assign to current section, if full move to next
+            while (!$assigned) {
+                $currentSection = $sectionsArray[$sectionIndex];
+    
+                if ($sectionCapacities[$currentSection->id] < $maxStudentsPerSection) {
+                    $learner->section_id = $currentSection->id;
+                    $learner->save();
+    
+                    $sectionCapacities[$currentSection->id]++;
+                    $assigned = true;
+                } else {
+                    $sectionIndex++;
+    
+                    // If we reached the end, start again
+                    if ($sectionIndex >= $sectionsArray->count()) {
+                        $sectionIndex = 0;
+                    }
+                }
             }
-    
-            $sections = $strandModel->sections;
-    
-            if ($sections->isEmpty()) {
-                continue;
-            }
-    
-            $sectionCount = $sections->count();
-            $i = 0;
-    
-            foreach ($group as $learner) {
-                $section = $sections[$i % $sectionCount];
-                $learner->section_id = $section->id;
-                $learner->save();
-                $i++;
-            }
-        } // <-- Closed foreach
+        }
     
         return redirect()->back()->with('success', 'Learners auto-assigned to sections successfully!');
     }
     
-    public function createSection(Request $request){
-        if ($request->filled(['name'])) {
-            Section::create([
-                'name' => $request->name,
-            ]);
 
-            return redirect()->back()->with('success', 'Section added successfully.');
-        } else {
-            return redirect()->back()->with('error', 'Please fill in all required fields.');
-        }
+    public function assignStrandtoSection(){
+
     }
+    
+    public function createSection(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'strands' => 'required|array',
+        ]);
+    
+        $section = Section::create([
+            'name' => $request->name,
+        ]);
+    
+        $section->strands()->attach($request->strands);
+    
+        return redirect()->back()->with('success', 'Section created and strands assigned successfully!');
+    }
+    
 
     public function removeSection($id)
     {

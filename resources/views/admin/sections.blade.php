@@ -10,6 +10,25 @@
                 <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 mt-2" />
             </div>
 
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Assign Strands</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @foreach($strands as $strand)
+                        <div class="flex items-center">
+                            <input 
+                                id="strand-{{ $strand->id }}" 
+                                type="checkbox" 
+                                name="strands[]" 
+                                value="{{ $strand->id }}"
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                            >
+                            <label for="strand-{{ $strand->id }}" class="ml-2 text-sm text-gray-700">{{ $strand->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            
+
             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Add Section</button>
         </form>
 
@@ -24,6 +43,7 @@
                     <th class="px-4 py-2">Action</th>
                 </tr>
             </thead>
+            
             <tbody class="text-sm text-gray-700">
                 @foreach($sections as $section)
                     <tr class="border-b">
