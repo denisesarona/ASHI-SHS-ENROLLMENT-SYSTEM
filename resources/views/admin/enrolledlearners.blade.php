@@ -17,7 +17,7 @@
             <table class="w-full text-center">
                 <thead>
                     <tr class="text-gray-600 text-lg font-semibold whitespace-nowrap">
-                        <th class="px-8 py-2 hidden md:table-cell">ID</th>
+                        <th class="px-8 py-2 hidden md:table-cell">LRN</th>
                         <th class="px-8 py-2">FULL NAME</th>
                         <th class="px-8 py-2 hidden md:table-cell">GRADE LEVEL</th>
                         <th class="px-8 py-2 hidden md:table-cell">STATUS</th>
@@ -30,7 +30,7 @@
                     @foreach ($learners as $learner)
                         @if ($learner->status == 'enrolled')
                     <tr class="text-gray-800 text-md">
-                        <td class="px-4 py-3 hidden md:table-cell">{{ $learner->id }}</td>
+                        <td class="px-4 py-3 hidden md:table-cell">{{ $learner->lrn }}</td>
                         <td class="px-4 py-3">{{ $learner->last_name . ', ' . $learner->first_name }}</td>
                         <td class="px-4 py-3 hidden md:table-cell">{{ $learner->grade_level}}</td>
                         <td class="px-4 py-3 hidden md:table-cell">
