@@ -398,8 +398,7 @@ class AdminController extends Controller
         $section->strands()->attach($request->strands);
     
         return redirect()->back()->with('success', 'Section created and strands assigned successfully!');
-    }
-    
+    }    
 
     public function removeSection($id)
     {
@@ -412,6 +411,14 @@ class AdminController extends Controller
         $section->delete();
     
         return redirect()->back()->with('success', 'Section deleted successfully.');
+    }
+
+    public function updateStrands(Request $request, $id)
+    {
+        $section = Section::findOrFail($id);
+        $section->strands()->sync($request->strands ?? []);
+
+        return redirect()->back()->with('success', 'Strands updated successfully!');
     }
 }
     
