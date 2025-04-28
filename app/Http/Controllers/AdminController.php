@@ -59,7 +59,8 @@ class AdminController extends Controller
     {
         $sections = Section::all();
         $strands = Strand::all();
-        return view('admin.sections', compact ('sections', 'strands'));
+        $enrollments = Enrollment::all();
+        return view('admin.sections', compact ('sections', 'strands', 'enrollments'));
     }
     public function showPendingLearners()
     {
