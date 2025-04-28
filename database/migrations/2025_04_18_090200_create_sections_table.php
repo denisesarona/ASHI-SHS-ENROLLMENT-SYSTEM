@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('name');  // Section name
-            $table->int('learners_count');  // Section name
             $table->timestamps();
         });
     }
