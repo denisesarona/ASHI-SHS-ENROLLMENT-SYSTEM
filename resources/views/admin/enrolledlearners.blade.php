@@ -1,5 +1,5 @@
 <x-admin-dashboard-layout>
-    <div class="min-h-screen flex flex-col items-center bg-white p-4 shadow-lg rounded-xl">
+    <div class="min-h-screen flex flex-col items-center bg-white p-3 shadow-lg rounded-xl">
         <div class="pt-8">
             <h1 class="text-4xl font-bold text-center">ENROLLED LEARNERS SY</h1>
         </div>
@@ -22,6 +22,7 @@
                         <th class="px-8 py-2 hidden md:table-cell">GRADE LEVEL</th>
                         <th class="px-8 py-2 hidden md:table-cell">STATUS</th>
                         <th class="px-8 py-2 hidden md:table-cell">SECTION</th>
+                        <th class="px-8 py-2 hidden md:table-cell">EDIT SECTION</th>
                         <th class="px-8 py-2">VIEW DETAILS</th>
                         <th class="px-8 py-2 hidden md:table-cell">REMOVE</th>
                     </tr>
@@ -65,7 +66,71 @@
                             </div>
                         </td>
                         <td class="px-4 py-3 hidden md:table-cell">
-                            {{ $learner->section->name ?? 'Unassigned' }}
+                            @if($learner->section)
+                                <span class="uppercase">{{ $learner->section->name }}</span>
+                            @else
+                                <span class="text-xs">No section assigned yet.</span>
+                                        @endif
+                        </td>
+                        <td class="px-4 py-3 hidden md:table-cell">
+                            <button data-modal-target="assign-section-modal-{{ $learner->id }}" data-modal-toggle="assign-section-modal-{{ $learner->id }}"
+                                class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5">
+                                Assign Section
+                            </button>
+
+                            <div id="assign-section-modal-{{ $learner->id }}" tabindex="-1" class="hidden overflow-y-auto fixed top-0 left-0 right-0 z-50 justify-center items-center w-full h-full">
+                                <div class="relative p-4 w-full max-w-md max-h-full">
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-white">
+                                        <button type="button" class="absolute top-3 right-2.5 text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto"
+                                            data-modal-hide="assign-section-modal-{{ $learner->id }}">
+                                            <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                            </svg>
+                                        </button>
+
+                                        <div class="p-6">
+                                            <h3 class="text-lg font-bold mb-4 text-gray-800">Assign Section for {{ $learner->name }}</h3>
+
+                                            <!-- Show Current Section if Exists -->
+                                            @if($learner->section)
+                                                <div class="mb-4 p-3 bg-green-100 text-green-800 rounded-lg">
+                                                    Current Section: <strong>{{ $learner->section->name }}</strong>
+                                                </div>
+                                            @else
+                                                <div class="mb-4 p-3 bg-yellow-100 text-yellow-800 rounded-lg">
+                                                    No section assigned yet.
+                                                </div>
+                                            @endif
+
+                                            <!-- Form to Update Section -->
+                                            <form action="" method="POST">
+                                                @csrf
+                                                @method('PUT')
+
+                                                <div class="mb-4">
+                                                    <label for="section_id" class="block text-sm font-medium text-gray-700 mb-2">Select Section</label>
+                                                    <select name="section_id" id="section_id" class="block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                                        @foreach($sections as $section)
+                                                            @if($section->strands->contains('id', $learner->chosen_strand))
+                                                                <option value="{{ $section->id }}"
+                                                                    @if($student->section && $learner->section->id == $section->id) selected @endif>
+                                                                    {{ $section->name }}
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="flex justify-end">
+                                                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                                                        Save Changes
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>                        
                         
                         <td class="px-4 py-3">

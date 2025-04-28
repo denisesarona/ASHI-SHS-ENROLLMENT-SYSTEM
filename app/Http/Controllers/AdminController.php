@@ -79,7 +79,9 @@ class AdminController extends Controller
     public function showEnrolledLearners()
     {
         $learners = Learner::all();
-        return view('admin.enrolledlearners', compact ('learners'));
+        $sections = Section::all();
+        $strands = Strand::all();
+        return view('admin.enrolledlearners', compact ('learners','sections', 'strands'));
     }
 
     public function loginAdmin(Request $request)
@@ -334,62 +336,60 @@ class AdminController extends Controller
     }
     
     public function autoAssignSections()
-{
-    $learners = Learner::where('status', 'enrolled')
-        ->whereNull('section_id')
-        ->get();
+    {
+        $learners = Learner::where('status', 'enrolled')
+            ->whereNull('section_id')
+            ->get();
 
-    $sections = Section::with('strands')->get();
+        $sections = Section::with('strands')->get();
 
-    if ($sections->isEmpty()) {
-        return redirect()->back()->with('error', 'No sections available.');
-    }
-
-    $maxStudentsPerSection = 50;
-    $unassignedLearners = [];
-
-    foreach ($learners as $learner) {
-        $assigned = false;
-        $strandId = $learner->chosen_strand; // (Fix: using chosen_strand, not strand_id)
-
-        // Find sections that match learner's strand
-        $matchingSections = $sections->filter(function ($section) use ($strandId) {
-            return $section->strands->contains('id', $strandId);
-        });
-
-        if ($matchingSections->isEmpty()) {
-            $unassignedLearners[] = $learner;
-            continue;
+        if ($sections->isEmpty()) {
+            return redirect()->back()->with('error', 'No sections available.');
         }
 
-        // Try to assign learner to a section with available space
-        foreach ($matchingSections as $section) {
-            // Instead of learners->count(), use learners_count field
-            if ($section->learners_count < $maxStudentsPerSection) {
-                $learner->section_id = $section->id;
-                $learner->save();
+        $maxStudentsPerSection = 50;
+        $unassignedLearners = [];
 
-                // Update the section's learners_count
-                $section->increment('learners_count');
-                $assigned = true;
-                break;
+        foreach ($learners as $learner) {
+            $assigned = false;
+            $strandId = $learner->chosen_strand; // (Fix: using chosen_strand, not strand_id)
+
+            // Find sections that match learner's strand
+            $matchingSections = $sections->filter(function ($section) use ($strandId) {
+                return $section->strands->contains('id', $strandId);
+            });
+
+            if ($matchingSections->isEmpty()) {
+                $unassignedLearners[] = $learner;
+                continue;
+            }
+
+            // Try to assign learner to a section with available space
+            foreach ($matchingSections as $section) {
+                // Instead of learners->count(), use learners_count field
+                if ($section->learners_count < $maxStudentsPerSection) {
+                    $learner->section_id = $section->id;
+                    $learner->save();
+
+                    // Update the section's learners_count
+                    $section->increment('learners_count');
+                    $assigned = true;
+                    break;
+                }
+            }
+
+            if (!$assigned) {
+                $unassignedLearners[] = $learner;
             }
         }
 
-        if (!$assigned) {
-            $unassignedLearners[] = $learner;
+        if (count($unassignedLearners) > 0) {
+            return redirect()->back()->with('error', count($unassignedLearners) . ' learner(s) could not be assigned due to no matching strands or section capacity full.');
         }
+
+        return redirect()->back()->with('success', 'All learners auto-assigned to sections successfully!');
     }
 
-    if (count($unassignedLearners) > 0) {
-        return redirect()->back()->with('error', count($unassignedLearners) . ' learner(s) could not be assigned due to no matching strands or section capacity full.');
-    }
-
-    return redirect()->back()->with('success', 'All learners auto-assigned to sections successfully!');
-}
-
-    
-    
     
     public function createSection(Request $request)
     {
