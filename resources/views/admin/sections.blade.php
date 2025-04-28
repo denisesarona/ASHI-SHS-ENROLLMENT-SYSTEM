@@ -3,7 +3,7 @@
         <div class="pt-8">
             <h1 class="text-4xl font-bold text-center mb-10">Add New Section</h1>
         </div>
-        <form action="" method="POST" class="w-full max-w-md mx-auto">
+        <form action="{{ route('createsection') }}" method="POST" class="w-full max-w-md mx-auto">
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Section Name</label>

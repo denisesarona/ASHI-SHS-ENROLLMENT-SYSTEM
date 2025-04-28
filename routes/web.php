@@ -63,6 +63,7 @@ Route::delete('/admin/enrollmentform/strands/{id}', [EnrollmentController::class
 Route::delete('/admin/enrollmentform/categories/{id}', [EnrollmentController::class, 'removeCategory'])->name('removecategory');
 
 Route::post('/admin/auto-assign-sections', [AdminController::class, 'autoAssignSections'])->name('auto.assign.sections');
+Route::post('/admin/sections', [AdminController::class, 'createSection'])->name('createsection');
 
 
 

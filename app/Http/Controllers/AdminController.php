@@ -166,8 +166,6 @@ class AdminController extends Controller
         return back()->with('success', 'Admin details updated successfully!');
     }
 
-
-
     public function logoutAdmin(Request $request){
         Auth::logout();
 
@@ -334,37 +332,48 @@ class AdminController extends Controller
     public function autoAssignSections()
     {
         // Group learners by their strand
-        $learners = Learner::where('status', 'enrolled')->whereNull('section_id')->get()->groupBy('strand');
-
-        foreach ($learners as $strand => $group) {
-
-            // Get the Strand ID first
+        $learners = Learner::where('status', 'enrolled')
+            ->whereNull('section_id')
+            ->get()
+            ->groupBy('strand');
+    
+        foreach ($learners as $strand => $group) { // <-- Added curly brace here
             $strandModel = \App\Models\Strand::where('strand_name', $strand)->first();
-
+    
             if (!$strandModel) {
-                continue; // Skip if no matching strand found
+                continue;
             }
-
-            // Find Sections that have this Strand
+    
             $sections = $strandModel->sections;
-
+    
             if ($sections->isEmpty()) {
-                continue; // Skip if no sections for this strand
+                continue;
             }
-
+    
             $sectionCount = $sections->count();
             $i = 0;
-
+    
             foreach ($group as $learner) {
-                $section = $sections[$i % $sectionCount]; // Distribute evenly
+                $section = $sections[$i % $sectionCount];
                 $learner->section_id = $section->id;
                 $learner->save();
                 $i++;
             }
-        }
-
+        } // <-- Closed foreach
+    
         return redirect()->back()->with('success', 'Learners auto-assigned to sections successfully!');
     }
-
     
+    public function createSection(Request $request){
+        if ($request->filled(['name'])) {
+            Section::create([
+                'name' => $request->name,
+            ]);
+
+            return redirect()->back()->with('success', 'Section added successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Please fill in all required fields.');
+        }
+    }
 }
+    
