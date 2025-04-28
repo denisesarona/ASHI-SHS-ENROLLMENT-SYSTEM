@@ -23,8 +23,8 @@
                         <th class="px-8 py-2 hidden md:table-cell">STATUS</th>
                         <th class="px-8 py-2 hidden md:table-cell">SECTION</th>
                         <th class="px-8 py-2 hidden md:table-cell">EDIT SECTION</th>
-                        <th class="px-8 py-2">VIEW DETAILS</th>
-                        <th class="px-8 py-2 hidden md:table-cell">REMOVE</th>
+                        <th class="px-6 py-2">VIEW DETAILS</th>
+                        <th class="px-6 py-2 hidden md:table-cell">REMOVE</th>
                     </tr>
                 </thead>                
                 <tbody>
