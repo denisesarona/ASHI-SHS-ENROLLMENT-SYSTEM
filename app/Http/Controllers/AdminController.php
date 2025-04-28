@@ -375,5 +375,18 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Please fill in all required fields.');
         }
     }
+
+    public function removeSection($id)
+    {
+        $section = Section::findOrFail($id);
+    
+        if (!$section) {
+            return redirect()->back()->with('error', 'Section not found!');
+        }
+
+        $section->delete();
+    
+        return redirect()->back()->with('success', 'Section deleted successfully.');
+    }
 }
     
