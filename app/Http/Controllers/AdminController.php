@@ -81,7 +81,8 @@ class AdminController extends Controller
         $learners = Learner::all();
         $sections = Section::all();
         $strands = Strand::all();
-        return view('admin.enrolledlearners', compact ('learners','sections', 'strands'));
+        $enrollments = Enrollment::all();
+        return view('admin.enrolledlearners', compact ('learners','sections', 'strands', 'enrollments'));
     }
 
     public function loginAdmin(Request $request)
@@ -442,5 +443,15 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Strands updated successfully!');
     }
+
+    public function removeLearnerSection($id)
+    {
+        $learner = Learner::findOrFail($id);
+        $learner->section_id = null;
+        $learner->save();
+
+        return redirect()->back()->with('success', 'Section removed successfully.');
+    }
+
 }
     

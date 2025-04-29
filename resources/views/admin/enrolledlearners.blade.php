@@ -1,7 +1,9 @@
 <x-admin-dashboard-layout>
     <div class="min-h-screen flex flex-col items-center bg-white p-3 shadow-lg rounded-xl">
         <div class="pt-8">
-            <h1 class="text-4xl font-bold text-center">ENROLLED LEARNERS SY</h1>
+            @foreach ($enrollments as $enrollment)
+                <h1 class="text-4xl font-bold text-center">ENROLLED LEARNERS SY {{ $enrollment->school_year}}</h1>
+            @endforeach
         </div>
 
         <div class="flex justify-end w-full mt-4">
@@ -74,8 +76,8 @@
                         </td>
                         <td class="px-4 py-3 hidden md:table-cell">
                             <button data-modal-target="assign-section-modal-{{ $learner->id }}" data-modal-toggle="assign-section-modal-{{ $learner->id }}"
-                                class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5">
-                                Assign Section
+                                class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-4 py-2.5">
+                                ASSIGN SECTION
                             </button>
 
                             <div id="assign-section-modal-{{ $learner->id }}" tabindex="-1" class="hidden overflow-y-auto fixed top-0 left-0 right-0 z-50 justify-center items-center w-full h-full">
@@ -90,23 +92,34 @@
 
                                         <div class="p-6">
                                             <h3 class="text-lg font-bold mb-4 text-gray-800">Assign Section for {{ $learner->name }}</h3>
-
-                                            <!-- Show Current Section if Exists -->
+                                        
                                             @if($learner->section)
                                                 <div class="mb-4 p-3 bg-green-100 text-green-800 rounded-lg">
                                                     Current Section: <strong>{{ $learner->section->name }}</strong>
                                                 </div>
+
+                                                <div class="flex justify-end space-x-2">
+                                                    @if($learner->section)
+                                                        <form action="{{ route('removelearnersection', ['id' => $learner->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to remove the assigned section?');">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="px-4 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                                                                REMOVE SECTION
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                </div> 
                                             @else
                                                 <div class="mb-4 p-3 bg-yellow-100 text-yellow-800 rounded-lg">
                                                     No section assigned yet.
                                                 </div>
                                             @endif
-
+                                        
                                             <form action="{{ route('assignsection', ['id' => $learner->id]) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-
-                                                <div class="mb-4">
+                                        
+                                                <div class="mb-4 mt-4">
                                                     <label for="section_id" class="block text-sm font-medium text-gray-700 mb-2">Select Section</label>
                                                 
                                                     @php
@@ -124,21 +137,21 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
+
+                                                        <div class="flex justify-end space-x-2">
+                                                            <button type="submit" class="px-4 py-2 font-bold bg-blue-600 text-white rounded-lg hover:bg-blue-700 mt-2">
+                                                                SAVE
+                                                            </button>
+                                                        </div>
                                                     @else
                                                         <div class="text-red-600 font-medium">
                                                             Strand not assigned to any section.
                                                         </div>
                                                     @endif
                                                 </div>
-                                                
-
-                                                <div class="flex justify-end">
-                                                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                                                        Save Changes
-                                                    </button>
-                                                </div>
+                                        
                                             </form>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +159,7 @@
                         
                         <td class="px-4 py-3">
                             <a href="{{ route('learnerdetails', ['id' => $learner->id]) }}" 
-                               class="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-md">
+                               class=" bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 text-sm  text-white font-semibold px-5 py-2.5 rounded-lg">
                                 VIEW DETAILS
                             </a>
                         </td>

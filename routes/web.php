@@ -67,6 +67,8 @@ Route::post('/admin/sections', [AdminController::class, 'createSection'])->name(
 Route::delete('/admin/remove-sections/{id}', [AdminController::class, 'removeSection'])->name('removesection');
 Route::put('/admin/sections/update-strands/{id}', [AdminController::class, 'updateStrands'])->name('updatestrandsection');
 Route::put('/admin/sections/assign-section/{id}', [AdminController::class, 'assignSection'])->name('assignsection');
+Route::put('/admin/sections/remove-learner-section/{id}', [AdminController::class, 'removeLearnerSection'])->name('removelearnersection');
+
 
 
 
