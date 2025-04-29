@@ -108,17 +108,29 @@
 
                                                 <div class="mb-4">
                                                     <label for="section_id" class="block text-sm font-medium text-gray-700 mb-2">Select Section</label>
-                                                    <select name="section_id" id="section_id" class="block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                                                        @foreach($sections as $section)
-                                                            @if($section->strands->contains('id', $learner->chosen_strand))
+                                                
+                                                    @php
+                                                        $availableSections = $sections->filter(function($section) use ($learner) {
+                                                            return $section->strands->contains('id', $learner->chosen_strand);
+                                                        });
+                                                    @endphp
+                                                
+                                                    @if ($availableSections->isNotEmpty())
+                                                        <select name="section_id" id="section_id" class="block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                                            @foreach($availableSections as $section)
                                                                 <option value="{{ $section->id }}"
                                                                     @if($learner->section && $learner->section->id == $section->id) selected @endif>
                                                                     {{ $section->name }}
                                                                 </option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
+                                                            @endforeach
+                                                        </select>
+                                                    @else
+                                                        <div class="text-red-600 font-medium">
+                                                            Strand not assigned to any section.
+                                                        </div>
+                                                    @endif
                                                 </div>
+                                                
 
                                                 <div class="flex justify-end">
                                                     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
