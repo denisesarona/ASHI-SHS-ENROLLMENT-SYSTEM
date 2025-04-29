@@ -34,7 +34,7 @@
 
                     <!-- Submit Button on Left -->
                     <div class="flex justify-start">
-                        <button type="submit" class="px-4 py-2 bg-blue-500 font-bold text-white rounded-lg">Add Section</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-500 font-bold text-white rounded-lg">ADD SECTION</button>
                     </div>
                 </form>
             </div>
@@ -72,7 +72,7 @@
                                         <span class="text-gray-400 italic">No strands assigned</span>
                                     @endif
                                 </td>
-                                <td class="px-4 py-2">30</td>
+                                <td class="px-4 py-2">{{$section->learners_count}}</td>
 
                                 <!-- Edit Strands Button and Modal -->
                                 <td class="px-4 py-2 hidden md:table-cell">
