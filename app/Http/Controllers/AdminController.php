@@ -467,5 +467,17 @@ class AdminController extends Controller
     
         return redirect()->back()->with('success', 'Section removed successfully.');
     }    
+
+    public function autoEnrollLearners()
+    {
+        $learners = Learner::where('status', 'pending')->get();
+
+        foreach ($learners as $learner) {
+            $learner->status = 'enrolled';
+            $learner->save();
+        }
+
+        return redirect()->route('enrolledlearners')->with('success', 'All pending learners have been enrolled.');
+    }
 }
     

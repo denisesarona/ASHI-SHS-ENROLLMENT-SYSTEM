@@ -204,9 +204,9 @@
                 </div>
 
                 <input type="hidden" name="id" value="{{ request('id') }}">
-                <div class="mt-6 text-center">
+                <div class="mt-6 text-end">
                     <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600">
-                        Update
+                        UPDATE
                     </button>
                 </div>
             </form>           
