@@ -353,9 +353,7 @@ class AdminController extends Controller
 
         foreach ($learners as $learner) {
             $assigned = false;
-            $strandId = $learner->chosen_strand; // (Fix: using chosen_strand, not strand_id)
-
-            // Find sections that match learner's strand
+            $strandId = $learner->chosen_strand;
             $matchingSections = $sections->filter(function ($section) use ($strandId) {
                 return $section->strands->contains('id', $strandId);
             });
@@ -365,14 +363,11 @@ class AdminController extends Controller
                 continue;
             }
 
-            // Try to assign learner to a section with available space
             foreach ($matchingSections as $section) {
-                // Instead of learners->count(), use learners_count field
                 if ($section->learners_count < $maxStudentsPerSection) {
                     $learner->section_id = $section->id;
                     $learner->save();
 
-                    // Update the section's learners_count
                     $section->increment('learners_count');
                     $assigned = true;
                     break;
@@ -411,18 +406,30 @@ class AdminController extends Controller
     public function assignSection(Request $request, $id)
     {
         $learner = Learner::findOrFail($id);
-
+    
         $request->validate([
             'section_id' => 'required|exists:sections,id',
         ]);
-
+    
+        $oldSectionId = $learner->section_id;
+    
         $learner->section_id = $request->section_id;
         $learner->save();
-
+    
+        if ($oldSectionId) {
+            Section::where('id', $oldSectionId)->update([
+                'learners_count' => Learner::where('section_id', $oldSectionId)->count()
+            ]);
+        }
+    
+        Section::where('id', $request->section_id)->update([
+            'learners_count' => Learner::where('section_id', $request->section_id)->count()
+        ]);
+    
         return redirect()->back()->with('success', 'Section assigned successfully.');
     }
-
-
+    
+    
     public function removeSection($id)
     {
         $section = Section::findOrFail($id);
@@ -447,11 +454,18 @@ class AdminController extends Controller
     public function removeLearnerSection($id)
     {
         $learner = Learner::findOrFail($id);
+        $oldSectionId = $learner->section_id;
+    
         $learner->section_id = null;
         $learner->save();
-
+    
+        if ($oldSectionId) {
+            Section::where('id', $oldSectionId)->update([
+                'learners_count' => Learner::where('section_id', $oldSectionId)->count()
+            ]);
+        }
+    
         return redirect()->back()->with('success', 'Section removed successfully.');
-    }
-
+    }    
 }
     
