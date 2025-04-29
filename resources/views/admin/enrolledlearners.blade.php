@@ -113,7 +113,7 @@
                                                         @foreach($sections as $section)
                                                             @if($section->strands->contains('id', $learner->chosen_strand))
                                                                 <option value="{{ $section->id }}"
-                                                                    @if($student->section && $learner->section->id == $section->id) selected @endif>
+                                                                    @if($learner->section && $learner->section->id == $section->id) selected @endif>
                                                                     {{ $section->name }}
                                                                 </option>
                                                             @endif
