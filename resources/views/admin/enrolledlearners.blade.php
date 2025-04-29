@@ -102,8 +102,7 @@
                                                 </div>
                                             @endif
 
-                                            <!-- Form to Update Section -->
-                                            <form action="" method="POST">
+                                            <form action="{{ route('assignsection', ['id' => $learner->id]) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
 

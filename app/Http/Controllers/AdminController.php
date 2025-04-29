@@ -407,6 +407,21 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Section created and strands assigned successfully!');
     }    
 
+    public function assignSection(Request $request, $id)
+    {
+        $learner = Learner::findOrFail($id);
+
+        $request->validate([
+            'section_id' => 'required|exists:sections,id',
+        ]);
+
+        $learner->section_id = $request->section_id;
+        $learner->save();
+
+        return redirect()->back()->with('success', 'Section assigned successfully.');
+    }
+
+
     public function removeSection($id)
     {
         $section = Section::findOrFail($id);

@@ -66,6 +66,7 @@ Route::post('/admin/auto-assign-sections', [AdminController::class, 'autoAssignS
 Route::post('/admin/sections', [AdminController::class, 'createSection'])->name('createsection');
 Route::delete('/admin/remove-sections/{id}', [AdminController::class, 'removeSection'])->name('removesection');
 Route::put('/admin/sections/update-strands/{id}', [AdminController::class, 'updateStrands'])->name('updatestrandsection');
+Route::put('/admin/sections/assign-section/{id}', [AdminController::class, 'assignSection'])->name('assignsection');
 
 
 
