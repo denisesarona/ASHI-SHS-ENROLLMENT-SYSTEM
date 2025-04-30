@@ -70,7 +70,7 @@
                 </li>
 
                 <li>
-                    <x-admin-nav-link href="{{ route('showsections') }}" class="nav-link" data-section="Sections" :active="request()->routeIs('showsections')"><i class='bx bx-list-check'></i> Sections</x-admin-nav-link>
+                    <x-admin-nav-link href="{{ route('showsections') }}" class="nav-link" data-section="Sections" :active="request()->routeIs('showsections')"><i class='bx bxs-category-alt'></i> Sections</x-admin-nav-link>
                 </li>
                 <li>
                     <x-admin-nav-link href="{{ route('viewenrollmentform') }}" class="nav-link" data-section="AdminList" :active="request()->routeIs('viewenrollmentform')"><i class='bx bx-list-check'></i> Enrollment Form</x-admin-nav-link>
