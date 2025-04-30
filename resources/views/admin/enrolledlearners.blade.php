@@ -24,7 +24,7 @@
                         <th class="px-8 py-2 hidden md:table-cell">GRADE LEVEL</th>
                         <th class="px-8 py-2 hidden md:table-cell">STATUS</th>
                         <th class="px-8 py-2 hidden md:table-cell">SECTION</th>
-                        <th class="px-8 py-2 hidden md:table-cell">EDIT SECTION</th>
+                        <th class="px-5 py-2 hidden md:table-cell">EDIT SECTION</th>
                         <th class="px-6 py-2">VIEW DETAILS</th>
                         <th class="px-6 py-2 hidden md:table-cell">REMOVE</th>
                     </tr>
@@ -77,7 +77,7 @@
                         <td class="px-4 py-3 hidden md:table-cell">
                             <button data-modal-target="assign-section-modal-{{ $learner->id }}" data-modal-toggle="assign-section-modal-{{ $learner->id }}"
                                 class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-4 py-2.5">
-                                ASSIGN SECTION
+                                EDIT SECTION
                             </button>
 
                             <div id="assign-section-modal-{{ $learner->id }}" tabindex="-1" class="hidden overflow-y-auto fixed top-0 left-0 right-0 z-50 justify-center items-center w-full h-full">
