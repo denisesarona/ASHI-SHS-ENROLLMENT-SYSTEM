@@ -19,7 +19,7 @@ class LearnerController extends Controller
 {
     public function showHomePage()
     {
-        return view('homepage');
+        return view('index');
     }
 
     public function showEnrollmentForm()
