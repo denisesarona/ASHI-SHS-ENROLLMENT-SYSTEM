@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Storage;
 
 class LearnerController extends Controller
 {
-    public function showHomePage()
+    public function index()
     {
-        return view('homepage');
+        return view('index');
     }
 
     public function showEnrollmentForm()
