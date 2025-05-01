@@ -5,6 +5,12 @@ use App\Http\Controllers\LearnerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\EnrollmentController;
+
+Route::get('/debug', function() {
+    Log::error('Debugging: 500 Error occurred.');
+    return 'Logged!';
+});
+
  
 Route::get('/', [LearnerController::class, 'index'])->name('homepage');
 Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
