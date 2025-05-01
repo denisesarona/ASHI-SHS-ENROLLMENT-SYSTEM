@@ -21,11 +21,11 @@ Route::put('/learner/{id}', [LearnerController::class, 'update'])->name('updateL
 
 Route::get('/login', [AdminController::class, 'showLoginForm'])->name('login');
 Route::get('/forgotpassword', [AdminController::class, 'showForgotPassword'])->name('forgotpassword');
-Route::get('/verification', [AdminController::class, 'showVerification'])->name('verifycode');
+Route::get('/verification', [AdminController::class, 'showVerification'])->name('showverifycode');
 Route::get('/changepassword', [AdminController::class, 'showChangePassword'])->name('changepassword');
 Route::get('/admin/dashboard', [AdminController::class, 'showDashboard'])->name('dashboard');
 Route::get('/admin/adminlist', [AdminController::class, 'showAdminList'])->name('adminlist');
-Route::get('/admin/add-admin', [AdminController::class, 'showAddAdmin'])->name('addadmin');
+Route::get('/admin/add-admin', [AdminController::class, 'showAddAdmin'])->name('showaddadmin');
 Route::get('/admin/pendinglearners', [AdminController::class, 'showPendingLearners'])->name('pendinglearners');
 Route::get('/admin/enrolledlearners', [AdminController::class, 'showEnrolledLearners'])->name('enrolledlearners');
 Route::get('/admin/admindetails/{id}', [AdminController::class, 'adminDetails'])->name('admindetails');

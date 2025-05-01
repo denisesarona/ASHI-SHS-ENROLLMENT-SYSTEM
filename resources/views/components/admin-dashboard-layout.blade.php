@@ -51,7 +51,7 @@
                     </button>
                     <ul class="dropdown-menu hidden py-2 space-y-2">
                         <li><x-admin-nav-link href="{{ route('adminlist') }}" class="nav-link pl-10" data-section="AdminList" :active="request()->routeIs('adminlist')">List of Admin</x-admin-nav-link>
-                        <li><x-admin-nav-link href="{{ route('addadmin') }}" class="nav-link pl-10" data-section="AddAdmin" :active="request()->routeIs('addadmin')">Add a new Admin</x-admin-nav-link>
+                        <li><x-admin-nav-link href="{{ route('showaddadmin') }}" class="nav-link pl-10" data-section="AddAdmin" :active="request()->routeIs('showaddadmin')">Add a new Admin</x-admin-nav-link>
                     </ul>
                 </li>
                 <li>
