@@ -6,12 +6,17 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\EnrollmentController;
 
-Route::get('/debug', function() {
-    Log::error('Debugging: 500 Error occurred.');
-    return 'Logged!';
+Route::get('/', function () {
+    try {
+        $users = DB::table('users')->get();
+        return view('welcome', compact('users'));
+    } catch (\Exception $e) {
+        Log::error($e);
+        abort(500, 'Something went wrong.');
+    }
 });
 
- 
+
 Route::get('/', [LearnerController::class, 'index'])->name('homepage');
 Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
 Route::get('/studentverify', [LearnerController::class, 'showStudentVerify'])->name('studentverify');
