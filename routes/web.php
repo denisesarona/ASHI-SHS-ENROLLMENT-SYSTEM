@@ -71,5 +71,6 @@ Route::put('/admin/sections/remove-learner-section/{id}', [AdminController::clas
 Route::post('/admin/auto-enroll-learners', [AdminController::class, 'autoEnrollLearners'])->name('auto.enroll.learners');
 
 Route::post('/admin/enrollmentform/savesydata', [AdminController::class, 'saveSchoolYearData'])->name('savesydata');
+Route::post('/admin/filter-section', [AdminController::class, 'filterSection'])->name('admin.filter.section');
 
 

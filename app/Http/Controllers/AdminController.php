@@ -569,5 +569,35 @@ class AdminController extends Controller
                 ->with('error', 'Error: ' . $e->getMessage());
         }
     }
-}
+    public function filterSection(Request $request)
+    {
+        $schoolYear = $request->input('school_year');
+        $sectionName = $request->input('section');
+    
+        $filteredLearners = Learner::query();
+    
+        if ($schoolYear) {
+            $filteredLearners->where('school_year', $schoolYear);
+        }
+    
+        if ($sectionName) {
+            $section = Section::where('name', $sectionName)->first();
+            if ($section) {
+                $filteredLearners->where('section_id', $section->id);
+            } else {
+                $filteredLearners->whereRaw('0 = 1');
+            }
+        }
+    
+        $learners = $filteredLearners->get();
+    
+        return view('admin.enrolledlearners', [
+            'learners' => $learners,
+            'sections' => Section::all(),
+            'enrollments' => Enrollment::all(),
+            'selectedSection' => $sectionName,
+            'selectedYear' => $schoolYear,
+        ]);
+    }
+}    
     

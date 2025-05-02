@@ -5,38 +5,46 @@
                 <h1 class="text-4xl font-bold text-center">ENROLLED LEARNERS SY {{ $enrollment->school_year}}</h1>
             @endforeach
         </div>
-
         <div class="w-full mt-4">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                <div class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
+                {{-- Filter Form --}}
+                <form action="{{ route('admin.filter.section') }}" method="POST" class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
+                    @csrf
+        
                     @php
                         $schoolYears = $enrollments->pluck('school_year')->unique();
+                        $sectionsLearner = $sections->pluck('name')->unique();
                     @endphp
+        
+                    {{-- School Year --}}
                     <div class="flex-1 min-w-[180px]">
                         <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <select name="school_year" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                             @foreach ($schoolYears as $year)
                                 <option value="{{ $year }}">{{ $year }}</option>
                             @endforeach
                         </select>
                     </div>
         
+                    {{-- Section --}}
                     <div class="flex-1 min-w-[180px]">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Specialization</label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                            <option>Web Development</option>
-                            <option>Network Admin</option>
-                            <option>Multimedia</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Section</label>
+                        <select name="section" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            @foreach ($sectionsLearner as $section)
+                                <option value="{{ $section }}">{{ $section }}</option>
+                            @endforeach
                         </select>
                     </div>
         
-                    <div class="flex items-end">
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full md:w-auto">
+                    {{-- Filter Button --}}
+                    <div class="flex items-end min-w-[120px]">
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full md:w-auto">
                             Filter
                         </button>
                     </div>
-                </div>
+                </form>
         
+                {{-- Auto Assign Button --}}
                 <form action="{{ route('auto.assign.sections') }}" method="POST" class="flex-shrink-0">
                     @csrf
                     <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md w-full md:w-auto">
@@ -44,7 +52,8 @@
                     </button>
                 </form>
             </div>
-        </div>     
+        </div>
+        
         <div class="w-full overflow-x-auto mt-8">
             <table class="w-full text-center">
                 <thead>
