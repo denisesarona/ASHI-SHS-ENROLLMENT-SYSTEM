@@ -87,8 +87,8 @@
                             </tr>
                             <tr class="border-b">
                                 <td class="px-4 py-2">Female</td>
-                                <td class="px-4 py-2">520</td>
-                                <td class="px-4 py-2">42%</td>
+                                <td class="px-4 py-2">{{ $females }}</td>
+                                <td class="px-4 py-2">{{ $female_percentage }}%</td>
                             </tr>
                         </tbody>
                     </table>

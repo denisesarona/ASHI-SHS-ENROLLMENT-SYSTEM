@@ -54,13 +54,23 @@ class AdminController extends Controller
         $male_percentage = $learners_count > 0
             ? round(($males / $learners_count) * 100, 2)
             : 0;
+
+        $females = Learner::where('status', 'enrolled')
+                        ->where('gender',   'Female')
+                        ->count();
+    
+        $female_percentage = $learners_count > 0
+            ? round(($females / $learners_count) * 100, 2)
+            : 0;
     
         return view('admin.dashboard', compact(
             'learners_count',
             'pending_learners',
             'recent_learners',
             'males',
-            'male_percentage'  
+            'male_percentage',
+            'females',
+            'female_percentage',
         ));
     }
     
