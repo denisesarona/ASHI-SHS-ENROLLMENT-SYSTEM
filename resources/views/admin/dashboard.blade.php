@@ -67,13 +67,9 @@
 
             <div class="bg-white p-6 rounded-xl shadow space-y-6">
                 <h2 class="text-xl font-semibold">Enrolled Students by Gender</h2>
-
-                <!-- Chart -->
                 <div class="w-full md:w-1/2 mx-auto">
                     <canvas id="genderChart"></canvas>
                 </div>
-
-                <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm text-left mt-6">
                         <thead class="bg-gray-100 text-gray-600">
@@ -86,8 +82,8 @@
                         <tbody class="text-gray-700">
                             <tr class="border-b">
                                 <td class="px-4 py-2">Male</td>
-                                <td class="px-4 py-2">720</td>
-                                <td class="px-4 py-2">58%</td>
+                                <td class="px-4 py-2">{{ $males }}</td>
+                                <td class="px-4 py-2"> {{ $male_percentage }}%</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="px-4 py-2">Female</td>
@@ -100,28 +96,28 @@
             </div>                   
         </div>
     </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-                const ctx = document.getElementById('genderChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Male', 'Female'],
-                        datasets: [{
-                            label: 'Enrolled Students',
-                            data: [720, 520],
-                            backgroundColor: ['#3B82F6', '#EC4899'],
-                            hoverOffset: 6
-                        }]
-                    },
-                    options: {
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
+            
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('genderChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+                data: {
+                labels: ['Male', 'Female'],
+                datasets: [{
+                    label: 'Enrolled Students',
+                    data: [720, 520],
+                    backgroundColor: ['#3B82F6', '#EC4899'],
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom'
                     }
-                });
-            </script>
+                }
+            }
+        });
+    </script>
 </x-admin-dashboard-layout>

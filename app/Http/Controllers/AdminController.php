@@ -45,10 +45,25 @@ class AdminController extends Controller
     {
         $learners_count = Learner::where('status', 'enrolled')->count();
         $pending_learners = Learner::where('status', 'pending')->count();
-
         $recent_learners = Learner::latest()->take(5)->get();
-        return view('admin.dashboard', compact('learners_count', 'pending_learners', 'recent_learners'));
+
+        $males = Learner::where('status', 'enrolled')
+                        ->where('gender',   'Male')
+                        ->count();
+    
+        $male_percentage = $learners_count > 0
+            ? round(($males / $learners_count) * 100, 2)
+            : 0;
+    
+        return view('admin.dashboard', compact(
+            'learners_count',
+            'pending_learners',
+            'recent_learners',
+            'males',
+            'male_percentage'  
+        ));
     }
+    
 
     public function showAdminList()
     {
