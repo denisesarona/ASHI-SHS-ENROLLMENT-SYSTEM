@@ -62,6 +62,10 @@ class AdminController extends Controller
         $female_percentage = $learners_count > 0
             ? round(($females / $learners_count) * 100, 2)
             : 0;
+
+        $new_enrollments = Learner::where('status', 'enrolled')
+                              ->where('created_at', '>=', now()->subDays(1))
+                              ->count();
     
         return view('admin.dashboard', compact(
             'learners_count',
@@ -71,6 +75,7 @@ class AdminController extends Controller
             'male_percentage',
             'females',
             'female_percentage',
+            'new_enrollments',
         ));
     }
     

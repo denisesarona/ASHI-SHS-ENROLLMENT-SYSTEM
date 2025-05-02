@@ -13,7 +13,7 @@
                     </div>
                     <div class="bg-white p-4 rounded-xl shadow-md flex flex-col">
                         <span class="text-sm text-gray-500">New Enrollments</span>
-                        <span class="text-2xl font-bold text-green-500">89</span>
+                        <span class="text-2xl font-bold text-green-500">{{ $new_enrollments }}</span>
                     </div>
                     <div class="bg-white p-4 rounded-xl shadow-md flex flex-col">
                         <span class="text-sm text-gray-500">Pending Applications</span>
