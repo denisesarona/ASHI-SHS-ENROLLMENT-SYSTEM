@@ -39,20 +39,27 @@
                                 </tr>
                             </thead>
                             <tbody class="text-sm text-gray-700">
-                                <tr class="border-b">
-                                    <td class="px-4 py-2">Juan Dela Cruz</td>
-                                    <td class="px-4 py-2">BSIT</td>
-                                    <td class="px-4 py-2 text-green-600 font-medium">Enrolled</td>
-                                    <td class="px-4 py-2">April 23, 2025</td>
-                                </tr>
-                                <tr class="border-b">
-                                    <td class="px-4 py-2">Maria Santos</td>
-                                    <td class="px-4 py-2">BSA</td>
-                                    <td class="px-4 py-2 text-yellow-500 font-medium">Pending</td>
-                                    <td class="px-4 py-2">April 22, 2025</td>
-                                </tr>
-                                <!-- Add more rows as needed -->
+                                @forelse ($recent_learners as $learner)
+                                    <tr class="border-b">
+                                        <td class="px-4 py-2">
+                                            {{ $learner->last_name . ", " . $learner->first_name . " " . $learner->middle_name }}
+                                        </td>                                        
+                                        <td class="px-4 py-2">{{ $learner->strand->name ?? 'N/A' }}</td>
+                                        <td class="px-4 py-2 font-medium 
+                                            @if($learner->status == 'enrolled') text-green-600 
+                                            @elseif($learner->status == 'pending') text-yellow-500 
+                                            @else text-gray-500 @endif">
+                                            {{ ucfirst($learner->status) }}
+                                        </td>
+                                        <td class="px-4 py-2">{{ $learner->created_at->format('F d, Y') }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="px-4 py-2 text-center text-gray-400">No recent enrollments.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
+                            
                         </table>
                     </div>
                 </div>

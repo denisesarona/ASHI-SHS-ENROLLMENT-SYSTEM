@@ -45,7 +45,9 @@ class AdminController extends Controller
     {
         $learners_count = Learner::where('status', 'enrolled')->count();
         $pending_learners = Learner::where('status', 'pending')->count();
-        return view('admin.dashboard', compact('learners_count', 'pending_learners'));
+
+        $recent_learners = Learner::latest()->take(5)->get();
+        return view('admin.dashboard', compact('learners_count', 'pending_learners', 'recent_learners'));
     }
 
     public function showAdminList()
