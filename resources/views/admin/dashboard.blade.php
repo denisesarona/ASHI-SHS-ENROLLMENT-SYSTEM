@@ -9,7 +9,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="bg-white p-4 rounded-xl shadow-md flex flex-col">
                         <span class="text-sm text-gray-500">Total Students</span>
-                        <span class="text-2xl font-bold text-blue-600">1,240</span>
+                        <span class="text-2xl font-bold text-blue-600">{{$learners_count}}</span>
                     </div>
                     <div class="bg-white p-4 rounded-xl shadow-md flex flex-col">
                         <span class="text-sm text-gray-500">New Enrollments</span>
@@ -17,10 +17,10 @@
                     </div>
                     <div class="bg-white p-4 rounded-xl shadow-md flex flex-col">
                         <span class="text-sm text-gray-500">Pending Applications</span>
-                        <span class="text-2xl font-bold text-yellow-500">34</span>
+                        <span class="text-2xl font-bold text-yellow-500">{{$pending_learners}}</span>
                     </div>
                     <div class="bg-white p-4 rounded-xl shadow-md flex flex-col">
-                        <span class="text-sm text-gray-500">This Semester</span>
+                        <span class="text-sm text-gray-500">This School Year</span>
                         <span class="text-2xl font-bold text-indigo-500">2,014</span>
                     </div>
                 </div>
@@ -90,12 +90,10 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div>                   
+        </div>
+    </div>
 
-                        
-                    </div>
-                </div>
-                <!-- Chart.js Script -->
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
                 const ctx = document.getElementById('genderChart').getContext('2d');
