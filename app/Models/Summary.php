@@ -33,7 +33,6 @@ class Summary extends Model
         'learner_category',
         'grade10_section',
         'image',
-        'chosen_track',
         'chosen_strand',
         'section',
     ];

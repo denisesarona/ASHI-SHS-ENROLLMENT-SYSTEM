@@ -10,6 +10,7 @@ use App\Models\Strand;
 use App\Models\Category;
 use App\Models\Enrollment;
 use App\Models\Section;
+use App\Models\Summary;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -512,6 +513,60 @@ class AdminController extends Controller
         }
 
         return redirect()->route('enrolledlearners')->with('success', 'All pending learners have been enrolled.');
+    }
+    
+    public function saveSchoolYearData()
+    {
+        try {
+            $learners = Learner::where('status', 'enrolled')->get();
+    
+            if ($learners->isEmpty()) {
+                return redirect()->back()->with('error', 'No enrolled learners found for this school year.');
+            }
+
+            foreach ($learners as $learner) {
+                // Check if the learner already exists in the summaries table
+                if (!Summary::where('lrn', $learner->lrn)->exists()) {
+                    Summary::create([
+                        'school_year' => '2025-2026',
+                        'grade_level' => $learner->grade_level,
+                        'last_name' => $learner->last_name,
+                        'first_name' => $learner->first_name,
+                        'middle_name' => $learner->middle_name,
+                        'extension_name' => $learner->extension_name,
+                        'lrn' => $learner->lrn,
+                        'birthdate' => $learner->birthdate,
+                        'age' => $learner->age,
+                        'gender' => $learner->gender,
+                        'beneficiary' => $learner->beneficiary,
+                        'street' => $learner->street,
+                        'baranggay' => $learner->baranggay,
+                        'municipality' => $learner->municipality,
+                        'province' => $learner->province,
+                        'guardian_name' => $learner->guardian_name,
+                        'guardian_contact' => $learner->guardian_contact,
+                        'relationship_guardian' => $learner->relationship_guardian,
+                        'last_sy' => $learner->last_sy,
+                        'last_school' => $learner->last_school,
+                        'learner_category' => $learner->learner_category,
+                        'grade10_section' => $learner->grade10_section,
+                        'image' => $learner->image,
+                        'chosen_strand' => $learner->chosen_strand,
+                        'status' => 'archived',
+                        'section' => $learner->section,
+                    ]);
+                }
+            }
+    
+            Learner::where('status', 'enrolled')->delete();
+    
+            return redirect()->route('admin.enrolledform')
+                ->with('success', 'All enrolled learners data in this School Year has been saved.');
+            
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error: ' . $e->getMessage());
+        }
     }
 }
     

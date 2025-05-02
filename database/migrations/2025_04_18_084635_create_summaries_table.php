@@ -36,7 +36,6 @@ return new class extends Migration
             $table->string('learner_category');
             $table->string('grade10_section');
             $table->string('image')->nullable();
-            $table->string('chosen_track');
             $table->string('chosen_strand');
             $table->string('section');
             $table->timestamps();

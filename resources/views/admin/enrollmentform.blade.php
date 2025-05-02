@@ -94,7 +94,6 @@
                 </div>
             </div>
 
-            {{-- Track and Strand Form + Table in One Card --}}
             <div class="bg-gray-100 p-6 rounded-lg shadow-md">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Strand and Specilization Configuration</h2>
                 <form action="{{ route('updatetrackstrand') }}" method="POST">
@@ -126,7 +125,6 @@
                     </div>
                 </form>
 
-                {{-- Existing Tracks and Strands Table --}}
                 <div class="bg-white p-5 mt-4 rounded-1xl">
                     <h3 class="text-xl font-semibold text-gray-700 mb-3">Existing Strands and Specialization</h3>
                     <div class="overflow-x-auto">
@@ -189,6 +187,16 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div class="bg-white p-5 mt-4 rounded-1xl">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3">New School Year</h3>
+                    <form action="{{ route('savesydata')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                            Save School Year Data
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

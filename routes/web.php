@@ -6,17 +6,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\EnrollmentController;
 
-Route::get('/', function () {
-    try {
-        $users = DB::table('users')->get();
-        return view('welcome', compact('users'));
-    } catch (\Exception $e) {
-        Log::error($e);
-        abort(500, 'Something went wrong.');
-    }
-});
-
-
 Route::get('/', [LearnerController::class, 'index'])->name('homepage');
 Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
 Route::get('/studentverify', [LearnerController::class, 'showStudentVerify'])->name('studentverify');
@@ -80,5 +69,7 @@ Route::put('/admin/sections/update-strands/{id}', [AdminController::class, 'upda
 Route::put('/admin/sections/assign-section/{id}', [AdminController::class, 'assignSection'])->name('assignsection');
 Route::put('/admin/sections/remove-learner-section/{id}', [AdminController::class, 'removeLearnerSection'])->name('removelearnersection');
 Route::post('/admin/auto-enroll-learners', [AdminController::class, 'autoEnrollLearners'])->name('auto.enroll.learners');
+
+Route::post('/admin/enrollmentform/savesydata', [AdminController::class, 'saveSchoolYearData'])->name('savesydata');
 
 
