@@ -4,24 +4,20 @@
             <h1 class="text-4xl font-bold">LEARNERS RECORDS</h1>
         </div>
     
-        <!-- Filter Section -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <!-- School Year -->
             @php
-            $schoolYears = $enrollments->pluck('school_year')->unique();
+                $schoolYears = $enrollments->pluck('school_year')->unique();
             @endphp
         
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
-            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                @foreach ($schoolYears as $year)
-                    <option value="{{ $year }}">{{ $year }}</option>
-                @endforeach
-            </select>
-        </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
+                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    @foreach ($schoolYears as $year)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endforeach
+                </select>
+            </div>
         
-    
-            <!-- Specialization -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Specialization</label>
                 <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
@@ -31,7 +27,6 @@
                 </select>
             </div>
     
-            <!-- Filter Button -->
             <div class="flex items-end">
                 <button class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                     Filter
@@ -39,7 +34,6 @@
             </div>
         </div>
     
-        <!-- Table Section -->
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white rounded-xl shadow text-sm">
                 <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
@@ -63,10 +57,8 @@
                             <a href="#" class="text-blue-600 hover:underline">View Details</a>
                         </td>
                     </tr>
-                    <!-- More rows as needed -->
                 </tbody>
             </table>
         </div>
-    </div>
-    
+    </div> 
 </x-admin-dashboard-layout>
