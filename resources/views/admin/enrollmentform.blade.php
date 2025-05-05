@@ -4,8 +4,6 @@
             <div class="text-center">
                 <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">Enrollment Form Configuration</h1>
             </div>
-
-            {{-- School Year and Grade Level Form --}}
             <form action="{{ route('updatesy') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
                 @csrf
                 @method('PUT')
@@ -27,7 +25,6 @@
                 </div>
             </form>
 
-            {{-- Category Form and Table in One Card --}}
             <div class="bg-gray-100 p-6 rounded-lg shadow-md">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Learner's Category Configuration</h2>
                 <form action="{{ route('updatecategory') }}" method="POST">
@@ -48,7 +45,6 @@
                     </div>
                 </form>
 
-                {{-- Existing Categories Table --}}
                 <div class="bg-white p-5 mt-4 rounded-1xl">
                     <h3 class="text-xl font-semibold text-gray-700 mb-3">Existing Categories</h3>
                     <div class="overflow-x-auto">

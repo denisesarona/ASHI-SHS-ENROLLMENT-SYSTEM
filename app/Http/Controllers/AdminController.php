@@ -526,46 +526,24 @@ class AdminController extends Controller
     {
         try {
             $learners = Learner::where('status', 'enrolled')->get();
-    
+        
             if ($learners->isEmpty()) {
                 return redirect()->back()->with('error', 'No enrolled learners found for this school year.');
             }
 
-            foreach ($learners as $learner) {
-                if (!Summary::where('lrn', $learner->lrn)->exists()) {
-                    Summary::create([
-                        'school_year' => '2025-2026',
-                        'grade_level' => $learner->grade_level,
-                        'last_name' => $learner->last_name,
-                        'first_name' => $learner->first_name,
-                        'middle_name' => $learner->middle_name,
-                        'extension_name' => $learner->extension_name,
-                        'lrn' => $learner->lrn,
-                        'birthdate' => $learner->birthdate,
-                        'age' => $learner->age,
-                        'gender' => $learner->gender,
-                        'beneficiary' => $learner->beneficiary,
-                        'street' => $learner->street,
-                        'baranggay' => $learner->baranggay,
-                        'municipality' => $learner->municipality,
-                        'province' => $learner->province,
-                        'guardian_name' => $learner->guardian_name,
-                        'guardian_contact' => $learner->guardian_contact,
-                        'relationship_guardian' => $learner->relationship_guardian,
-                        'last_sy' => $learner->last_sy,
-                        'last_school' => $learner->last_school,
-                        'learner_category' => $learner->learner_category,
-                        'grade10_section' => $learner->grade10_section,
-                        'image' => $learner->image,
-                        'chosen_strand' => $learner->chosen_strand,
-                        'status' => 'archived',
-                        'section' => $learner->section,
-                    ]);
-                }
-            }
-    
+            $dataToInsert = $learners->map(function ($learner) {
+                return [
+                    'id' => $learner->id,  
+                    'first_name' => $learner->first_name, 
+                    'last_name' => $learner->last_name,
+                    'school_year' => $learner->school_year, 
+                ];
+            })->toArray();
+
+            Summary::insert($dataToInsert);
+        
             Learner::where('status', 'enrolled')->delete();
-    
+        
             return redirect()->route('admin.enrolledform')
                 ->with('success', 'All enrolled learners data in this School Year has been saved.');
             
@@ -574,6 +552,8 @@ class AdminController extends Controller
                 ->with('error', 'Error: ' . $e->getMessage());
         }
     }
+
+
     public function filterSection(Request $request)
     {
         $schoolYear = $request->input('school_year');
