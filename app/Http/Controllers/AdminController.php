@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -67,6 +67,10 @@ class AdminController extends Controller
         $new_enrollments = Learner::where('status', 'enrolled')
                               ->where('created_at', '>=', now()->subDays(1))
                               ->count();
+                    
+
+        $enrollment_school_year = DB::table('enrollments')->value('school_year');
+        $summaries = Summary::where('school_year', '=', $enrollment_school_year)->count();
     
         return view('admin.dashboard', compact(
             'learners_count',
@@ -77,6 +81,8 @@ class AdminController extends Controller
             'females',
             'female_percentage',
             'new_enrollments',
+            'summaries',
+            'enrollment_school_year',
         ));
     }
     
@@ -526,7 +532,6 @@ class AdminController extends Controller
             }
 
             foreach ($learners as $learner) {
-                // Check if the learner already exists in the summaries table
                 if (!Summary::where('lrn', $learner->lrn)->exists()) {
                     Summary::create([
                         'school_year' => '2025-2026',

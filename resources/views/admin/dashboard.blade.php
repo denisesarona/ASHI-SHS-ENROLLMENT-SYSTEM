@@ -5,7 +5,6 @@
         </div>
         
         <div class="w-full overflow-x-auto mt-8 space-y-6">
-            <!-- Stats Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-white p-4 rounded-xl shadow-md flex flex-col">
                     <span class="text-sm text-gray-500">Total Students</span>
@@ -20,12 +19,11 @@
                     <span class="text-2xl font-bold text-yellow-500">{{ $pending_learners }}</span>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-md flex flex-col">
-                    <span class="text-sm text-gray-500">This School Year</span>
-                    <span class="text-2xl font-bold text-indigo-500">2,014</span>
+                    <span class="text-sm text-gray-500">S.Y. {{ $enrollment_school_year }}</span>
+                    <span class="text-2xl font-bold text-indigo-500">{{ $summaries }}</span>
                 </div>
             </div>
 
-            <!-- Recent Enrollments Table -->
             <div class="bg-white p-6 rounded-xl shadow">
                 <h2 class="text-xl font-semibold mb-4">Recent Enrollments</h2>
                 <div class="overflow-x-auto">
@@ -63,7 +61,6 @@
                 </div>
             </div>
 
-            <!-- Gender Stats -->
             <div class="bg-white p-6 rounded-xl shadow space-y-6">
                 <h2 class="text-xl font-semibold">Enrolled Students by Gender</h2>
                 <div class="w-full md:w-1/2 mx-auto">
@@ -96,7 +93,6 @@
         </div>
     </div>
 
-    <!-- Chart Script -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('genderChart').getContext('2d');
