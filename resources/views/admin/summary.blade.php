@@ -3,60 +3,72 @@
         <div class="text-center mb-10">
             <h1 class="text-4xl font-bold">LEARNERS RECORDS</h1>
         </div>
-    
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            @php
-                $schoolYears = $enrollments->pluck('school_year')->unique();
-            @endphp
-        
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
-                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                    @foreach ($schoolYears as $year)
-                        <option value="{{ $year }}">{{ $year }}</option>
-                    @endforeach
-                </select>
-            </div>
-        
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Specialization</label>
-                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                    <option>Web Development</option>
-                    <option>Network Admin</option>
-                    <option>Multimedia</option>
-                </select>
-            </div>
-    
-            <div class="flex items-end">
-                <button class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                    Filter
-                </button>
+
+        <div class="w-full">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <form action="{{ route('admin.filter.section') }}" method="POST" class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
+                    @csrf
+
+                    @php
+                        $schoolYears = $enrollments->pluck('school_year')->unique();
+                        $sectionsLearner = $sections->pluck('name')->unique();
+                    @endphp
+
+                    <div class="flex-1 min-w-[180px]">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
+                        <select name="school_year" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            @foreach ($schoolYears as $year)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="flex-1 min-w-[180px]">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Section</label>
+                        <select name="section" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            @foreach ($sectionsLearner as $section)
+                                <option value="{{ $section }}">{{ $section }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="flex items-end min-w-[120px]">
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full md:w-auto">
+                            Filter
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white rounded-xl shadow text-sm">
-                <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
-                    <tr>
-                        <th class="px-4 py-3">LRN</th>
-                        <th class="px-4 py-3">Last Name</th>
-                        <th class="px-4 py-3">First Name</th>
-                        <th class="px-4 py-3">Middle Name</th>
-                        <th class="px-4 py-3">Gender</th>
-                        <th class="px-4 py-3 text-center">Action</th>
+
+        <div class="w-full overflow-x-auto mt-8">
+            <table class="w-full text-center">
+                <thead>
+                    <tr class="text-gray-600 text-lg font-semibold whitespace-nowrap">
+                        <th class="px-8 py-2 hidden md:table-cell">LRN</th>
+                        <th class="px-8 py-2">FULL NAME</th>
+                        <th class="px-8 py-2 hidden md:table-cell">GRADE LEVEL</th>
+                        <th class="px-8 py-2 hidden md:table-cell">SECTION</th>
+                        <th class="px-6 py-2">VIEW DETAILS</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-800">
-                    <tr class="border-t">
-                        <td class="px-4 py-3">1234567890</td>
-                        <td class="px-4 py-3">Dela Cruz</td>
-                        <td class="px-4 py-3">Juan</td>
-                        <td class="px-4 py-3">Santos</td>
-                        <td class="px-4 py-3">Male</td>
-                        <td class="px-4 py-3 text-center">
-                            <a href="#" class="text-blue-600 hover:underline">View Details</a>
-                        </td>
-                    </tr>
+                    @foreach ($summaries as $summary)
+                        <tr class="border-t">
+                            <td class="px-4 py-3 hidden md:table-cell">{{ $summary->lrn }}</td>
+                            <td class="px-4 py-3">
+                                {{ $summary->last_name }}, {{ $summary->first_name }} {{ $summary->middle_name }}
+                            </td>
+                            <td class="px-4 py-3 hidden md:table-cell">{{ $summary->grade_level }}</td>
+                            <td class="px-4 py-3 hidden md:table-cell">{{ $summary->section }}</td>
+                            <td class="px-4 py-3">
+                                <a href="{{ route('learnerdetails', ['id' => $summary->id]) }}" 
+                                   class=" bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 text-sm  text-white font-semibold px-5 py-2.5 rounded-lg">
+                                    VIEW DETAILS
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

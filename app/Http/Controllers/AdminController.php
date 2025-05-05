@@ -86,7 +86,6 @@ class AdminController extends Controller
         ));
     }
     
-
     public function showAdminList()
     {
         $admins = Admin::all();
@@ -115,7 +114,9 @@ class AdminController extends Controller
     public function showSummary()
     {
         $enrollments = Enrollment::all();
-        return view('admin.summary', compact('enrollments'));
+        $summaries = Summary::all();
+        $sections = Section::all();
+        return view('admin.summary', compact('enrollments', 'summaries', 'sections'));
     }
 
     public function showEnrolledLearners()
