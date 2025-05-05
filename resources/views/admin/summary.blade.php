@@ -62,7 +62,7 @@
                             <td class="px-4 py-3 hidden md:table-cell">{{ $summary->grade_level }}</td>
                             <td class="px-4 py-3 hidden md:table-cell">{{ $summary->section }}</td>
                             <td class="px-4 py-3">
-                                <a href="{{ route('learnerdetails', ['id' => $summary->id]) }}" 
+                                <a href="{{ route('summarydetails', ['id' => $summary->id]) }}" 
                                    class=" bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 text-sm  text-white font-semibold px-5 py-2.5 rounded-lg">
                                     VIEW DETAILS
                                 </a>

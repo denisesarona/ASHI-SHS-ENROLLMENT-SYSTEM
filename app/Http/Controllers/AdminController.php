@@ -161,6 +161,15 @@ class AdminController extends Controller
         return view('admin.learnerdetails', compact('learner', 'tracks', 'categories'));
     }
 
+    public function summaryDetails($id)
+    {
+        $summaries = Summary::findOrFail($id); 
+        $tracks = Track::with('strands')->get();
+        $categories = Category::all();
+
+        return view('admin.summarydetails', compact('summaries', 'tracks', 'categories'));
+    }
+
     public function updatePassword(Request $request, $id)
     {
         $request->validate([
