@@ -115,6 +115,8 @@ class EnrollmentController extends Controller
     
         return redirect()->back()->with('success', 'Category deleted successfully.');
     }
+
+    
 }
 
 

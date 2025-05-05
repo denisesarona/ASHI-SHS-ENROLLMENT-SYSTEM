@@ -4,6 +4,24 @@
             <div class="text-center">
                 <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">Enrollment Form Configuration</h1>
             </div>
+
+            <div class="bg-white p-5 mt-4 rounded-xl">
+                @foreach ($enrollments as $enrollment)
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-semibold text-gray-700">
+                            Save School Year {{ $enrollment->school_year }} data?
+                        </h3>
+                        <form action="{{ route('savesydata') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                                Save School Year Data
+                            </button>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
+            
+
             <form action="{{ route('updatesy') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
                 @csrf
                 @method('PUT')
@@ -183,16 +201,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-
-                <div class="bg-white p-5 mt-4 rounded-1xl">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-3">New School Year</h3>
-                    <form action="{{ route('savesydata')}}" method="POST">
-                        @csrf
-                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                            Save School Year Data
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
