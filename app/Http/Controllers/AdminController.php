@@ -163,7 +163,7 @@ class AdminController extends Controller
 
     public function summaryDetails($id)
     {
-        $summaries = Summary::findOrFail($id); 
+        $summaries = Summary::findOrFail($id);
         $tracks = Track::with('strands')->get();
         $categories = Category::all();
 
