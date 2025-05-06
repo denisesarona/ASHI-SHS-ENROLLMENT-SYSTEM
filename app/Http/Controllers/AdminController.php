@@ -619,31 +619,31 @@ class AdminController extends Controller
 
     public function summaryFilterSection(Request $request)
     {
-
+        $summaries = Summary::all();
+        $sections = Section::all();
+    
         $schoolYear = $request->input('school_year');
         $sectionName = $request->input('section');
-    
+        
         $filteredLearners = Summary::query();
-    
+        
         if ($schoolYear) {
             $filteredLearners->where('school_year', $schoolYear);
         }
-    
+        
         if ($sectionName) {
-            $section = Summary::where('section', $sectionName)->first();
-            if ($section) {
-                $filteredLearners->where('name', $section);
-            } else {
-                $filteredLearners->whereRaw('0 = 1');
-            }
+            $filteredLearners->where('section', $sectionName);
         }
-    
+        
         $learners = $filteredLearners->get();
-    
+
         return view('admin.summary', [
+            'summaries' => $summaries,
+            'sections' => $sections,
             'learners' => $learners,
             'selectedYear' => $schoolYear,
+            'selectedSection' => $sectionName,
         ]);
-    }
+    }    
 }    
     

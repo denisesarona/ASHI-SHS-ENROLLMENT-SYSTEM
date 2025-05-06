@@ -8,36 +8,39 @@
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                 <form action="{{ route('admin.summary.filter') }}" method="POST" class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
                     @csrf
-
+                
                     @php
-                        $schoolYears = $enrollments->pluck('school_year')->unique();
+                        $schoolYears = $summaries->pluck('school_year')->unique();
                         $sectionsLearner = $sections->pluck('name')->unique();
+                        $selectedYear = old('school_year', request('school_year')); // Get the selected school year from the request or the previous input
+                        $selectedSection = old('section', request('section')); // Get the selected section from the request or the previous input
                     @endphp
-
+                
                     <div class="flex-1 min-w-[180px]">
                         <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
                         <select name="school_year" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                             @foreach ($schoolYears as $year)
-                                <option value="{{ $year }}">{{ $year }}</option>
+                                <option value="{{ $year }}" {{ $year == $selectedYear ? 'selected' : '' }}>{{ $year }}</option>
                             @endforeach
                         </select>
                     </div>
-
+                
                     <div class="flex-1 min-w-[180px]">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Section</label>
                         <select name="section" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                             @foreach ($sectionsLearner as $section)
-                                <option value="{{ $section }}">{{ $section }}</option>
+                                <option value="{{ $section }}" {{ $section == $selectedSection ? 'selected' : '' }}>{{ $section }}</option>
                             @endforeach
                         </select>
                     </div>
-
+                
                     <div class="flex items-end min-w-[120px]">
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full md:w-auto">
                             Filter
                         </button>
                     </div>
                 </form>
+                
             </div>
         </div>
 
