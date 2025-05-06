@@ -616,34 +616,32 @@ class AdminController extends Controller
         ]);
     }
 
-
     public function summaryFilterSection(Request $request)
     {
-        $summaries = Summary::all();
-        $sections = Section::all();
-    
+        $schoolYears = Summary::select('school_year')->distinct()->pluck('school_year');
+        $sections = Summary::select('section')->distinct()->pluck('section');
         $schoolYear = $request->input('school_year');
         $sectionName = $request->input('section');
-        
-        $filteredLearners = Summary::query();
-        
+
+        $filteredSummaries = Summary::query();
+
         if ($schoolYear) {
-            $filteredLearners->where('school_year', $schoolYear);
+            $filteredSummaries->where('school_year', $schoolYear);
         }
-        
+
         if ($sectionName) {
-            $filteredLearners->where('section', $sectionName);
+            $filteredSummaries->where('section', $sectionName);
         }
-        
-        $learners = $filteredLearners->get();
+
+        $summaries = $filteredSummaries->get();
 
         return view('admin.summary', [
-            'summaries' => $summaries,
-            'sections' => $sections,
-            'learners' => $learners,
+            'summaries',
+            'sections',
+            'schoolYears',
             'selectedYear' => $schoolYear,
             'selectedSection' => $sectionName,
         ]);
-    }    
+    }
 }    
     
