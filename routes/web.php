@@ -72,5 +72,6 @@ Route::post('/admin/auto-enroll-learners', [AdminController::class, 'autoEnrollL
 
 Route::post('/admin/enrollmentform/savesydata', [AdminController::class, 'saveSchoolYearData'])->name('savesydata');
 Route::post('/admin/filter-section', [AdminController::class, 'filterSection'])->name('admin.filter.section');
+Route::post('/admin/summary-filter-section', [AdminController::class, 'summaryFilterSection'])->name('admin.summary.filter');
 Route::get('/admin/summaries/summarydetails/{id}', [AdminController::class, 'summaryDetails'])->name('summarydetails');
 

@@ -615,5 +615,35 @@ class AdminController extends Controller
             'selectedYear' => $schoolYear,
         ]);
     }
+
+
+    public function summaryFilterSection(Request $request)
+    {
+
+        $schoolYear = $request->input('school_year');
+        $sectionName = $request->input('section');
+    
+        $filteredLearners = Summary::query();
+    
+        if ($schoolYear) {
+            $filteredLearners->where('school_year', $schoolYear);
+        }
+    
+        if ($sectionName) {
+            $section = Summary::where('section', $sectionName)->first();
+            if ($section) {
+                $filteredLearners->where('name', $section);
+            } else {
+                $filteredLearners->whereRaw('0 = 1');
+            }
+        }
+    
+        $learners = $filteredLearners->get();
+    
+        return view('admin.summary', [
+            'learners' => $learners,
+            'selectedYear' => $schoolYear,
+        ]);
+    }
 }    
     

@@ -6,7 +6,7 @@
 
         <div class="w-full">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                <form action="{{ route('admin.filter.section') }}" method="POST" class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
+                <form action="{{ route('admin.summary.filter') }}" method="POST" class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
                     @csrf
 
                     @php
