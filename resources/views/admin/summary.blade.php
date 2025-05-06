@@ -6,11 +6,6 @@
 
         <div class="w-full">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                @php
-                    $selectedYear = old('school_year', $selectedYear ?? request('school_year'));
-                    $selectedSection = old('section', $selectedSection ?? request('section'));
-                @endphp
-                    
                 <form action="{{ route('admin.summary.filter') }}" method="POST" class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
                     @csrf
                 
