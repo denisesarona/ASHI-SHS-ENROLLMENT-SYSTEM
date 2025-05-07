@@ -102,7 +102,12 @@ class AdminController extends Controller
         $sections = Section::all();
         $strands = Strand::all();
         $enrollments = Enrollment::all();
-        return view('admin.sections', compact ('sections', 'strands', 'enrollments'));
+
+        $currentSY = Enrollment::latest('school_year')->value('school_year');
+
+        $learners_count = Learner::where('school_year', $currentSY)->count();
+
+        return view('admin.sections', compact ('sections', 'strands', 'enrollments', 'currentSY', 'learners_count'));
     }
     
     public function showPendingLearners()
@@ -410,7 +415,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'No sections available.');
         }
 
-        $maxStudentsPerSection = 50;
+        $maxStudentsPerSection = 60;
         $unassignedLearners = [];
 
         foreach ($learners as $learner) {
@@ -584,6 +589,7 @@ class AdminController extends Controller
             Summary::insert($dataToInsert);
         
             Learner::where('status', 'enrolled')->delete();
+            Section::query()->update(['learners_count' => 0]);
         
             return redirect()->route('viewenrollmentform')
                 ->with('success', 'All enrolled learners data in this School Year has been saved.');
