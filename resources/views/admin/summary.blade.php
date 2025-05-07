@@ -12,9 +12,9 @@
                     <div class="flex-1 min-w-[180px]">
                         <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
                         <select name="school_year" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                            @foreach ($schoolYear as $year)
+                            @foreach ($schoolYears as $year)
                                 <option value="{{ $year }}" {{ $year == $selectedYear ? 'selected' : '' }}>{{ $year }}</option>
-                            @endforeach
+                            @endforeach       
                         </select>
                     </div>
                 

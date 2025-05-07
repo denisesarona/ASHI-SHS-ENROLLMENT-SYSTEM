@@ -113,12 +113,22 @@ class AdminController extends Controller
 
     public function showSummary()
     {
-        $enrollments = Enrollment::all();
         $summaries = Summary::all();
-        $sections = Section::all();
-        return view('admin.summary', compact('enrollments', 'summaries', 'sections'));
+        $schoolYears = Summary::select('school_year')->distinct()->pluck('school_year');
+        $sections = Summary::select('section')->distinct()->pluck('section');
+    
+        $selectedYear = null;
+        $selectedSection = null;
+    
+        return view('admin.summary', compact(
+            'summaries',
+            'schoolYears',
+            'sections',
+            'selectedYear',
+            'selectedSection'
+        ));
     }
-
+    
     public function showEnrolledLearners()
     {
         $learners = Learner::all();
@@ -575,7 +585,7 @@ class AdminController extends Controller
         
             Learner::where('status', 'enrolled')->delete();
         
-            return redirect()->route('admin.enrollmentform')
+            return redirect()->route('viewenrollmentform')
                 ->with('success', 'All enrolled learners data in this School Year has been saved.');
             
         } catch (\Exception $e) {
@@ -636,12 +646,12 @@ class AdminController extends Controller
         $summaries = $filteredSummaries->get();
 
         return view('admin.summary', [
-            'summaries',
-            'sections',
-            'schoolYears',
+            'summaries' => $summaries,
+            'sections' => $sections,
+            'schoolYears' => $schoolYears,
             'selectedYear' => $schoolYear,
             'selectedSection' => $sectionName,
-        ]);
+        ]);   
     }
 }    
     
