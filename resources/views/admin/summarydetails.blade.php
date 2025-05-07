@@ -30,15 +30,15 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block font-semibold text-lg text-gray-700 mb-2">Middle Names</label>
+                    <label class="block font-semibold text-lg text-gray-700 mb-2">Middle Name</label>
                     <div class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {{ $summaries->middle_name }}
+                        {!! $summaries->middle_name ?: 'N/A' !!}
                     </div>
                 </div>
                 <div>
                     <label class="block font-semibold text-lg text-gray-700 mb-2">Extension Name</label>
                     <div class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {{ $summaries->extension_name }}
+                        {{!! $summaries->extension_name ?: 'N/A' !!}}
                     </div>
                 </div>
                 <div>
@@ -153,7 +153,25 @@
                         {{ $summaries->last_school }}
                     </div>
                 </div>
+
+                <div>
+                    <label class="block font-semibold text-lg text-gray-700 mb-2">Grade 10 section<span class="text-red-500 font-bold"> *</span></label>
+                    <div class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        {{ $summaries->grade10_section }}
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span></label>
+                
+                    @if($summaries->image)
+                        <div class="mt-2">
+                            <img src="{{ asset('storage/' . $summaries->image) }}" alt="Grade 10 Card" class="w-64 h-auto rounded">
+                        </div>
+                    @endif
+                </div>
             </div>  
+
+
         </div>
     </div>
 </x-admin-dashboard-layout>

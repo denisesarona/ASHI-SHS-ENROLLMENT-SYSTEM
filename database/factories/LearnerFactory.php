@@ -19,7 +19,7 @@ class LearnerFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_year' => $this->faker->randomElement(['2025-2026']),
+            'school_year' => $this->faker->randomElement(['2024-2025']),
             'grade_level' => $this->faker->randomElement(['Grade 11']),
             'last_name' => $this->faker->lastName(),
             'first_name' => $this->faker->firstName(),
