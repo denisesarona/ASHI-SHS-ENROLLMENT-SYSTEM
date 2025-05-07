@@ -96,19 +96,23 @@ class AdminController extends Controller
     {
         return view('admin.addadmin');
     }
-    
+
     public function showSection()
     {
         $sections = Section::all();
         $strands = Strand::all();
         $enrollments = Enrollment::all();
-
+    
         $currentSY = Enrollment::latest('school_year')->value('school_year');
-
-        $learners_count = Learner::where('school_year', $currentSY)->count();
-
-        return view('admin.sections', compact ('sections', 'strands', 'enrollments', 'currentSY', 'learners_count'));
+    
+        $learnerCounts = Learner::where('school_year', $currentSY)
+            ->select('section_id', DB::raw('count(*) as total'))
+            ->groupBy('section_id')
+            ->pluck('total', 'section_id');
+    
+        return view('admin.sections', compact('sections', 'strands', 'enrollments', 'currentSY', 'learnerCounts'));
     }
+    
     
     public function showPendingLearners()
     {
