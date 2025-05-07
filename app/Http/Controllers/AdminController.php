@@ -97,6 +97,10 @@ class AdminController extends Controller
         return view('admin.addadmin');
     }
 
+    public function showAddLearner(){
+        return view('admin.addlearner');
+    }
+
     public function showSection()
     {
         $sections = Section::all();

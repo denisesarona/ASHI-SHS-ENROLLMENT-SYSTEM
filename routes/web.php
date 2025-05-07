@@ -75,3 +75,5 @@ Route::post('/admin/filter-section', [AdminController::class, 'filterSection'])-
 Route::post('/admin/summary-filter-section', [AdminController::class, 'summaryFilterSection'])->name('admin.summary.filter');
 Route::get('/admin/summaries/summarydetails/{id}', [AdminController::class, 'summaryDetails'])->name('summarydetails');
 
+Route::get('/admin/addlearner', [AdminController::class, 'showAddLearner'])->name('showaddlearner');
+
