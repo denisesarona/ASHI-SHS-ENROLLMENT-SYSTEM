@@ -138,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div>
                     <label class="block font-semibold text-lg text-gray-700">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
                     <label class="text-sm font-normal mb-2"><i> EXAMPLE: 2024-2025</i></label>
@@ -169,9 +169,21 @@
                         </div>
                     @endif
                 </div>
+
+                <div>
+                    <label class="block font-semibold text-lg text-gray-700">Learner Category<span class="text-red-500 font-bold"> *</span></label>
+                    <div class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        {{ $summaries->learner_category }}
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-lg text-gray-700">Strand/Specialization<span class="text-red-500 font-bold"> *</span></label>
+                    <div class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        {{ $summaries->chosen_strand }}
+                    </div>
+                </div>
             </div>  
-
-
         </div>
     </div>
 </x-admin-dashboard-layout>
