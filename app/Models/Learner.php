@@ -44,6 +44,13 @@ class Learner extends Model
 
     public function strand()
     {
-        return $this->belongsTo(Strand::class, 'chosen_strand'); // 'chosen_strand' is the foreign key
+        return $this->belongsTo(Strand::class, 'chosen_strand'); 
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'learner_category'); 
+    }
+
+
 }

@@ -558,7 +558,7 @@ class AdminController extends Controller
     public function saveSchoolYearData()
     {
         try {
-            $learners = Learner::where('status', 'enrolled')->get();
+            $learners = Learner::with(['category', 'strand'])->where('status', 'enrolled')->get();
         
             if ($learners->isEmpty()) {
                 return redirect()->back()->with('error', 'No enrolled learners found for this school year.');
@@ -586,10 +586,10 @@ class AdminController extends Controller
                     'relationship_guardian' => $learner->relationship_guardian,
                     'last_sy' => $learner->last_sy,
                     'last_school' => $learner->last_school,
-                    'learner_category' => $learner->learner_category,
+                    'learner_category' => optional($learner->category)->name ?? 'N/A',
+                    'chosen_strand' => optional($learner->strand)->name ?? 'N/A',
                     'grade10_section' => $learner->grade10_section,
                     'image' => $learner->image,
-                    'chosen_strand' => $learner->chosen_strand,
                     'section' => optional($learner->section)->name,
                 ];
             })->toArray();
@@ -598,6 +598,7 @@ class AdminController extends Controller
         
             Learner::where('status', 'enrolled')->delete();
             Section::query()->update(['learners_count' => 0]);
+            
         
             return redirect()->route('viewenrollmentform')
                 ->with('success', 'All enrolled learners data in this School Year has been saved.');
