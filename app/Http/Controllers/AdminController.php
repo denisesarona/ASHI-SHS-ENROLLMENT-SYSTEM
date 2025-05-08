@@ -426,7 +426,7 @@ class AdminController extends Controller
         $maxStudentsPerSection = 60;
         $unassignedLearners = [];
     
-        $humssStrand = Strand::where('name', 'HUMSS')->first();
+        $humssStrand = Strand::where('name', 'Humanities and Social Sciences')->first();
         $humssStrandId = $humssStrand ? $humssStrand->id : null;
     
         $humssSections = $sections->filter(function ($section) use ($humssStrandId) {
