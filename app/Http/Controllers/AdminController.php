@@ -98,7 +98,12 @@ class AdminController extends Controller
     }
 
     public function showAddLearner(){
-        return view('admin.addlearner');
+
+        $enrollments = Enrollment::all();
+        $categories = Category::all();
+        $tracks = Track::all();
+
+        return view('admin.addlearner', compact('enrollments', 'categories', 'tracks'));
     }
 
     public function showSection()
