@@ -39,7 +39,7 @@ class LearnerFactory extends Factory
             'relationship_guardian' => $this->faker->randomElement(['Mother', 'Father', 'Guardian']),
             'last_sy' => $this->faker->year(),
             'last_school' => $this->faker->company(),
-            'learner_category' => $this->faker->randomElement(['1', '2', '3', '4']),
+            'learner_category' => $this->faker->randomElement(['5']),
             'grade10_section' => $this->faker->bothify('Section-?#'),
             'image' => $this->faker->optional()->imageUrl(640, 480, 'people'),
             'chosen_strand' => $this->faker->randomElement(['10', '11', '12']),

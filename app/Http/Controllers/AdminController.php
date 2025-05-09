@@ -416,50 +416,69 @@ class AdminController extends Controller
         $learners = Learner::where('status', 'enrolled')
             ->whereNull('section_id')
             ->get();
-
+    
         $sections = Section::with('strands')->get();
-
+    
         if ($sections->isEmpty()) {
             return redirect()->back()->with('error', 'No sections available.');
         }
-
+    
         $maxStudentsPerSection = 60;
         $unassignedLearners = [];
-
+        
+        $alsSection = $sections->firstWhere('category', 'ALS Graduate');
+        if (!$alsSection) {
+            return redirect()->back()->with('error', 'ALS section not found. Please create an ALS section first.');
+        }
+    
         foreach ($learners as $learner) {
             $assigned = false;
-            $strandId = $learner->chosen_strand;
-            $matchingSections = $sections->filter(function ($section) use ($strandId) {
-                return $section->strands->contains('id', $strandId);
-            });
-
-            if ($matchingSections->isEmpty()) {
-                $unassignedLearners[] = $learner;
-                continue;
-            }
-
-            foreach ($matchingSections as $section) {
-                if ($section->learners_count < $maxStudentsPerSection) {
-                    $learner->section_id = $section->id;
+    
+            if ($learner->category === 'ALS') {
+                if ($alsSection->learners_count < $maxStudentsPerSection) {
+                    $learner->section_id = $alsSection->id;
                     $learner->save();
-
-                    $section->increment('learners_count');
+    
+                    $alsSection->increment('learners_count');
                     $assigned = true;
-                    break;
+                } else {
+                    $unassignedLearners[] = $learner;
+                }
+            } else {
+                $strandId = $learner->chosen_strand;
+                $matchingSections = $sections->filter(function ($section) use ($strandId) {
+                    return $section->strands->contains('id', $strandId);
+                });
+    
+                if ($matchingSections->isEmpty()) {
+                    $unassignedLearners[] = $learner;
+                    continue;
+                }
+    
+                foreach ($matchingSections as $section) {
+                    if ($section->learners_count < $maxStudentsPerSection) {
+                        $learner->section_id = $section->id;
+                        $learner->save();
+    
+                        $section->increment('learners_count');
+                        $assigned = true;
+                        break;
+                    }
+                }
+    
+                if (!$assigned) {
+                    $unassignedLearners[] = $learner;
                 }
             }
-
-            if (!$assigned) {
-                $unassignedLearners[] = $learner;
-            }
         }
-
+    
         if (count($unassignedLearners) > 0) {
             return redirect()->back()->with('error', count($unassignedLearners) . ' learner(s) could not be assigned due to no matching strands or section capacity full.');
         }
-
+    
         return redirect()->back()->with('success', 'All learners auto-assigned to sections successfully!');
     }
+    
 
     
     public function createSection(Request $request)
