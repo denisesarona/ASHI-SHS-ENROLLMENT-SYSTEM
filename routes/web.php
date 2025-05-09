@@ -76,5 +76,5 @@ Route::post('/admin/summary-filter-section', [AdminController::class, 'summaryFi
 Route::get('/admin/summaries/summarydetails/{id}', [AdminController::class, 'summaryDetails'])->name('summarydetails');
 
 Route::get('/admin/addlearner', [AdminController::class, 'showAddLearner'])->name('showaddlearner');
-Route::get('/admin/addnewlearner', [AdminController::class,'addNewLearner'])->name('addnewlearner');
+Route::post('/admin/addnewlearner', [AdminController::class,'addNewLearner'])->name('addnewlearner');
 

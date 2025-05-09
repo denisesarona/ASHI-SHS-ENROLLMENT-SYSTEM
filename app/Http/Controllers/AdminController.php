@@ -694,9 +694,8 @@ class AdminController extends Controller
         ]);   
     }
 
-
-    public function addNewLearner(Request $request){
-         
+    public function addNewLearner(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'school_year' => 'required|string|max:255',
             'grade_level' => 'required|string|max:255',
@@ -716,7 +715,7 @@ class AdminController extends Controller
             'guardian_name' => 'required|string|max:255',
             'guardian_contact' => 'required|string|max:255',
             'relationship_guardian' => 'nullable|string',
-            'last_sy' => 'required|string|max:255',
+            'last_sy' => 'required|string',
             'last_school' => 'required|string|max:255',
             'learner_category' => 'required|string|max:255',
             'grade10_section' => 'required|string|max:255',
@@ -731,17 +730,11 @@ class AdminController extends Controller
         }
 
         if ($validator->fails()) {
-            dd($validator->errors()); // Show the exact error messages
+            dd($validator->errors());
             return redirect()->back()->withErrors($validator)->withInput();
         }        
 
         try {
-
-            $learner = Learner::where('lrn', $request->lrn)
-                          ->where('last_name', $request->last_name)
-                          ->first();
-    
-            if (!$learner) {   
                 $learner = Learner::create([
                     'school_year' => $request->school_year,
                     'grade_level' => $request->grade_level,
@@ -769,12 +762,8 @@ class AdminController extends Controller
                     'chosen_strand' => $request->chosen_strand,
                     'status' => $request->status,
                 ]);
-                return redirect()->route('controlnum', ['id' => $learner->id])->with('success', 'Learner enrollment successful.');
-            } else {
-                return redirect()->route('enrollment')->with('error', 'Learner already submitted an enrollment form.');
-            }
-            
-        } catch (\Exception $e) {   
+                return redirect()->route('pendinglearners')->with('success', 'Learner enrollment successful.');
+            } catch (\Exception $e) {   
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }

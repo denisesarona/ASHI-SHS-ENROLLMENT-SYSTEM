@@ -15,7 +15,7 @@
                         </div>
                         <div>
                             <label class="block font-semibold mb-2 text-lg">Grade Level<span class="text-red-500 font-bold"> *</span></label>
-                            <select class="w-full p-3 border rounded" name="school_year">
+                            <select class="w-full p-3 border rounded" name="grade_level">
                                 <option value="{{ $enrollment->grade_level }}">{{ $enrollment->grade_level }}</option>
                             </select>
                         </div>
@@ -131,7 +131,7 @@
                         <label class="block font-semibold text-lg text-gray-700">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
                         <label class="text-sm font-normal mb-2"><i> EXAMPLE: 2024-2025</i></label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="lastt_sy" placeholder="Enter Last School Year Attended" required>
+                               name="last_sy" placeholder="Enter Last School Year Attended" required>
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700">Last School Attended<span class="text-red-500 font-bold"> *</span></label>
@@ -170,6 +170,7 @@
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span></label>
                         <input type="file" class="w-full p-3 border rounded" name="image" accept="image/*">
+                        
                     </div>
                 </div>
                 <div class="w-full mt-6 p-4 bg-gray-100">
