@@ -20,6 +20,13 @@
                     </div>
                 @endforeach
             </div>
+
+            <form action="{{ route('uploadpdf') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="pdf_form" accept="application/pdf" required>
+                <button type="submit">Upload PDF</button>
+            </form>
+
             
 
             <form action="{{ route('updatesy') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
