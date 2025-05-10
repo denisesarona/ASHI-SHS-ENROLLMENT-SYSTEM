@@ -767,5 +767,32 @@ class AdminController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
+
+    public function showUploadForm()
+    {
+        return view('admin.upload-form');
+    }
+
+    public function uploadForm(Request $request)
+    {
+        $request->validate([
+            'form' => 'required|file|mimes:pdf|max:10240',
+        ]);
+
+        $path = $request->file('form')->storeAs('forms', 'enrollment_form.pdf');
+        
+
+        $this->convertPdfToImage();
+
+        return redirect()->route('admin.map-fields');
+    }
+
+    protected function convertPdfToImage()
+    {
+        $imagick = new \Imagick();
+        $imagick->setResolution(150, 150);
+        $imagick->readImage(storage_path('app/forms/enrollment_form.pdf[0]'));
+        $imagick->writeImage(storage_path('app/public/pdf_preview.jpg'));
+    }
 }    
     
