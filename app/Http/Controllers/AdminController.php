@@ -794,5 +794,19 @@ class AdminController extends Controller
         $imagick->readImage(storage_path('app/forms/enrollment_form.pdf[0]'));
         $imagick->writeImage(storage_path('app/public/pdf_preview.jpg'));
     }
+
+    public function showMapFields()
+    {
+        return view('admin.map-fields');
+    }
+
+    public function saveMapping(Request $request)
+    {
+        $mappingData = $request->input('mapping');
+        file_put_contents(storage_path('app/forms/enrollment_form_mapping.json'), json_encode($mappingData));
+
+        return redirect()->route('admin.map-fields')->with('success', 'Field mapping saved!');
+    }
+
 }    
     

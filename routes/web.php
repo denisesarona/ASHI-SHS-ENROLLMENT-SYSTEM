@@ -77,5 +77,11 @@ Route::get('/admin/summaries/summarydetails/{id}', [AdminController::class, 'sum
 
 Route::get('/admin/addlearner', [AdminController::class, 'showAddLearner'])->name('showaddlearner');
 Route::post('/admin/addnewlearner', [AdminController::class,'addNewLearner'])->name('addnewlearner');
-Route::post('/admin/uploadpdf', [AdminController::class, 'uploadPdf'])->name('uploadpdf');
+
+Route::get('/admin/upload-form', [FormController::class, 'showUploadForm']);
+Route::post('/admin/upload-form', [FormController::class, 'uploadForm']);
+
+Route::get('/admin/map-fields/enrollment_form', [FormController::class, 'showMapFields'])->name('admin.map-fields');
+Route::post('/admin/save-mapping', [FormController::class, 'saveMapping']);
+
 
