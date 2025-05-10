@@ -762,6 +762,9 @@ class AdminController extends Controller
                     'chosen_strand' => $request->chosen_strand,
                     'status' => $request->status,
                 ]);
+
+                return $this->generateFilledPdf($learner);
+
                 return redirect()->route('pendinglearners')->with('success', 'Learner enrollment successful.');
             } catch (\Exception $e) {   
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
@@ -806,6 +809,27 @@ class AdminController extends Controller
         file_put_contents(storage_path('app/forms/enrollment_form_mapping.json'), json_encode($mappingData));
 
         return redirect()->route('admin.map-fields')->with('success', 'Field mapping saved!');
+    }
+
+    protected function generateFilledPdf($learner)
+    {
+        $pdf = new \FPDI();
+        $pdf->AddPage();
+        $pdf->setSourceFile(storage_path('app/forms/enrollment_form.pdf'));
+        $template = $pdf->importPage(1);
+        $pdf->useTemplate($template);
+
+        $mapping = json_decode(file_get_contents(storage_path('app/forms/enrollment_form_mapping.json')), true);
+
+        foreach ($mapping as $fieldName => $position) {
+            $pdf->SetXY($position['x'], $position['y']);
+            $pdf->Write(0, $learner->$fieldName);
+        }
+
+        $filledPdfPath = storage_path('app/forms/final_enrollment_form.pdf');
+        $pdf->Output('F', $filledPdfPath);
+
+        return response()->download($filledPdfPath);
     }
 
 }    
