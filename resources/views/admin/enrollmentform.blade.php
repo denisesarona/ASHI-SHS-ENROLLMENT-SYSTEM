@@ -21,7 +21,7 @@
                 @endforeach
             </div>
             
-            <form action="{{ url('/admin/upload-form') }}" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="form" required>
                 <button type="submit">Upload PDF Form</button>
