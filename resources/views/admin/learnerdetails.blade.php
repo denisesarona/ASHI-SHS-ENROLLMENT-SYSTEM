@@ -214,30 +214,23 @@
     </div>
 
     <script>
-        // When the user types in the "Others" input field
         document.getElementById('relationship_other').addEventListener('input', function() {
             var relationshipInput = document.getElementById('relationship_other').value;
             if (relationshipInput) {
-                // If "Others" is entered, set the hidden input to the value entered
                 document.getElementById('relationship_hidden').value = relationshipInput;
             } else {
-                // If "Others" is cleared, reset the hidden input
                 document.getElementById('relationship_hidden').value = '';
             }
         });
-    
-        // When any radio button is selected, update the hidden input field
         document.querySelectorAll('input[name="relationship_guardian"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
-                // If "Mother" or "Father" is selected, disable the "Others" input field
                 if (this.value === 'Mother' || this.value === 'Father') {
                     document.getElementById('relationship_other').disabled = true;
-                    document.getElementById('relationship_other').value = ''; // Clear "Others" input if it's active
-                    document.getElementById('relationship_hidden').value = this.value; // Set the hidden field
+                    document.getElementById('relationship_other').value = ''; 
+                    document.getElementById('relationship_hidden').value = this.value; 
                 } else if (this.value === 'Others') {
-                    // If "Others" is selected, enable the "Others" input field
                     document.getElementById('relationship_other').disabled = false;
-                    document.getElementById('relationship_hidden').value = ''; // Clear the hidden field for custom input
+                    document.getElementById('relationship_hidden').value = '';
                 }
             });
         });
