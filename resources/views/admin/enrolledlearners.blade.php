@@ -7,60 +7,56 @@
         </div>
         <div class="w-full mt-4">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                {{-- Filter Form --}}
-                <form action="{{ route('admin.filter.section') }}" method="POST" class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
-                    @csrf
-        
-                    @php
-                        $schoolYears = $enrollments->pluck('school_year')->unique();
-                        $sectionsLearner = $sections->pluck('name')->unique();
-                    @endphp
-        
-                    {{-- School Year --}}
-                    <div class="flex-1 min-w-[180px]">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
-                        <select name="school_year" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                            @foreach ($schoolYears as $year)
-                                <option value="{{ $year }}">{{ $year }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-        
-                    {{-- Section --}}
-                    <div class="flex-1 min-w-[180px]">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Section</label>
-                        <select name="section" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                            @foreach ($sectionsLearner as $section)
-                                <option value="{{ $section }}">{{ $section }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-        
-                    {{-- Filter Button --}}
-                    <div class="flex items-end min-w-[120px]">
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full md:w-auto">
-                            Filter
+                
+                <form action="{{ route('searchlearner') }}" method="GET" class="flex gap-2 w-full md:max-w-sm">
+                    <input type="text" name="search_name" class="w-full p-1 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter Learner's Name" value=" {{ request('search_name') }}"/>
+                    <button type="submit" class="bg-amber-500 px-4 py-2 text-white rounded">Search</button>
+                </form>
+
+                <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                    <form action="{{ route('admin.filter.section') }}" method="POST" class="flex flex-col md:flex-row gap-4 flex-grow">
+                        @csrf
+
+                        @php
+                            $schoolYears = $enrollments->pluck('school_year')->unique();
+                            $sectionsLearner = $sections->pluck('name')->unique();
+                        @endphp
+
+                        <div class="flex-1 min-w-[180px]">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">School Year</label>
+                            <select name="school_year" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                @foreach ($schoolYears as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="flex-1 min-w-[180px]">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Section</label>
+                            <select name="section" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                @foreach ($sectionsLearner as $section)
+                                    <option value="{{ $section }}">{{ $section }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="flex items-end min-w-[120px]">
+                            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full md:w-auto">
+                                Filter
+                            </button>
+                        </div>
+                    </form>
+
+                    <form action="{{ route('auto.assign.sections') }}" method="POST" class="flex-shrink-0 mt-6">
+                        @csrf
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md w-full md:w-auto">
+                            Auto-Assign Sections
                         </button>
-                    </div>
-                </form>
-        
-                {{-- Auto Assign Button --}}
-                <form action="{{ route('auto.assign.sections') }}" method="POST" class="flex-shrink-0">
-                    @csrf
-                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md w-full md:w-auto">
-                        Auto-Assign Learners to Sections
-                    </button>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
 
-        <div>
-            <form action="{{ route('searchlearner') }}" method="GET" class="flex gap-2 my-4">
-                <input type="text" name="search_name" class="..." placeholder="Enter Learner's Name" value="{{ request('search_name') }}"/>
-                <button type="submit" class="bg-amber-500 px-4 py-2 text-white rounded">Submit</button>
-            </form
-        </div>
-        
         <div class="w-full overflow-x-auto mt-8">
             <table class="w-full text-center">
                 <thead>
@@ -90,8 +86,7 @@
                             <button data-modal-target="status-modal-{{ $learner->id }}" data-modal-toggle="status-modal-{{ $learner->id }}" class="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-sm uppercase">
                                 {{ ucfirst($learner->status) }}
                             </button>
-                        
-                            <!-- Status Modal -->
+                    
                             <div id="status-modal-{{ $learner->id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative p-4 w-full max-w-md max-h-full">
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
