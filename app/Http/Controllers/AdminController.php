@@ -770,5 +770,17 @@ class AdminController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
+
+    public function searchLearner(){
+
+        $search = $request->input('search_name');
+
+        $results = Learner::query()
+        ->where::('first_name', 'LIKE', "%{$search}%")
+        ->orWhere::('last_name', 'LIKE', "%{$search}%")
+        ->get();
+
+        return redirect()->route('enrolledlearners')->with('success', 'Learner found successfully.');
+    }
 }    
     
