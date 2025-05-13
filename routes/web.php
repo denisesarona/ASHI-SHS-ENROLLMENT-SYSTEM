@@ -77,5 +77,6 @@ Route::get('/admin/summaries/summarydetails/{id}', [AdminController::class, 'sum
 
 Route::get('/admin/addlearner', [AdminController::class, 'showAddLearner'])->name('showaddlearner');
 Route::post('/admin/addnewlearner', [AdminController::class,'addNewLearner'])->name('addnewlearner');
+Route::get('/admin/searchlearner', [AdminController::class, 'searchLearner'])->name('searchlearner');
 
 

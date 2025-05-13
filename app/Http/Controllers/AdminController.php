@@ -771,16 +771,23 @@ class AdminController extends Controller
         }
     }
 
-    public function searchLearner(){
+    public function searchLearner(Request $request)
+    {
+        $searchTerm = $request->input('search_name');
 
-        $search = $request->input('search_name');
+        $learners = Learner::query()
+            ->when($searchTerm, function ($query, $searchTerm) {
+                $query->where('first_name', 'like', "%{$searchTerm}%")
+                    ->orWhere('last_name', 'like', "%{$searchTerm}%");
+            })
+            ->with('section')
+            ->get();
 
-        $results = Learner::query()
-        ->where::('first_name', 'LIKE', "%{$search}%")
-        ->orWhere::('last_name', 'LIKE', "%{$search}%")
-        ->get();
+        $enrollments = Enrollment::all();
+        $sections = Section::all();
 
-        return redirect()->route('enrolledlearners')->with('success', 'Learner found successfully.');
+        return view('admin.enrolledlearners', compact('learners', 'enrollments', 'sections'));
     }
+
 }    
     

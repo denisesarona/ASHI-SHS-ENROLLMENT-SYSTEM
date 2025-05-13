@@ -55,10 +55,10 @@
         </div>
 
         <div>
-            <form action="">
-                <input type="text" name="search_name" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter Learner's Name"/>
-                <button type="submit" class="bg-amber-500">Submit</button>
-            </form>
+            <form action="{{ route('searchlearner') }}" method="GET" class="flex gap-2 my-4">
+                <input type="text" name="search_name" class="..." placeholder="Enter Learner's Name" value="{{ request('search_name') }}"/>
+                <button type="submit" class="bg-amber-500 px-4 py-2 text-white rounded">Submit</button>
+            </form
         </div>
         
         <div class="w-full overflow-x-auto mt-8">
@@ -76,6 +76,10 @@
                     </tr>
                 </thead>                
                 <tbody>
+                    @if($learners->isEmpty())
+                        <p class="text-center text-gray-500 mt-4">No learners found.</p>
+                    @endif
+                    
                     @foreach ($learners as $learner)
                         @if ($learner->status == 'enrolled')
                     <tr class="text-gray-800 text-md">
