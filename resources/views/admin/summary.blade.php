@@ -6,6 +6,11 @@
 
         <div class="w-full">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <form action="{{ route('') }}" method="GET" class="flex gap-2 w-full md:max-w-sm">
+                    <input type="text" name="search_name" class="w-full p-1 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter Learner's Name" value=" {{ request('search_name') }}"/>
+                    <button type="submit" class="bg-amber-500 px-4 py-2 text-white rounded">Search</button>
+                </form>
+
                 <form action="{{ route('admin.summary.filter') }}" method="POST" class="flex flex-col md:flex-row flex-wrap gap-4 flex-grow">
                     @csrf
                 
@@ -48,6 +53,10 @@
                     </tr>
                 </thead>
                 <tbody class="text-gray-800">
+                    @if($learners->isEmpty())
+                        <p class="text-center text-gray-500 mt-4">No learners found.</p>
+                    @endif
+
                     @foreach ($summaries as $summary)
                         <tr class="border-t">
                             <td class="px-4 py-3 hidden md:table-cell">{{ $summary->lrn }}</td>

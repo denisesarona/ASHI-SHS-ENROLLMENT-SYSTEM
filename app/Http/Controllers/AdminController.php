@@ -789,5 +789,19 @@ class AdminController extends Controller
         return view('admin.enrolledlearners', compact('learners', 'enrollments', 'sections'));
     }
 
+    public function searchLearnerSummary(Request $request)
+    {
+        $searchTerm = $request->input('search_name');
+
+        $summaries = Summary::query()
+            ->when($searchTerm, function ($query, $searchTerm) {
+                $query->where('first_name', 'like', "%{$searchTerm}%")
+                    ->orWhere('last_name', 'like', "%{$searchTerm}%");
+            })
+            ->get();
+
+        return view('admin.enrolledlearners', compact('summaries'));
+    }
+
 }    
     
