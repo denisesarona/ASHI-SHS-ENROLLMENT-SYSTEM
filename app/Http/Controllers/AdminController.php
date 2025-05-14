@@ -799,9 +799,20 @@ class AdminController extends Controller
                     ->orWhere('last_name', 'like', "%{$searchTerm}%");
             })
             ->get();
-
-        return view('admin.enrolledlearners', compact('summaries'));
+        
+        $schoolYears = Summary::select('school_year')->distinct()->pluck('school_year');
+        $sections = Summary::select('section')->distinct()->pluck('section');
+    
+        $selectedYear = null;
+        $selectedSection = null;
+    
+        return view('admin.summary', compact(
+            'summaries',
+            'schoolYears',
+            'sections',
+            'selectedYear',
+            'selectedSection'
+        ));
     }
-
 }    
     

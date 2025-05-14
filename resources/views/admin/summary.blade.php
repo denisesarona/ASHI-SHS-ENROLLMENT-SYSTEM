@@ -53,7 +53,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-gray-800">
-                    @if($learners->isEmpty())
+                    @if($summaries->isEmpty())
                         <p class="text-center text-gray-500 mt-4">No learners found.</p>
                     @endif
 
