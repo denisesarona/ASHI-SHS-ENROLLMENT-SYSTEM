@@ -775,11 +775,9 @@ class AdminController extends Controller
                     'status' => $request->status,
                 ]);
 
-                return $this->generateFilledPdf($learner);
-
                 return redirect()->route('pendinglearners')->with('success', 'Learner enrollment successful.');
             } catch (\Exception $e) {   
-            return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
+            return redirect()->back()->with('error', 'Please fill up all inputs!');
         }
     }
 
