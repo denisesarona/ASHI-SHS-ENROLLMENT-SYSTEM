@@ -168,15 +168,34 @@
                                name="grade10_section" value="{{ $learner->grade10_section }}" placeholder="Enter Grade 10 section" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span></label>
-                        <input type="file" class="w-full p-3 border rounded" name="image" accept="image/*">
-                    
-                        @if($learner->image)
-                            <div class="mt-2">
-                                <img src="{{ asset('storage/' . $learner->image) }}" alt="Grade 10 Card" class="w-64 h-auto rounded">
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">
+                            Picture of Grade 10 Card
+                            <span class="text-red-500 font-bold"> *</span>
+                            <span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span>
+                        </label>
+
+                        <input type="file" class="w-full p-3 border rounded" name="images[]" multiple accept="image/*">
+                        <div class="flex flex-wrap gap-4">
+                            <div class="w-40 sm:w-48 md:w-56">
+                                <label class="block font-semibold mb-1">Front of Card:</label>
+                                <img 
+                                    src="{{ asset('storage/' . $learner->front_card) }}" 
+                                    alt="Front Card" 
+                                    class="w-full h-auto rounded shadow-md object-contain"
+                                >
                             </div>
-                        @endif
+
+                            <div class="w-40 sm:w-48 md:w-56">
+                                <label class="block font-semibold mb-1">Back of Card:</label>
+                                <img 
+                                    src="{{ asset('storage/' . $learner->back_card) }}" 
+                                    alt="Back Card" 
+                                    class="w-full h-auto rounded shadow-md object-contain"
+                                >
+                            </div>
+                        </div>
                     </div>
+
                 </div>
                 <div class="w-full mt-6 p-4 bg-gray-100">
                     <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS AND SPECIALIZATION</label>

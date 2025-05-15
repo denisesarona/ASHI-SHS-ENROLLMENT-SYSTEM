@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 {
@@ -371,24 +373,43 @@ class AdminController extends Controller
     {
         $learner = Learner::findOrFail($id);
 
-        if ($request->hasFile('image')) {
-            if ($learner->image) {
-                Storage::delete('public/' . $learner->image);
+        $imagePaths = [
+            'front_card' => $learner->front_card,
+            'back_card' => $learner->back_card,
+        ];
+
+        if ($request->hasFile('images')) {
+            $files = $request->file('images');
+
+            if (isset($files[0])) {
+                if ($learner->front_card) {
+                    Storage::delete('public/' . $learner->front_card);
+                }
+                $imagePaths['front_card'] = $files[0]->store('image', 'public');
             }
 
-            $path = $request->file('image')->store('learners', 'public');
-            $learner->image = $path;
+            if (isset($files[1])) {
+                if ($learner->back_card) {
+                    Storage::delete('public/' . $learner->back_card);
+                }
+                $imagePaths['back_card'] = $files[1]->store('image', 'public');
+            }
         }
 
         try {
-            $learner->fill($request->except('image'));
+            $learner->fill($request->except('images'));
+
+            $learner->front_card = $imagePaths['front_card'];
+            $learner->back_card = $imagePaths['back_card'];
+
             $learner->save();
 
             return back()->with('success', 'Learner details updated successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
-    }
+    }   
+
 
     public function removeLearner($id)
     {
@@ -738,8 +759,6 @@ class AdminController extends Controller
             }
         }
 
-
-
         if ($validator->fails()) {
             dd($validator->errors());
             return redirect()->back()->withErrors($validator)->withInput();
@@ -769,8 +788,8 @@ class AdminController extends Controller
                     'last_school' => $request->last_school,
                     'learner_category' => $request->learner_category,
                     'grade10_section' => $request->grade10_section,
-                    'front_image' => $imagePaths[0],
-                    'back_image' => $imagePaths[1],
+                    'front_card' => $imagePaths[0],
+                    'back_card' => $imagePaths[1],
                     'chosen_strand' => $request->chosen_strand,
                     'status' => $request->status,
                 ]);
