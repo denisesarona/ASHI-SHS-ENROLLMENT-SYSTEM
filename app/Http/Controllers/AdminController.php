@@ -719,15 +719,26 @@ class AdminController extends Controller
             'last_school' => 'required|string|max:255',
             'learner_category' => 'required|string|max:255',
             'grade10_section' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
+            'images' => 'nullable|array|max:2',
+            'images.*' => 'image|mimes:jpeg,jpg,png,gif,svg|max:5120',
             'chosen_strand' => 'required|string',
             'status' => 'required|string|max:255',
         ]);
 
-        $imagePath = null;
-        if($request->hasFile('image')){
-            $imagePath = $request->file('image')->store('image', 'public');
+        $imagePaths = [null, null]; 
+
+        if ($request->hasFile('images')) {
+            $files = $request->file('images');
+            
+            if (isset($files[0])) {
+                $imagePaths[0] = $files[0]->store('images', 'public'); 
+            }
+            if (isset($files[1])) {
+                $imagePaths[1] = $files[1]->store('images', 'public'); 
+            }
         }
+
+
 
         if ($validator->fails()) {
             dd($validator->errors());
@@ -758,7 +769,8 @@ class AdminController extends Controller
                     'last_school' => $request->last_school,
                     'learner_category' => $request->learner_category,
                     'grade10_section' => $request->grade10_section,
-                    'image' => $imagePath,
+                    'front_image' => $imagePaths[0],
+                    'back_image' => $imagePaths[1],
                     'chosen_strand' => $request->chosen_strand,
                     'status' => $request->status,
                 ]);

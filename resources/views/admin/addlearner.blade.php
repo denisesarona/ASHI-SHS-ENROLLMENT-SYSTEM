@@ -169,7 +169,7 @@
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span></label>
-                        <input type="file" class="w-full p-3 border rounded" name="image" accept="image/*">
+                        <input type="file" class="w-full p-3 border rounded" name="image[]" accept="image/*" multiple>
                         
                     </div>
                 </div>
