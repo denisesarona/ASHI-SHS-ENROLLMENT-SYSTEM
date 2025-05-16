@@ -410,7 +410,6 @@ class AdminController extends Controller
         }
     }   
 
-
     public function removeLearner($id)
     {
         $learner = Learner::find($id); 
@@ -722,84 +721,79 @@ class AdminController extends Controller
             'grade_level' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'string|max:255',
-            'extension_name' => 'nullable|string',
+            'middle_name' => 'nullable|string|max:255',
+            'extension_name' => 'nullable|string|max:255',
             'lrn' => 'required|string|max:255',
             'birthdate' => 'required|date',
             'age' => 'required|integer',
-            'gender' => 'string|max:255',
-            'beneficiary' => 'string|max:255',
+            'gender' => 'nullable|string|max:255',
+            'beneficiary' => 'nullable|string|max:255',
             'street' => 'required|string|max:255',
             'baranggay' => 'required|string|max:255',
             'municipality' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'guardian_name' => 'required|string|max:255',
             'guardian_contact' => 'required|string|max:255',
-            'relationship_guardian' => 'nullable|string',
-            'last_sy' => 'required|string',
+            'relationship_guardian' => 'nullable|string|max:255',
+            'last_sy' => 'required|string|max:255',
             'last_school' => 'required|string|max:255',
             'learner_category' => 'required|string|max:255',
             'grade10_section' => 'required|string|max:255',
-            'images' => 'nullable|array|max:2',
-            'images.*' => 'image|mimes:jpeg,jpg,png,gif,svg|max:5120',
-            'chosen_strand' => 'required|string',
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'chosen_strand' => 'required|string|max:255',
             'status' => 'required|string|max:255',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $imagePaths = [null, null]; 
 
         if ($request->hasFile('images')) {
-            $files = $request->file('images');
-            
-            if (isset($files[0])) {
-                $imagePaths[0] = $files[0]->store('images', 'public'); 
-            }
-            if (isset($files[1])) {
-                $imagePaths[1] = $files[1]->store('images', 'public'); 
+            foreach ($request->file('images') as $index => $image) {
+                $path = $image->store('image', 'public');
+                $imagePaths[$index] = 'storage/' . $path;
             }
         }
-
-        if ($validator->fails()) {
-            dd($validator->errors());
-            return redirect()->back()->withErrors($validator)->withInput();
-        }        
 
         try {
-                $learner = Learner::create([
-                    'school_year' => $request->school_year,
-                    'grade_level' => $request->grade_level,
-                    'last_name' => $request->last_name,
-                    'first_name' => $request->first_name,
-                    'middle_name' => $request->middle_name,
-                    'extension_name' => $request->extension_name,
-                    'lrn' => $request->lrn,
-                    'birthdate' => $request->birthdate,
-                    'age' => $request->age,
-                    'gender' => $request->gender,
-                    'beneficiary' => $request->beneficiary,
-                    'street' => $request->street,
-                    'baranggay' => $request->baranggay,
-                    'municipality' => $request->municipality,
-                    'province' => $request->province,
-                    'guardian_name' => $request->guardian_name,
-                    'guardian_contact' => $request->guardian_contact,
-                    'relationship_guardian' => $request->relationship_guardian,
-                    'last_sy' => $request->last_sy,
-                    'last_school' => $request->last_school,
-                    'learner_category' => $request->learner_category,
-                    'grade10_section' => $request->grade10_section,
-                    'front_card' => $imagePaths[0],
-                    'back_card' => $imagePaths[1],
-                    'chosen_strand' => $request->chosen_strand,
-                    'status' => $request->status,
-                ]);
+            $learner = Learner::create([
+                'school_year' => $request->school_year,
+                'grade_level' => $request->grade_level,
+                'last_name' => $request->last_name,
+                'first_name' => $request->first_name,
+                'middle_name' => $request->middle_name,
+                'extension_name' => $request->extension_name,
+                'lrn' => $request->lrn,
+                'birthdate' => $request->birthdate,
+                'age' => $request->age,
+                'gender' => $request->gender,
+                'beneficiary' => $request->beneficiary,
+                'street' => $request->street,
+                'baranggay' => $request->baranggay,
+                'municipality' => $request->municipality,
+                'province' => $request->province,
+                'guardian_name' => $request->guardian_name,
+                'guardian_contact' => $request->guardian_contact,
+                'relationship_guardian' => $request->relationship_guardian,
+                'last_sy' => $request->last_sy,
+                'last_school' => $request->last_school,
+                'learner_category' => $request->learner_category,
+                'grade10_section' => $request->grade10_section,
+                'front_card' => $imagePaths[0],
+                'back_card' => $imagePaths[1],
+                'chosen_strand' => $request->chosen_strand,
+                'status' => $request->status,
+            ]);
 
-                return redirect()->route('pendinglearners')->with('success', 'Learner enrollment successful.');
-            } catch (\Exception $e) {   
-            return redirect()->back()->with('error', 'Please fill up all inputs!');
+
+            return redirect()->route('pendinglearners')->with('success', 'Learner enrollment successful.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while saving the learner.')->withInput();
         }
     }
-
     public function searchLearner(Request $request)
     {
         $searchTerm = $request->input('search_name');
