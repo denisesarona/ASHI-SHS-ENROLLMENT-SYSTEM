@@ -152,7 +152,6 @@
                             </div>
                         </div>
                     
-                        <!-- Last School Information -->
                         <div class="w-full mt-6">
                             <label class="block font-semibold text-lg">Last School Year Attended<span class="text-red-500 font-bold"> *</span></label>
                             <input type="text" class="w-full p-3 border rounded mt-2" value="{{$learner->last_sy}}" name="last_sy" placeholder="Enter Last School Year">
@@ -190,16 +189,44 @@
                             <input type="text" class="w-full p-3 border rounded" value="{{$learner->grade10_section}}" name="grade10_section" placeholder="Enter Grade 10 section">
                         </div>
 
-                        <div class="w-full mt-6">
-                            <label class="block font-semibold text-lg">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span></label>
-                            <label class="text-sm font-normal"><i> FRONT and BACK of the Card</i></label>
-                            <input type="file" class="w-full p-3 border rounded mt-3" name="image" accept="image/*">
-                        
-                            @if($learner->image)
-                                <div class="mt-2">
-                                    <img src="{{ asset('storage/' . $learner->image) }}" alt="Grade 10 Card" class="w-64 h-auto rounded">
+                         <div>
+                            <label class="block font-semibold text-lg text-gray-700 mb-2">
+                                Picture of Grade 10 Card (FRONT)
+                                <span class="text-red-500 font-bold"> *</span>
+                                <span class="text-sm font-normal"></span>
+                            </label>
+
+                            <input type="file" class="w-full p-3 border rounded" name="front_card" accept="image/*">
+
+                            <label class="block font-semibold text-lg text-gray-700 mb-2 mt-2">
+                                Picture of Grade 10 (BACK)
+                                <span class="text-red-500 font-bold"> *</span>
+                                <span class="text-sm font-normal"></span>
+                            </label>
+
+                            <input type="file" class="w-full p-3 border rounded" name="back_card" accept="image/*">
+
+                            <div class="flex flex-wrap gap-4">
+                                <div class="w-40 sm:w-48 md:w-56">
+                                    <br>
+                                    <label class="block font-semibold mb-1">Front of Card:</label>
+                                    <img 
+                                        src="{{ asset('storage/' . $learner->front_card) }}" 
+                                        alt="Front Card" 
+                                        class="w-full h-auto rounded shadow-md object-contain"
+                                    >
                                 </div>
-                            @endif
+
+                                <div class="w-40 sm:w-48 md:w-56">
+                                    <br>
+                                    <label class="block font-semibold mb-1">Back of Card:</label>
+                                    <img 
+                                        src="{{ asset('storage/' . $learner->back_card) }}" 
+                                        alt="Back Card" 
+                                        class="w-full h-auto rounded shadow-md object-contain"
+                                    >
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="w-full mt-6">

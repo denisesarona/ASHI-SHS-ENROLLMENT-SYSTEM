@@ -84,23 +84,27 @@ class LearnerController extends Controller
             'last_school' => 'required|string|max:255',
             'learner_category' => 'required|string|max:255',
             'grade10_section' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
+            'front_card' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
+            'back_card' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
             'chosen_strand' => 'required|string',
             'status' => 'required|string|max:255',
         ]);
 
-        $imagePath = null;
-        if($request->hasFile('image')){
-            $imagePath = $request->file('image')->store('image', 'public');
+        $frontCardPath = null;
+        $backCardPath = null;
+        if($request->hasFile('front_card')){
+            $frontCardPath = $request->file('front_card')->store('image', 'public');
+        }
+
+        if($request->hasFile('back_card')){
+            $backCardPath = $request->file('back_card')->store('image', 'public');
         }
 
         if ($validator->fails()) {
-            dd($validator->errors()); // Show the exact error messages
             return redirect()->back()->withErrors($validator)->withInput();
         }        
 
         try {
-
             $learner = Learner::where('lrn', $request->lrn)
                           ->where('last_name', $request->last_name)
                           ->first();
@@ -129,7 +133,8 @@ class LearnerController extends Controller
                     'last_school' => $request->last_school,
                     'learner_category' => $request->learner_category,
                     'grade10_section' => $request->grade10_section,
-                    'image' => $imagePath,
+                    'front_card' => $frontCardPath,
+                    'back_card' => $backCardPath,
                     'chosen_strand' => $request->chosen_strand,
                     'status' => $request->status,
                 ]);

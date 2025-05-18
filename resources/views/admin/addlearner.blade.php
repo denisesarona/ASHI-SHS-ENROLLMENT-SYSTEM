@@ -168,11 +168,11 @@
                                name="grade10_section" placeholder="Enter Grade 10 section" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card FRONT<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span></label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card (FRONT)<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"></span></label>
                         <input type="file" name="front_card" accept="image/*" required>
                     </div>
                     <div>
-                        <label class="block font-semibold text-lg text-gray-700 mb-2">Picture of Grade 10 Card BACK<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span></label>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2 mt-2">Picture of Grade 10 Card (BACK)<span class="text-red-500 font-bold"> *</span><span class="text-sm font-normal"></span></label>
                         <input type="file" name="back_card" accept="image/*" required>
                     </div>
                 </div>
