@@ -739,23 +739,28 @@ class AdminController extends Controller
             'last_school' => 'required|string|max:255',
             'learner_category' => 'required|string|max:255',
             'grade10_section' => 'required|string|max:255',
-            'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'front_card' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
+            'back_card' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
             'chosen_strand' => 'required|string|max:255',
             'status' => 'required|string|max:255',
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        $frontCardPath = null;
+        $backCardPath = null;
+        if($request->hasFile('front_card')){
+            $frontCardPath = $request->file('front_card')->store('image', 'public');
+            \Log::info('Front card path: '.$frontCardPath);
+
         }
 
-        $imagePaths = [null, null]; 
+        if($request->hasFile('back_card')){
+            $backCardPath = $request->file('back_card')->store('image', 'public');
+            \Log::info('Back card path: '.$backCardPath);
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $index => $image) {
-                $path = $image->store('image', 'public');
-                $imagePaths[$index] = 'storage/' . $path;
-            }
+        }
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         try {
@@ -782,18 +787,18 @@ class AdminController extends Controller
                 'last_school' => $request->last_school,
                 'learner_category' => $request->learner_category,
                 'grade10_section' => $request->grade10_section,
-                'front_card' => $imagePaths[0],
-                'back_card' => $imagePaths[1],
+                'front_card' => $frontCardPath,
+                'back_card' => $backCardPath,
                 'chosen_strand' => $request->chosen_strand,
                 'status' => $request->status,
             ]);
-
 
             return redirect()->route('pendinglearners')->with('success', 'Learner enrollment successful.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while saving the learner.')->withInput();
         }
     }
+
     public function searchLearner(Request $request)
     {
         $searchTerm = $request->input('search_name');

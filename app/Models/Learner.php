@@ -32,7 +32,8 @@ class Learner extends Model
         'last_school',
         'learner_category',
         'grade10_section',
-        'image',
+        'front_card',
+        'back_card',
         'chosen_strand',
         'status',
     ];
