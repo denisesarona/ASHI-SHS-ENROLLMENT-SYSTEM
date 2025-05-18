@@ -166,10 +166,15 @@
                 </div>
 
                 <div class="w-full mt-6">
-                    <label class="block font-semibold text-lg">Picture of Grade 10 Card<span class="text-red-500 font-bold"> *</span></label>
-                    <label class="text-sm font-normal"><i> FRONT and BACK of the Card</i></label>
-                    <input type="file" class="w-full p-3 border rounded mt-3"  name="image" accept="image/*" required>
+                    <label class="block font-semibold text-lg">Picture of Grade 10 Card FRONT<span class="text-red-500 font-bold"> *</span></label>
+                    <input type="file" class="w-full p-3 border rounded mt-3"  name="front_card" accept="image/*" required>
                 </div>
+
+                <div class="w-full mt-6">
+                    <label class="block font-semibold text-lg">Picture of Grade 10 Card BACK<span class="text-red-500 font-bold"> *</span></label>
+                    <input type="file" class="w-full p-3 border rounded mt-3"  name="back_card" accept="image/*" required>
+                </div>
+
 
                 <div class="w-full mt-6">
                     <label class="block font-semibold mb-4 text-lg bg-blue-200 p-4 text-center">OFFERED STRANDS AND SPECIALIZATION</label>
