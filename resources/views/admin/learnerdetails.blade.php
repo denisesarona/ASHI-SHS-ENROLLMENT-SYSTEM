@@ -169,14 +169,24 @@
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">
-                            Picture of Grade 10 Card
+                            Picture of Grade 10 Card (FRONT)
                             <span class="text-red-500 font-bold"> *</span>
-                            <span class="text-sm font-normal"><i> FRONT and BACK of the Card</i></span>
+                            <span class="text-sm font-normal"></span>
                         </label>
 
-                        <input type="file" class="w-full p-3 border rounded" name="images[]" multiple accept="image/*">
+                        <input type="file" class="w-full p-3 border rounded" name="front_card" accept="image/*">
+
+                        <label class="block font-semibold text-lg text-gray-700 mb-2 mt-2">
+                            Picture of Grade 10 (BACK)
+                            <span class="text-red-500 font-bold"> *</span>
+                            <span class="text-sm font-normal"></span>
+                        </label>
+
+                        <input type="file" class="w-full p-3 border rounded" name="back_card" accept="image/*">
+
                         <div class="flex flex-wrap gap-4">
                             <div class="w-40 sm:w-48 md:w-56">
+                                <br>
                                 <label class="block font-semibold mb-1">Front of Card:</label>
                                 <img 
                                     src="{{ asset('storage/' . $learner->front_card) }}" 
@@ -186,6 +196,7 @@
                             </div>
 
                             <div class="w-40 sm:w-48 md:w-56">
+                                <br>
                                 <label class="block font-semibold mb-1">Back of Card:</label>
                                 <img 
                                     src="{{ asset('storage/' . $learner->back_card) }}" 

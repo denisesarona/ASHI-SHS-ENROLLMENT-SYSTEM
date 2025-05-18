@@ -373,42 +373,30 @@ class AdminController extends Controller
     {
         $learner = Learner::findOrFail($id);
 
-        $imagePaths = [
-            'front_card' => $learner->front_card,
-            'back_card' => $learner->back_card,
-        ];
-
-        if ($request->hasFile('images')) {
-            $files = $request->file('images');
-
-            if (isset($files[0])) {
+        try {
+            if ($request->hasFile('front_card')) {
                 if ($learner->front_card) {
                     Storage::delete('public/' . $learner->front_card);
                 }
-                $imagePaths['front_card'] = $files[0]->store('image', 'public');
+                $learner->front_card = $request->file('front_card')->store('image', 'public');
             }
 
-            if (isset($files[1])) {
+            if ($request->hasFile('back_card')) {
                 if ($learner->back_card) {
                     Storage::delete('public/' . $learner->back_card);
                 }
-                $imagePaths['back_card'] = $files[1]->store('image', 'public');
+                $learner->back_card = $request->file('back_card')->store('image', 'public');
             }
-        }
 
-        try {
-            $learner->fill($request->except('images'));
-
-            $learner->front_card = $imagePaths['front_card'];
-            $learner->back_card = $imagePaths['back_card'];
-
+            $learner->fill($request->except(['front_card', 'back_card']));
             $learner->save();
 
             return back()->with('success', 'Learner details updated successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
-    }   
+    }
+
 
     public function removeLearner($id)
     {
