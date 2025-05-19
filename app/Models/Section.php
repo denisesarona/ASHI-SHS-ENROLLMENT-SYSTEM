@@ -8,7 +8,7 @@ class Section extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'max_learner'];
 
     public function learners()
     {

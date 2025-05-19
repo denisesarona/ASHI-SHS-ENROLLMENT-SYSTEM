@@ -508,10 +508,12 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'strands' => 'required|array',
+            'max_learner' => 'required|int',
         ]);
     
         $section = Section::create([
             'name' => $request->name,
+            'max_learner' => $request->max_learner,
         ]);
     
         $section->strands()->attach($request->strands);
