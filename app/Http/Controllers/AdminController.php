@@ -269,6 +269,7 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'required|confirmed',
+            'role' => 'required|in:super_admin,teacher_admin',
         ]);
 
         if (Admin::where('email', $request->email)->exists()) {
@@ -290,6 +291,7 @@ class AdminController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'role' => $request->role,
             ]
         ]);
         
@@ -737,14 +739,10 @@ class AdminController extends Controller
         $backCardPath = null;
         if($request->hasFile('front_card')){
             $frontCardPath = $request->file('front_card')->store('image', 'public');
-            \Log::info('Front card path: '.$frontCardPath);
-
         }
 
         if($request->hasFile('back_card')){
             $backCardPath = $request->file('back_card')->store('image', 'public');
-            \Log::info('Back card path: '.$backCardPath);
-
         }
 
         if ($validator->fails()) {
