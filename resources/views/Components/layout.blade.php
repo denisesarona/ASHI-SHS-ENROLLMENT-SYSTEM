@@ -23,7 +23,7 @@
                 <i class="fas fa-bars text-2xl"></i>
             </button>    
                 
-            <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white p-4 
+            <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white p-4 
             flex flex-col items-center space-y-2 
             lg:flex-row lg:items-center lg:justify-end lg:w-auto lg:space-x-6 lg:p-0 lg:relative lg:block">
     
