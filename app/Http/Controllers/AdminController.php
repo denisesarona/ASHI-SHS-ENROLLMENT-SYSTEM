@@ -286,20 +286,26 @@ class AdminController extends Controller
             ]
         );
 
+        $roleMap = [
+            'super_admin' => 1,
+            'teacher_admin' => 2,
+        ];
+
         session([
             'pending_admin' => [
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'role' => $request->role,
+                'role' => $roleMap[$request->role],
             ]
         ]);
-        
+
         Mail::to($request->email)->send(new EmailVerificationMail($request->email, $verificationCode));
 
         return redirect()->route('verify.add-admin-email', ['email' => $request->email])
             ->with('success', 'A verification code has been sent to your email.');
     }
+
 
     public function destroy($id)
     {

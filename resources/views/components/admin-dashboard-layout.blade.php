@@ -41,41 +41,62 @@
                         <span class="ms-3">Dashboard</span>
                     </x-admin-nav-link>                    
                 </li>
-                <li>
-                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
-                        <i class='bx bx-user'></i>
-                        <span class="flex-1 ms-3 text-left whitespace-nowrap">Administrators</span>
-                        <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"></path>
-                        </svg>
-                    </button>
-                    <ul class="dropdown-menu hidden py-2 space-y-2">
-                        <li><x-admin-nav-link href="{{ route('adminlist') }}" class="nav-link pl-10" data-section="AdminList" :active="request()->routeIs('adminlist')">List of Admin</x-admin-nav-link>
-                        <li><x-admin-nav-link href="{{ route('showaddadmin') }}" class="nav-link pl-10" data-section="AddAdmin" :active="request()->routeIs('showaddadmin')">Add a new Admin</x-admin-nav-link>
-                    </ul>
-                </li>
-                <li>
-                    <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
-                        <i class='bx bxs-graduation'></i>
-                        <span class="flex-1 ms-3 text-left whitespace-nowrap">Learners</span>
-                        <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"></path>
-                        </svg>
-                    </button>
-                    <ul class="dropdown-menu hidden py-2 space-y-2">
-                        <li><x-admin-nav-link href="{{ route('showaddlearner') }}" class="nav-link pl-10" data-section="AddLearners" :active="request()->routeIs('showaddlearner')">Add Learners</x-admin-nav-link>
-                        <li><x-admin-nav-link href="{{ route('pendinglearners') }}" class="nav-link pl-10" data-section="PendingLearners" :active="request()->routeIs('pendinglearners')">Pending Learners</x-admin-nav-link>
-                        <li><x-admin-nav-link href="{{ route('enrolledlearners') }}" class="nav-link pl-10" data-section="EnrolledLearners" :active="request()->routeIs('enrolledlearners')">Enrolled Learners</x-admin-nav-link>
-                        <li><x-admin-nav-link href="{{ route('showsummary') }}" class="nav-link pl-10" data-section="LearnersRecords" :active="request()->routeIs('showsummary')">Learners Records</x-admin-nav-link>
-                    </ul>
-                </li>
+                @auth('admin')
+                    @if(auth('admin')->user()->role === 2)
+                        <li>
+                            <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
+                                <i class='bx bxs-graduation'></i>
+                                <span class="flex-1 ms-3 text-left whitespace-nowrap">Learners</span>
+                                <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"></path>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu hidden py-2 space-y-2">
+                                <li><x-admin-nav-link href="{{ route('showaddlearner') }}" class="nav-link pl-10" data-section="AddLearners" :active="request()->routeIs('showaddlearner')">Add Learners</x-admin-nav-link>
+                                <li><x-admin-nav-link href="{{ route('pendinglearners') }}" class="nav-link pl-10" data-section="PendingLearners" :active="request()->routeIs('pendinglearners')">Pending Learners</x-admin-nav-link>
+                                <li><x-admin-nav-link href="{{ route('enrolledlearners') }}" class="nav-link pl-10" data-section="EnrolledLearners" :active="request()->routeIs('enrolledlearners')">Enrolled Learners</x-admin-nav-link>
+                            </ul>
+                        </li>
+                    @endif
 
-                <li>
-                    <x-admin-nav-link href="{{ route('showsections') }}" class="nav-link" data-section="Sections" :active="request()->routeIs('showsections')"><i class='bx bxs-category-alt'></i><span class="ms-3">Sections</span></x-admin-nav-link>
-                </li>
-                <li>
-                    <x-admin-nav-link href="{{ route('viewenrollmentform') }}" class="nav-link" data-section="AdminList" :active="request()->routeIs('viewenrollmentform')"><i class='bx bx-list-check'></i><span class="ms-3">Enrollment Form</span></x-admin-nav-link>
-                </li>
+                    @if(auth('admin')->check() && auth('admin')->user()->role == 1)
+                         <li>
+                            <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
+                                <i class='bx bx-user'></i>
+                                <span class="flex-1 ms-3 text-left whitespace-nowrap">Administrators</span>
+                                <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"></path>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu hidden py-2 space-y-2">
+                                <li><x-admin-nav-link href="{{ route('adminlist') }}" class="nav-link pl-10" data-section="AdminList" :active="request()->routeIs('adminlist')">List of Admin</x-admin-nav-link>
+                                <li><x-admin-nav-link href="{{ route('showaddadmin') }}" class="nav-link pl-10" data-section="AddAdmin" :active="request()->routeIs('showaddadmin')">Add a new Admin</x-admin-nav-link>
+                            </ul>
+                        </li>
+                        <li>
+                            <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
+                                <i class='bx bxs-graduation'></i>
+                                <span class="flex-1 ms-3 text-left whitespace-nowrap">Learners</span>
+                                <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"></path>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu hidden py-2 space-y-2">
+                                <li><x-admin-nav-link href="{{ route('showaddlearner') }}" class="nav-link pl-10" data-section="AddLearners" :active="request()->routeIs('showaddlearner')">Add Learners</x-admin-nav-link>
+                                <li><x-admin-nav-link href="{{ route('pendinglearners') }}" class="nav-link pl-10" data-section="PendingLearners" :active="request()->routeIs('pendinglearners')">Pending Learners</x-admin-nav-link>
+                                <li><x-admin-nav-link href="{{ route('enrolledlearners') }}" class="nav-link pl-10" data-section="EnrolledLearners" :active="request()->routeIs('enrolledlearners')">Enrolled Learners</x-admin-nav-link>
+                                <li><x-admin-nav-link href="{{ route('showsummary') }}" class="nav-link pl-10" data-section="LearnersRecords" :active="request()->routeIs('showsummary')">Learners Records</x-admin-nav-link>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <x-admin-nav-link href="{{ route('showsections') }}" class="nav-link" data-section="Sections" :active="request()->routeIs('showsections')"><i class='bx bxs-category-alt'></i><span class="ms-3">Sections</span></x-admin-nav-link>
+                        </li>
+                        <li>
+                            <x-admin-nav-link href="{{ route('viewenrollmentform') }}" class="nav-link" data-section="AdminList" :active="request()->routeIs('viewenrollmentform')"><i class='bx bx-list-check'></i><span class="ms-3">Enrollment Form</span></x-admin-nav-link>
+                        </li>
+                    @endif
+                @endauth
                 <li class="absolute bottom-4 left-4 right-4">
                     <form action="{{ route('logoutAdmin') }}" method="POST">
                         @csrf
@@ -167,8 +188,7 @@
             }
         });
     </script>
-    
-    
+
 </body>
 </html>
 

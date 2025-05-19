@@ -18,6 +18,13 @@
                                name="email" placeholder="Enter email">
                     </div>
                     <div>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Role</label>
+                        <select name="role" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="super_admin">Super Admin</option>
+                            <option value="teacher_admin">Teacher Admin</option>
+                        </select>
+                    </div>
+                    <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Password</label>
                         <input type="password" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                name="password" placeholder="Enter password">
