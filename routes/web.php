@@ -6,6 +6,16 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\EnrollmentController;
 
+Route::middleware(['auth:admin', 'role:super_admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+});
+
+Route::middleware(['auth:admin', 'role:teacher_admin'])->group(function () {
+    Route::get('/pending-learners', [LearnerController::class, 'pending']);
+    Route::get('/enroll-learners', [LearnerController::class, 'enroll']);
+});
+
+
 Route::get('/', [LearnerController::class, 'index'])->name('homepage');
 Route::get('/enrollment', [LearnerController::class, 'showEnrollmentForm'])->name('enrollment');
 Route::get('/studentverify', [LearnerController::class, 'showStudentVerify'])->name('studentverify');
