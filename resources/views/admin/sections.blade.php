@@ -55,6 +55,7 @@
                                     {{ $enrollment->school_year }}
                                 @endforeach
                             </th>
+                            <th class="px-4 py-2">MAX LEARNERS</th>
                             <th class="px-4 py-2 hidden md:table-cell">EDIT STRANDS/SPECIALIZATION</th>
                             <th class="px-4 py-2 hidden md:table-cell">DELETE</th>
                         </tr>
@@ -76,7 +77,10 @@
                                 </td>
                                 <td class="px-4 py-2">
                                     {{ $learnerCounts[$section->id] ?? 0 }}
-                                </td>                                
+                                </td>         
+                                <td class="px-4 py-2">
+                                    {{ $section->max_learner }}
+                                </td>                            
                                 <td class="px-4 py-2 hidden md:table-cell">
                                     <button data-modal-target="edit-strand-modal-{{ $section->id }}" data-modal-toggle="edit-strand-modal-{{ $section->id }}" 
                                         class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">
