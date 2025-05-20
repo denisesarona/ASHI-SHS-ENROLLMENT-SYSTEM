@@ -41,7 +41,8 @@ class LearnerFactory extends Factory
             'last_school' => $this->faker->company(),
             'learner_category' => $this->faker->randomElement(['5']),
             'grade10_section' => $this->faker->bothify('Section-?#'),
-            'image' => $this->faker->optional()->imageUrl(640, 480, 'people'),
+            'front_card' => $this->faker->optional()->imageUrl(640, 480, 'people'),
+            'back_card' => $this->faker->optional()->imageUrl(640, 480, 'people'),
             'chosen_strand' => $this->faker->randomElement(['10', '11', '12']),
             'status' => $this->faker->randomElement(['pending']),
             'section_id' => null, // Optional for unassigned learners
