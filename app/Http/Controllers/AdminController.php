@@ -444,7 +444,6 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'No sections available.');
         }
 
-        $maxStudentsPerSection = 60;
         $unassignedLearners = [];
 
         $alsSection = $sections->where('name', 'ALS')->first();
@@ -454,11 +453,10 @@ class AdminController extends Controller
 
         foreach ($learners as $learner) {
             $assigned = false;
-
             $category = Category::find($learner->learner_category);
 
             if ($category && $category->name === 'ALS Graduate') {
-                if ($alsSection->learners_count < $maxStudentsPerSection) {
+                if ($alsSection->learners_count < $alsSection->max_learner) {
                     $learner->section_id = $alsSection->id;
                     $learner->save();
 
@@ -479,7 +477,7 @@ class AdminController extends Controller
                 }
 
                 foreach ($matchingSections as $section) {
-                    if ($section->learners_count < $maxStudentsPerSection) {
+                    if ($section->learners_count < $section->max_learner) {
                         $learner->section_id = $section->id;
                         $learner->save();
 
@@ -501,6 +499,7 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'All learners have been auto-assigned to sections successfully!');
     }
+
 
     
     public function createSection(Request $request)
@@ -836,5 +835,19 @@ class AdminController extends Controller
             'selectedSection'
         ));
     }
+
+    public function updateMaxLearnerSingle(Request $request, $id)
+    {
+        $request->validate([
+            'max_learner' => 'required|integer|min:1'
+        ]);
+
+        $section = Section::findOrFail($id);
+        $section->max_learner = $request->input('max_learner');
+        $section->save();
+
+        return back()->with('success', 'Max learners updated for ' . $section->name);
+    }
+
 }    
     

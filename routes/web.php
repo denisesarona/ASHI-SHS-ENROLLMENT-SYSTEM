@@ -90,4 +90,7 @@ Route::post('/admin/addnewlearner', [AdminController::class,'addNewLearner'])->n
 Route::get('/admin/searchlearner', [AdminController::class, 'searchLearner'])->name('searchlearner');
 Route::get('/admin/searchlearnersummary', [AdminController::class, 'searchLearnerSummary'])->name('searchlearnersummary');
 
+Route::put('/sections/{id}/update-max-learner', [SectionController::class, 'updateMaxLearnerSingle'])->name('sections.updateMaxLearnerSingle');
+
+
 
