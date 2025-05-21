@@ -4,19 +4,30 @@
             <div class="pt-6 text-center mb-10">
                 <h1 class="text-4xl font-bold text-gray-800">Admin Details</h1>
             </div>
-            <form action="{{ route('updatepassword', $admin->id) }}" method="POST">
+            <form action="{{ route('updatepassword', $admins->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Name</label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="name" value="{{ $admin->name }}">
+                               name="name" value="{{ $admins->name }}">
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">Email</label>
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               name="email" value="{{ $admin->email }}">
+                               name="email" value="{{ $admins->email }}">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-lg text-gray-700 mb-2">Role</label>
+                        <select name="role" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            @foreach ($roles as $roleId => $roleName)
+                                <option value="{{ $roleId }}" {{ $admins->role == $roleId ? 'selected' : '' }}>
+                                    {{ $roleName }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div>
                         <label class="block font-semibold text-lg text-gray-700 mb-2">New Password</label>

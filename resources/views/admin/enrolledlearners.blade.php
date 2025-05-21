@@ -60,7 +60,7 @@
         <div class="w-full overflow-x-auto mt-8">
             <table class="w-full text-center">
                 <thead>
-                    <tr class="text-gray-600 text-lg font-semibold whitespace-nowrap">
+                    <tr class="bg-gray-100 text-gray-700 font-semibold text-center">
                         <th class="px-8 py-2 hidden md:table-cell">LRN</th>
                         <th class="px-8 py-2">FULL NAME</th>
                         <th class="px-8 py-2 hidden md:table-cell">GRADE LEVEL</th>

@@ -177,9 +177,13 @@ class AdminController extends Controller
 
     public function adminDetails($id)
     {
-        $admin = Admin::findOrFail($id);
-    
-        return view('admin.admindetails', compact('admin'));
+        $admins = Admin::findOrFail($id);
+        $roles = [
+            1 => 'Super Admin',
+            2 => 'Teacher Admin',
+        ];
+
+        return view('admin.admindetails', compact('admins', 'roles'));
     }
 
     public function learnerDetails($id)
