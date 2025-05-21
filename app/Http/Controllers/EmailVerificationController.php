@@ -88,7 +88,7 @@ class EmailVerificationController extends Controller
             'name' => $pending['name'],
             'email' => $pending['email'],
             'password' => $pending['password'],
-            'role' => '1',
+            'role' => $pending['role'],
         ]);
 
         $verification->delete();
@@ -96,6 +96,7 @@ class EmailVerificationController extends Controller
 
         return redirect()->route('adminlist')->with('success', 'New admin created successfully!');
     }
+
 
     public function verifyCode(Request $request)
     {
