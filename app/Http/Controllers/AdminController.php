@@ -523,28 +523,37 @@ class AdminController extends Controller
     public function assignSection(Request $request, $id)
     {
         $learner = Learner::findOrFail($id);
-    
+
         $request->validate([
             'section_id' => 'required|exists:sections,id',
         ]);
-    
+
+        $newSection = Section::findOrFail($request->section_id);
+
+        $currentCount = Learner::where('section_id', $newSection->id)->count();
+
+        if ($currentCount >= $newSection->max_learner) {
+            return redirect()->back()->with('error', 'Cannot assign learner. The selected section has reached its maximum capacity.');
+        }
+
         $oldSectionId = $learner->section_id;
-    
-        $learner->section_id = $request->section_id;
+
+        $learner->section_id = $newSection->id;
         $learner->save();
-    
+
         if ($oldSectionId) {
             Section::where('id', $oldSectionId)->update([
                 'learners_count' => Learner::where('section_id', $oldSectionId)->count()
             ]);
         }
-    
-        Section::where('id', $request->section_id)->update([
-            'learners_count' => Learner::where('section_id', $request->section_id)->count()
+
+        Section::where('id', $newSection->id)->update([
+            'learners_count' => $currentCount + 1
         ]);
-    
+
         return redirect()->back()->with('success', 'Section assigned successfully.');
     }
+
     
     
     public function removeSection($id)
