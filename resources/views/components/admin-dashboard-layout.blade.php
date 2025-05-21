@@ -43,18 +43,22 @@
                 @auth('admin')
                     @if(auth('admin')->user()->role === 2)
                         <li>
-                            <button type="button" class="dropdown-toggle flex items-center w-full p-2 ml-1 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500">
+                            <x-admin-nav-link href="{{ route('showaddlearner') }}" class="nav-link ml-1 p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500" data-section="AddLearners" :active="request()->routeIs('showaddlearner')">
                                 <i class='bx bxs-graduation'></i>
-                                <span class="flex-1 ms-3 text-left whitespace-nowrap">Learners</span>
-                                <svg class="w-3 h-3 transition-transform transform rotate-0" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"></path>
-                                </svg>
-                            </button>
-                            <ul class="dropdown-menu hidden py-2 space-y-2">
-                                <li><x-admin-nav-link href="{{ route('showaddlearner') }}" class="nav-link pl-10" data-section="AddLearners" :active="request()->routeIs('showaddlearner')">Add Learners</x-admin-nav-link>
-                                <li><x-admin-nav-link href="{{ route('pendinglearners') }}" class="nav-link pl-10" data-section="PendingLearners" :active="request()->routeIs('pendinglearners')">Pending Learners</x-admin-nav-link>
-                                <li><x-admin-nav-link href="{{ route('enrolledlearners') }}" class="nav-link pl-10" data-section="EnrolledLearners" :active="request()->routeIs('enrolledlearners')">Enrolled Learners</x-admin-nav-link>
-                            </ul>
+                                <span class="ms-3">Add Learners</span>
+                            </x-admin-nav-link>
+                        </li>
+                        <li>
+                            <x-admin-nav-link href="{{ route('pendinglearners') }}" class="nav-link ml-1 p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500" data-section="PendingLearners" :active="request()->routeIs('pendinglearners')">
+                                <i class='bx bxs-graduation'></i>
+                                <span class="ms-3">Pending Learners</span>
+                            </x-admin-nav-link>
+                        </li>
+                        <li>
+                            <x-admin-nav-link href="{{ route('enrolledlearners') }}" class="nav-link ml-1 p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-500" data-section="EnrolledLearners" :active="request()->routeIs('enrolledlearners')">
+                                <i class='bx bxs-graduation'></i>
+                                <span class="ms-3">Enrolled Learners</span>
+                            </x-admin-nav-link>
                         </li>
                     @endif
 
@@ -80,7 +84,7 @@
                                     <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4"></path>
                                 </svg>
                             </button>
-                            <ul class="dropdown-menu hidden py-2 space-y-2">
+                            <ul>
                                 <li><x-admin-nav-link href="{{ route('showaddlearner') }}" class="nav-link pl-10" data-section="AddLearners" :active="request()->routeIs('showaddlearner')">Add Learners</x-admin-nav-link>
                                 <li><x-admin-nav-link href="{{ route('pendinglearners') }}" class="nav-link pl-10" data-section="PendingLearners" :active="request()->routeIs('pendinglearners')">Pending Learners</x-admin-nav-link>
                                 <li><x-admin-nav-link href="{{ route('enrolledlearners') }}" class="nav-link pl-10" data-section="EnrolledLearners" :active="request()->routeIs('enrolledlearners')">Enrolled Learners</x-admin-nav-link>

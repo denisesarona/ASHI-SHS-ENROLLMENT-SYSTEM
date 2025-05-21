@@ -64,7 +64,7 @@
                         <td class="px-4 py-3">
                             <a href="{{ route('learnerdetails', ['id' => $learner->id]) }}" 
                                class="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-md shadow-md">
-                                VIEW DETAILS
+                                DETAILS
                             </a>
                         </td>
                         <td class="px-4 py-3 hidden sm:table-cell">
