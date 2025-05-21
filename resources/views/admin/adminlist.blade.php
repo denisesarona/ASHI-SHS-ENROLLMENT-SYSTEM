@@ -24,7 +24,7 @@
                         <td class="px-4 py-3">{{ $admin->name }}</td>
                     
                         <!-- Role Column (Hidden on Small Screens) -->
-                        <td class="px-4 py-3 hidden md:table-cell">{{ $admin->role == 1 ? 'ADMIN' : 'USER' }}</td>
+                        <td class="px-4 py-3 hidden md:table-cell">{{ $admin->role == 1 ? 'SUPER ADMIN' : 'TEACHER ADMIN' }}</td>
                     
                         <!-- View Details Button (Always Visible) -->
                         <td class="px-4 py-3">
@@ -54,7 +54,6 @@
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                             </svg>
                                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to remove this admin?</h3>
-                                            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                                                 <form action="{{ route('removeadmin', ['id' => $admin->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
