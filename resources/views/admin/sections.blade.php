@@ -13,7 +13,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="max_learner">Maximum Learners</label>
-                        <input type="number" name="max_learner" id="max_learner"  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 mt-2" required>
+                        <input type="number" name="max_learner" id="max_learner" placeholder="e.g. 45" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 mt-2" required>
                     </div>
                     
                     <div class="mb-6">
@@ -33,10 +33,10 @@
                             @endforeach
                         </div>
                     </div>
-
-                    <!-- Submit Button on Left -->
-                    <div class="flex justify-start">
-                        <button type="submit" class="px-4 py-2 bg-blue-500 font-bold text-white rounded-lg">ADD SECTION</button>
+                    <div class="col-span-2 flex justify-start">
+                        <button type="submit" class="px-4 py-1.5 text-sm bg-blue-500 font-medium text-white rounded-md hover:bg-blue-600 w-auto">
+                            Add Section
+                        </button>
                     </div>
                 </form>
             </div>
