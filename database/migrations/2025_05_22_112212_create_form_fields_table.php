@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('form_fields', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('form_template_id')->constrained()->onDelete('cascade');
-        $table->string('field_name');
-        $table->integer('x');
-        $table->integer('y');
-        $table->integer('font_size')->default(12);
-        $table->timestamps();
-    });
+        Schema::create('form_fields', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**

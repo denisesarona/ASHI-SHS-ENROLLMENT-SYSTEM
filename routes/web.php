@@ -97,5 +97,10 @@ Route::post('/learner-map/update-position', [EnrollmentController::class, 'updat
 Route::get('/admin/upload-map', [EnrollmentController::class, 'showForm'])->name('upload.map.form');
 Route::post('/admin/upload-map', [EnrollmentController::class, 'upload'])->name('upload.map');
 
+Route::get('/form-setup', [FormSetupController::class, 'showForm']);
+Route::post('/form-upload', [FormSetupController::class, 'upload']);
+Route::post('/form-fields/save', [FormSetupController::class, 'saveFields']);
+
+
 
 
