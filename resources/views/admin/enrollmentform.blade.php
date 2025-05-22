@@ -21,11 +21,14 @@
                 @endforeach
             </div>
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('upload.map') }}" method="POST" enctype="multipart/form-data" class="p-6 bg-white shadow max-w-lg mx-auto">
                 @csrf
-                <input type="file" name="form" required>
-                <button type="submit">Upload PDF Form</button>
+                <label class="block mb-2 font-bold">Upload Background Image:</label>
+                <input type="file" name="map_image" accept="image/*" class="mb-4 border rounded w-full">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Upload</button>
             </form>
+
+            <a href="{{ route('showmap') }}" >map</a>
 
             
 

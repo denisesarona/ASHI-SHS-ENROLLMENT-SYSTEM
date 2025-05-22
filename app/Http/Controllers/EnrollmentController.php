@@ -10,6 +10,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EnrollmentController extends Controller
 {
@@ -117,11 +118,13 @@ class EnrollmentController extends Controller
         return redirect()->back()->with('success', 'Category deleted successfully.');
     }
 
-    public function index()
+    public function showMap()
     {
         $learners = Learner::all();
         $imagePath = asset('storage/uploads/map.jpg');
-        return view('learners.map', compact('learners', 'imagePath'));
+        $imagePath = 'storage/' . trim(file_get_contents(storage_path('app/public/current-map.txt')));
+
+        return view('admin.map', compact('learners', 'imagePath'));
     }
 
     public function updatePosition(Request $request)
@@ -137,7 +140,23 @@ class EnrollmentController extends Controller
         return response()->json(['status' => 'not found'], 404);
     }
 
-    
+    public function showForm()
+    {
+        return view('admin.upload-map');
+    }
+
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'map_image' => 'required|image|mimes:jpg,jpeg,png',
+        ]);
+
+        $path = $request->file('map_image')->store('uploads', 'public');
+
+        file_put_contents(storage_path('app/public/current-map.txt'), $path);
+
+        return back()->with('success', 'Image uploaded successfully.');
+    }
 }
 
 
