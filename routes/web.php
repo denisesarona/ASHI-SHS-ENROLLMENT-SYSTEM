@@ -92,5 +92,8 @@ Route::get('/admin/searchlearnersummary', [AdminController::class, 'searchLearne
 
 Route::put('/sections/{id}/update-max-learner', [AdminController::class, 'updateMaxLearnerSingle'])->name('sections.updateMaxLearnerSingle');
 
+Route::get('/learner-map', [EnrollmentController::class, 'index']);
+Route::post('/learner-map/update-position', [EnrollmentController::class, 'updatePosition']);
+
 
 

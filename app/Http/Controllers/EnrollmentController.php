@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enrollment;
+use App\Models\Learner;
 use App\Models\Track;
 use App\Models\Strand;
 use App\Models\Category;
@@ -114,6 +115,26 @@ class EnrollmentController extends Controller
         $category->delete();
     
         return redirect()->back()->with('success', 'Category deleted successfully.');
+    }
+
+    public function index()
+    {
+        $learners = Learner::all();
+        $imagePath = asset('storage/uploads/map.jpg');
+        return view('learners.map', compact('learners', 'imagePath'));
+    }
+
+    public function updatePosition(Request $request)
+    {
+        $learner = Learner::find($request->id);
+        if ($learner) {
+            $learner->top_position = $request->top;
+            $learner->left_position = $request->left;
+            $learner->display_address = $request->address;
+            $learner->save();
+            return response()->json(['status' => 'success']);
+        }
+        return response()->json(['status' => 'not found'], 404);
     }
 
     
