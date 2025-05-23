@@ -15,17 +15,19 @@
     </div>
     
     <section id="AboutUs" class="py-16 bg-gray-100 shadow-lg w-full flex items-center h-screen text-center">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold text-blue-900">ACADEMIC PROGRAMS</h2>
+        <div class="max-w-5xl mx-auto px-4 py-8">
+            <h2 class="text-3xl font-bold text-blue-900 mb-4">Academic Programs</h2>
+
             <div class="mt-6">
-                <h4 class="text-xl font-bold">Academic Track</h4>
-                <p>Humanities and Social Sciences (HUMSS)</p>
-            </div>
-            <div class="mt-6">
-                <h4 class="text-xl font-bold">Technical–Vocational–Livelihood (TVL) Track</h4>
-                <p>ICT (Information and Communications Technology)</p>
-                <p>Home Economics (HE)</p>
-                <p>Industrial Arts (IA)</p>
+                <h4 class="text-xl font-semibold text-gray-800 mb-2">Available Strands / Specializations</h4>
+                
+                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                    @forelse ($strands as $strand)
+                        <li class="list-none">{{ $strand->name }}</li>
+                    @empty
+                        <li>No strands or specializations available at this time.</li>
+                    @endforelse
+                </ul>
             </div>
         </div>
     </section>

@@ -19,7 +19,9 @@ class LearnerController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $strands = Strand::all();
+        return view('index', ['strands' => $strands]);
+
     }
 
     public function showEnrollmentForm()
